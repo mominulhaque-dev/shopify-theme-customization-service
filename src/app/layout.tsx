@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MotionProvider from "@/components/animations/MotionProvider";
@@ -13,6 +13,12 @@ import "./globals.css";
  * when JS is available and the visitor has not asked for reduced motion, which
  * is what lets the pre-paint hidden states in styles/motion.css exist without
  * ever trapping content invisible: no class, no hiding, no animation.
+ *
+ * It is emitted as the first thing in <head>, ahead of the stylesheet links, on
+ * purpose. A parser-blocking inline script placed after a <link rel=stylesheet>
+ * waits for that stylesheet to arrive before it executes — putting it below the
+ * Google Fonts link would make a third-party round trip a prerequisite for the
+ * class landing, which is the one thing that must happen before first paint.
  */
 const MOTION_BOOTSTRAP = `try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('motion')}}catch(e){}`;
 
@@ -31,10 +37,26 @@ export const metadata: Metadata = {
     url: siteConfig.url,
   },
   twitter: {
-    card: "summary_large_image",
+    /* `summary` rather than `summary_large_image` until public/og-image.png
+       exists — a large-image card with no image resolves to an empty panel,
+       where the small card degrades to a normal title/description link. */
+    card: "summary",
     title: siteConfig.name,
     description: siteConfig.description,
   },
+};
+
+/**
+ * `colorScheme: light` is load-bearing, not decorative: the palette has no dark
+ * variant, so a visitor whose OS is in dark mode would otherwise get UA-darkened
+ * form controls, scrollbars and autofill styling inside a light page. Declaring
+ * the scheme keeps every native control matched to the design.
+ */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  colorScheme: "light",
+  themeColor: "#fbfcfb",
 };
 
 /*
@@ -49,7 +71,8 @@ export const metadata: Metadata = {
  * The card design is ready at public/og-image.svg. To finish it: export that to
  * public/og-image.png at 1200x630, then add
  *   images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }]
- * to openGraph above and `images: ["/og-image.png"]` to twitter.
+ * to openGraph above, `images: ["/og-image.png"]` to twitter, and switch the
+ * twitter card back to "summary_large_image".
  */
 
 const organizationJsonLd = {
@@ -80,6 +103,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
+        {/* eslint-disable-next-line react/no-danger */}
+        <script dangerouslySetInnerHTML={{ __html: MOTION_BOOTSTRAP }} />
         {/* Google Fonts over <link> rather than next/font: the build environment
             cannot reach fonts.gstatic.com, and a font fetch that fails at build
             time fails the whole build. Preconnects keep the runtime cost close
@@ -92,10 +117,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
         />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/icon.svg" />
       </head>
       <body>
-        {/* eslint-disable-next-line react/no-danger */}
-        <script dangerouslySetInnerHTML={{ __html: MOTION_BOOTSTRAP }} />
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger

@@ -14,11 +14,16 @@
   contain: layout paint style;
 }
 
-/* ---------- shared blob primitive ---------- */
+/* ---------- shared blob primitive ----------
+   Blur radius is the single biggest paint cost in the whole backdrop system —
+   a full-bleed layer is rasterised at radius-dependent cost before it can be
+   composited. These are radial gradients that already fade to transparent at
+   68-70%, so most of the blur was smoothing something that was smooth: 44px
+   reads the same as 64px and rasterises in a fraction of the time. */
 .bd-blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(64px);
+  filter: blur(44px);
   will-change: transform;
   animation: bd-drift 24s ease-in-out infinite;
 }
@@ -106,7 +111,9 @@
     radial-gradient(34% 40% at 78% 22%, rgba(10, 93, 66, 0.26), transparent 72%),
     radial-gradient(44% 46% at 62% 82%, rgba(127, 217, 180, 0.24), transparent 74%),
     conic-gradient(from 200deg at 50% 50%, rgba(238, 246, 241, 0.5), transparent 40%);
-  filter: blur(42px) saturate(115%);
+  /* No saturate(): the layer is four stacked gradients at 0.24-0.5 alpha, so a
+     second filter pass over an oversized blurred surface bought nothing. */
+  filter: blur(30px);
   opacity: 0.75;
   will-change: transform;
   animation: bd-mesh 34s ease-in-out infinite alternate;

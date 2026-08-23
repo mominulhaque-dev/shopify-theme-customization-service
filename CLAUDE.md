@@ -205,10 +205,13 @@ prerendered HTML, so they only mean something after a build.
 2. **Reduced motion.** Turn it on and confirm every page renders its finished
    state with no hidden content and no animation.
 3. **`public/og-image.png`.** The design is ready at `public/og-image.svg`;
-   export it at 1200×630 and wire it up per the comment in `layout.tsx`. The
-   `next/og` route was removed because @vercel/og cannot resolve its bundled
-   font when the project path contains a space or brackets, and it fails at
-   module load, so the route 500s rather than degrading.
+   export it at 1200×630 and wire it up per the comment in `layout.tsx` — which
+   includes switching `twitter.card` back to `summary_large_image` (it is
+   `summary` while no image exists, because a large-image card with no image
+   renders as an empty panel). The `next/og` route was removed because @vercel/og
+   cannot resolve its bundled font when the project path contains a space or
+   brackets, and it fails at module load, so the route 500s rather than
+   degrading.
 4. **Resend credentials.** Set `RESEND_API_KEY` and `CONTACT_EMAIL` (see
    `.env.example`), then test the idle → submitting → success/error flow against
    the real endpoint. The route deliberately returns 503 rather than faking a

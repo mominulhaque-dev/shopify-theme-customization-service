@@ -29,7 +29,7 @@
     rgba(23, 196, 127, 0.18) 55%,
     transparent
   );
-  filter: blur(28px);
+  filter: blur(20px);
   transform: rotate(-14deg) translateX(-60%);
   will-change: transform;
   opacity: 0.7;
@@ -102,7 +102,7 @@
   position: absolute;
   width: 52%;
   aspect-ratio: 1.15;
-  filter: blur(38px);
+  filter: blur(28px);
   opacity: 0.42;
   background: radial-gradient(circle at 35% 35%, var(--signal), rgba(10, 93, 66, 0.55) 65%, transparent 78%);
   border-radius: 62% 38% 54% 46% / 52% 58% 42% 48%;
@@ -194,7 +194,10 @@
 }
 
 /* Backdrops carry no information — drop the heaviest layers on small screens
-   where they cost the most and read the least. */
+   where they cost the most and read the least, and shrink the remaining blur
+   radii again. (These values must stay *below* the desktop ones in backdrops.css;
+   the override exists to reduce cost, and an earlier 48px here was larger than
+   the desktop radius it was meant to undercut.) */
 @media (max-width: 700px) {
   .bd-float,
   .bd-rings-layer,
@@ -203,6 +206,12 @@
     display: none;
   }
   .bd-blob {
-    filter: blur(48px);
+    filter: blur(28px);
+  }
+  .bd-mesh-layer {
+    filter: blur(22px);
+  }
+  .bd-organic-shape {
+    filter: blur(20px);
   }
 }

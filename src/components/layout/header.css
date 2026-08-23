@@ -1,12 +1,16 @@
 /* ==========================================================================
    Header + mobile navigation
    ========================================================================== */
+/* A sticky bar with a backdrop-filter re-composites the strip behind it on every
+   scroll frame, and the cost scales with the blur radius. 8px still separates the
+   bar from the content sliding under it; `saturate()` was a second filter pass
+   for an effect nobody could name. */
 header {
   position: sticky;
   top: 0;
   z-index: 100;
   background: rgba(251, 252, 251, 0.88);
-  backdrop-filter: blur(12px) saturate(140%);
+  backdrop-filter: blur(8px);
   border-bottom: 1px solid transparent;
   transition: border-color var(--dur-med) var(--ease-out), box-shadow var(--dur-med) var(--ease-out),
     background var(--dur-med);
@@ -205,5 +209,16 @@ header.is-scrolled {
   }
   .burger {
     display: block;
+  }
+}
+
+/* Phones pay the most for a per-frame backdrop-filter and have the least GPU
+   headroom, so the blur goes and the bar becomes opaque instead. It has to be
+   opaque, not just unblurred: a translucent header with nothing diffusing what
+   scrolls under it is unreadable. */
+@media (max-width: 700px) {
+  header {
+    background: var(--paper);
+    backdrop-filter: none;
   }
 }

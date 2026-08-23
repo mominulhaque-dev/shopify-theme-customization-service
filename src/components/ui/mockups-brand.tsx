@@ -49,7 +49,6 @@ export function FontSpecimen() {
           </text>
         </g>
       ))}
-      <rect x="28" y="256" width="1" height="0" fill="none" />
       <rect x="28" y="258" width="504" height="1" fill="#d5e5dc" />
       <text x="28" y="282" fontFamily="monospace" fontSize="9" fill="#4d6259" letterSpacing="1.2">
         FALLBACK STACK MEASURED TO MATCH — NO LAYOUT SHIFT ON SWAP
