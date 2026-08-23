@@ -1,0 +1,68 @@
+footer {
+  background: var(--deep);
+  color: var(--on-deep);
+  padding: 4rem 0 2rem;
+}
+.foot {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--line-dark);
+}
+.foot h4 {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 1.1rem;
+  font-weight: 500;
+}
+.foot ul {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+.foot a {
+  color: var(--on-deep);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: color var(--dur-fast);
+}
+.foot a:hover {
+  color: var(--signal);
+}
+.foot-base {
+  padding-top: 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+}
+.foot-contact {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+.foot-contact a {
+  color: var(--on-deep);
+  text-decoration: none;
+}
+.foot-contact a:hover {
+  color: var(--signal);
+}
+
+@media (max-width: 960px) {
+  .foot {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 2rem;
+  }
+}
+@media (max-width: 560px) {
+  .foot {
+    grid-template-columns: 1fr;
+  }
+}
