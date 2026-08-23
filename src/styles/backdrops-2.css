@@ -10,7 +10,7 @@
   background: repeating-linear-gradient(
     90deg,
     transparent 0 90px,
-    rgba(23, 196, 127, 0.1) 90px 92px,
+    rgba(195, 255, 0, 0.1) 90px 92px,
     transparent 92px 190px
   );
   mask-image: linear-gradient(90deg, transparent, black 30%, black 70%, transparent);
@@ -26,7 +26,7 @@
     100deg,
     transparent,
     rgba(255, 255, 255, 0.55) 45%,
-    rgba(23, 196, 127, 0.18) 55%,
+    rgba(195, 255, 0, 0.18) 55%,
     transparent
   );
   filter: blur(20px);
@@ -38,8 +38,8 @@
   background: linear-gradient(
     100deg,
     transparent,
-    rgba(23, 196, 127, 0.32) 45%,
-    rgba(169, 200, 187, 0.14) 58%,
+    rgba(195, 255, 0, 0.32) 45%,
+    rgba(196, 196, 196, 0.14) 58%,
     transparent
   );
   opacity: 0.55;
@@ -57,7 +57,7 @@
   background: repeating-radial-gradient(
     circle at 50% 50%,
     transparent 0 58px,
-    rgba(10, 93, 66, 0.09) 58px 59px
+    rgba(23, 62, 184, 0.09) 58px 59px
   );
   mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 66%);
   -webkit-mask-image: radial-gradient(circle at 50% 50%, black 20%, transparent 66%);
@@ -68,7 +68,7 @@
   background: repeating-radial-gradient(
     circle at 50% 50%,
     transparent 0 58px,
-    rgba(169, 200, 187, 0.1) 58px 59px
+    rgba(196, 196, 196, 0.1) 58px 59px
   );
 }
 @keyframes bd-spin {
@@ -87,13 +87,13 @@
 }
 .bd-contour-svg path {
   fill: none;
-  stroke: var(--forest);
+  stroke: var(--brand);
   stroke-width: 1;
   opacity: 0.16;
   will-change: transform;
 }
 .bd-dark .bd-contour-svg path {
-  stroke: var(--signal);
+  stroke: var(--accent);
   opacity: 0.14;
 }
 
@@ -104,7 +104,7 @@
   aspect-ratio: 1.15;
   filter: blur(28px);
   opacity: 0.42;
-  background: radial-gradient(circle at 35% 35%, var(--signal), rgba(10, 93, 66, 0.55) 65%, transparent 78%);
+  background: radial-gradient(circle at 35% 35%, var(--accent), rgba(23, 62, 184, 0.55) 65%, transparent 78%);
   border-radius: 62% 38% 54% 46% / 52% 58% 42% 48%;
   will-change: border-radius, transform;
   animation: bd-morph 26s ease-in-out infinite;
@@ -116,11 +116,11 @@
   opacity: 0.3;
   animation-duration: 34s;
   animation-direction: reverse;
-  background: radial-gradient(circle at 60% 40%, #7fd9b4, rgba(10, 93, 66, 0.4) 70%, transparent 80%);
+  background: radial-gradient(circle at 60% 40%, #dcff6b, rgba(23, 62, 184, 0.4) 70%, transparent 80%);
 }
 .bd-dark .bd-organic-shape {
   opacity: 0.5;
-  background: radial-gradient(circle at 35% 35%, rgba(23, 196, 127, 0.85), rgba(5, 46, 33, 0.2) 70%, transparent 82%);
+  background: radial-gradient(circle at 35% 35%, rgba(195, 255, 0, 0.85), rgba(21, 20, 26, 0.2) 70%, transparent 82%);
 }
 @keyframes bd-morph {
   0%,
@@ -180,7 +180,7 @@
   border: none;
   border-left: 46px solid transparent;
   border-right: 46px solid transparent;
-  border-bottom: 76px solid rgba(23, 196, 127, 0.12);
+  border-bottom: 76px solid rgba(195, 255, 0, 0.12);
   opacity: 0.8;
 }
 .bd-float.pill {
@@ -189,7 +189,7 @@
   border-radius: 100px;
 }
 .bd-dark .bd-float {
-  border-color: rgba(169, 200, 187, 0.24);
+  border-color: rgba(196, 196, 196, 0.24);
   opacity: 0.5;
 }
 

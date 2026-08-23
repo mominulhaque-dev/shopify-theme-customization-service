@@ -9,7 +9,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(251, 252, 251, 0.88);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid transparent;
   transition: border-color var(--dur-med) var(--ease-out), box-shadow var(--dur-med) var(--ease-out),
@@ -17,7 +17,7 @@ header {
 }
 header.is-scrolled {
   border-bottom-color: var(--line);
-  box-shadow: 0 10px 30px -24px rgba(5, 46, 33, 0.45);
+  box-shadow: 0 10px 30px -24px rgba(21, 20, 26, 0.45);
 }
 .nav {
   display: flex;
@@ -25,11 +25,13 @@ header.is-scrolled {
   gap: 1.5rem;
   height: 66px;
 }
+/* The wordmark is the one place Righteous appears — a single-weight display face
+   used as a logotype, exactly as the reference does. It ships one cut (400), so
+   there is no weight to declare beyond it and nothing to synthesise. */
 .logo {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 0.9375rem;
-  letter-spacing: -0.03em;
+  font-family: var(--font-logo);
+  font-weight: 400;
+  font-size: 1.0625rem;
   color: var(--ink);
   text-decoration: none;
   line-height: 1.1;
@@ -74,12 +76,12 @@ header.is-scrolled {
   right: 0;
   bottom: 0;
   height: 1.5px;
-  background: var(--forest);
+  background: var(--brand);
   transform: scaleX(0);
   transition: transform var(--dur-med) var(--ease-out);
 }
 .nav ul a:hover {
-  color: var(--forest);
+  color: var(--brand);
 }
 .nav ul a:hover::after {
   transform: scaleX(1);
@@ -151,8 +153,7 @@ header.is-scrolled {
 .mobile-panel nav > ul > li > a {
   font-family: var(--font-display);
   font-size: 1.5rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-weight: 600;
   color: var(--ink);
   text-decoration: none;
   display: block;
@@ -160,7 +161,7 @@ header.is-scrolled {
   border-bottom: 1px solid var(--line);
 }
 .mobile-panel nav > ul > li > a:hover {
-  color: var(--forest);
+  color: var(--brand);
 }
 .mobile-sub {
   margin-top: 1.5rem;

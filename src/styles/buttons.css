@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: var(--forest);
+  background: var(--brand);
   color: var(--white);
   padding: 0.8rem 1.4rem;
   border-radius: var(--r-sm);
@@ -17,7 +17,7 @@
   font-family: var(--font-body);
   font-weight: 600;
   font-size: var(--t-sm);
-  line-height: 1.2;
+  line-height: 1.28; /* 14/18, the reference's button metric */
   border: none;
   cursor: pointer;
   position: relative;
@@ -41,9 +41,9 @@
   transition: transform var(--dur-slow) var(--ease-out);
 }
 .btn:hover {
-  background: var(--forest-hover);
+  background: var(--brand-hover);
   color: var(--white);
-  box-shadow: 0 12px 26px -18px rgba(5, 46, 33, 0.7);
+  box-shadow: 0 12px 26px -18px rgba(21, 20, 26, 0.7);
 }
 .btn:hover::before {
   transform: translateX(110%);
@@ -57,14 +57,14 @@
 }
 .btn-sm {
   padding: 0.55rem 1rem;
-  font-size: 0.875rem;
+  font-size: var(--t-sm);
 }
 .btn-signal {
-  background: var(--signal);
+  background: var(--accent);
   color: var(--deep);
 }
 .btn-signal:hover {
-  background: #12b573;
+  background: #b0e800;
   color: var(--deep);
 }
 .btn-ghost {
@@ -74,18 +74,18 @@
 }
 .btn-ghost:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: var(--signal);
+  border-color: var(--accent);
   color: var(--white);
 }
 .btn-outline {
   background: transparent;
-  color: var(--forest);
+  color: var(--brand);
   border: 1px solid var(--line-strong);
 }
 .btn-outline:hover {
   background: var(--wash);
-  border-color: var(--forest);
-  color: var(--forest);
+  border-color: var(--brand);
+  color: var(--brand);
 }
 .btn-arrow svg {
   transition: transform var(--dur-med) var(--ease-out);
@@ -124,8 +124,8 @@ button[disabled] {
     box-shadow var(--dur-fast);
 }
 .chip:hover {
-  border-color: var(--forest);
-  color: var(--forest);
+  border-color: var(--brand);
+  color: var(--brand);
   transform: translateY(-1px);
   box-shadow: var(--sh-sm);
 }
@@ -143,7 +143,7 @@ button[disabled] {
   font-size: 0.6875rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--forest);
+  color: var(--brand);
   background: var(--wash);
   border: 1px solid var(--line);
   border-radius: 100px;
@@ -151,7 +151,7 @@ button[disabled] {
 }
 .on-deep .badge,
 .dark .badge {
-  color: var(--signal);
-  background: rgba(23, 196, 127, 0.08);
+  color: var(--accent);
+  background: rgba(195, 255, 0, 0.08);
   border-color: var(--line-dark);
 }

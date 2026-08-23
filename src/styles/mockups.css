@@ -108,11 +108,11 @@
   background: var(--deep-2);
 }
 .browser-dark .browser-bar {
-  background: #063324;
+  background: #1D1B24;
   border-bottom-color: var(--line-dark);
 }
 .browser-dark .browser-url {
-  background: #052e21;
+  background: #15141a;
   border-color: var(--line-dark);
   color: var(--on-deep-dim);
 }
@@ -176,16 +176,16 @@
   tab-size: 2;
 }
 .code .t {
-  color: #7fd9b4;
+  color: #dcff6b;
 }
 .code .k {
-  color: var(--signal);
+  color: var(--accent);
 }
 .code .s {
   color: #e0b23a;
 }
 .code .c {
-  color: #5d8a78;
+  color: #8f96a8;
   font-style: italic;
 }
 .code .p {

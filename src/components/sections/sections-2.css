@@ -24,7 +24,7 @@
 }
 .wall-rule {
   width: 1px;
-  background: linear-gradient(180deg, transparent, var(--forest) 12%, var(--forest) 88%, transparent);
+  background: linear-gradient(180deg, transparent, var(--brand) 12%, var(--brand) 88%, transparent);
   position: relative;
 }
 .wall-tag {
@@ -36,7 +36,7 @@
   font-size: 0.6875rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--forest);
+  color: var(--brand);
   background: var(--wash);
   padding: 0.4rem 0.85rem;
   white-space: nowrap;
@@ -80,7 +80,7 @@
   width: 7px;
   height: 7px;
   border-radius: 2px;
-  background: var(--signal);
+  background: var(--accent);
 }
 .blk.limit li::before {
   background: var(--amber-soft);
@@ -154,7 +154,7 @@
     padding: 0;
   }
   .wall-side.right {
-    border-top: 2px solid var(--forest);
+    border-top: 2px solid var(--brand);
     padding-top: 1.5rem;
   }
   .theme-row {

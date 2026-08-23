@@ -1,46 +1,62 @@
 /* ==========================================================================
    Typography
    ========================================================================== */
+/* Weight 600 and `letter-spacing: normal` across every level, because that is
+   what the reference measures: no heading on it is heavier than semibold and
+   none is tracked in. Poppins is geometric and already fairly tight at display
+   sizes — the -0.025em the previous face needed closes the counters here. */
 h1,
 h2,
 h3,
 h4 {
   font-family: var(--font-display);
   line-height: 1.08;
-  letter-spacing: -0.025em;
-  font-weight: 700;
+  letter-spacing: normal;
+  font-weight: 600;
   text-wrap: balance;
 }
 h1 {
   font-size: var(--t-h1);
-  font-weight: 800;
 }
 h2 {
   font-size: var(--t-h2);
+  line-height: 1.29;
 }
 h3 {
   font-size: var(--t-h3);
-  line-height: 1.25;
-  letter-spacing: -0.015em;
+  line-height: 1.33;
+}
+h4 {
+  font-size: var(--t-h4);
+  line-height: 1.33;
 }
 
 p {
   text-wrap: pretty;
 }
 
+/* Poppins is loaded at 300/400/500/600 only, because the reference uses nothing
+   heavier. The UA default for b/strong is 700, which no loaded face supplies —
+   the browser would synthesise it by smearing the 600 outlines. Declaring 600
+   globally keeps every emphasis a real cut instead of a faked one. */
+b,
+strong {
+  font-weight: 600;
+}
+
 a {
-  color: var(--forest);
+  color: var(--brand);
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
 }
 a:hover {
-  color: var(--forest-hover);
+  color: var(--brand-hover);
 }
 
 /* Inline link inside body copy — underline grows from the left on hover
    rather than simply appearing, so prose links feel considered. */
 .ilink {
-  color: var(--forest);
+  color: var(--brand);
   text-decoration: none;
   position: relative;
   font-weight: 500;
@@ -64,13 +80,37 @@ a:hover {
   transform: scaleX(1) translateY(1px);
 }
 
+/* The reference's two decorative faces, exposed as utilities rather than baked
+   into a component: Playfair 600 italic for a single emphasis word inside a
+   headline, Ms Madi for a handwritten aside. Both are opt-in per element.
+
+   They are deliberately not applied to homepage headings — wrapping a word in a
+   <span> splits the text node, and audit:homepage asserts each approved string
+   appears intact in the prerendered HTML. Use them on interior pages, where the
+   copy carries no such guarantee.
+
+   Google Fonts only downloads a woff2 when a rule actually matches text in that
+   family, so declaring these costs a few bytes of CSS and no font request until
+   one of the classes is used. */
+.accent-word {
+  font-family: var(--font-accent);
+  font-weight: 600;
+  font-style: italic;
+}
+.script-note {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 1.35em;
+  line-height: 1;
+}
+
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--t-mono);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--forest);
+  color: var(--brand);
   margin-bottom: 0.7rem;
   display: flex;
   align-items: center;
@@ -81,13 +121,13 @@ a:hover {
   width: 7px;
   height: 7px;
   border-radius: 2px;
-  background: var(--signal);
+  background: var(--accent);
   transform: rotate(45deg);
   flex-shrink: 0;
 }
 .on-deep .eyebrow::before,
 .dark .eyebrow::before {
-  background: var(--signal);
+  background: var(--accent);
 }
 
 /* ---------- section heads ---------- */
@@ -117,9 +157,8 @@ a:hover {
 .deck-sm {
   font-family: var(--font-display);
   font-weight: 500;
-  font-size: 1.0625rem;
-  color: var(--forest);
-  letter-spacing: -0.01em;
+  font-size: var(--t-lg);
+  color: var(--brand);
   margin-bottom: 0.85rem;
 }
 .h2-col {

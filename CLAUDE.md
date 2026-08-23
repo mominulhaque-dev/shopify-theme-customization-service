@@ -142,10 +142,40 @@ tokens in `tokens.css`. The previous build used 5.5rem section padding and
 `clamp(2.75rem, 5.5vw, 4.5rem)` and heading gaps `clamp(1.5rem, 2.6vw, 2.25rem)`.
 Retune density there rather than per section.
 
-**Contrast is checked, not assumed.** Every text pair passes WCAG AA:
-`--muted` 6.37:1 on `--paper`, `--muted-soft` 4.87:1, `--ink-2` 10.5:1,
-`--forest` 7.68:1, `--on-deep` 8.22:1 on `--deep`, `--signal` 6.51:1 on `--deep`.
-If you change a colour token, recompute rather than eyeballing.
+**The palette and type identity come from fatjoe.com** (extracted from computed
+styles in a browser, Aug 2026 — the site sits behind a Vercel bot check, so no
+server-side fetch can read it). The previous forest-green system was replaced
+wholesale: brand blue `#173EB8`, acid-lime accent `#C3FF00`, near-black ink
+`#15141A`, white page. Token names are now palette-neutral — `--brand` and
+`--accent`, not `--forest` and `--signal`, which described values and so became
+lies the moment the palette changed. `scripts/migrate-palette.mjs` is the
+in-repo record of exactly which old value became which new one.
+
+Type: one face for everything (Poppins 300–600), `letter-spacing: normal`
+everywhere, and no weight above 600 — all three are what the reference measures,
+not preferences. `b`/`strong` are declared 600 globally in `typography.css`
+because the UA default of 700 is a weight no loaded cut supplies and the browser
+would synthesise it. `--font-logo` (Righteous, one cut) is the wordmark only;
+`--font-accent` (Playfair 600 italic) and `--font-script` (Ms Madi) exist as the
+`.accent-word` / `.script-note` utilities. `--font-mono` is deliberately *not*
+from the reference — they ship no monospace, and the code panels need real
+column alignment, so it is a system stack. Desktop scale: h1 48/52, h2 28/36,
+h3 24/32, h4 18/24, body 16/24, button 14/18; the `clamp()` upper bounds are
+those numbers, the lower bounds are ours.
+
+**Contrast is computed, not assumed.** On `--paper` (`#fff`): `--ink` 18.31:1,
+`--ink-2` 12.6:1, `--muted` 5.10:1, `--brand` 8.68:1, `--accent-ink` 4.96:1. On
+`--deep`: `--on-deep` 10.50:1, `--on-deep-dim` 5.96:1.
+
+⚠️ **`--muted-soft` (`#939393`) is 3.07:1 and fails WCAG AA for normal text.**
+It is fatjoe.com's own body-copy grey and was applied at the user's explicit
+instruction after the failure was flagged — it is a known, accepted deviation,
+not an oversight. It is used for captions, breadcrumbs and mono labels. If it
+needs to pass, `#767676` is the same family at 4.54:1 and it is a one-line
+change in `tokens.css`. `--accent` (`#c3ff00`, 1.19:1 on white) is a fill behind
+dark text and must never be text on a light surface; `--accent-ink` is the
+text-legible version. If you change a colour token, recompute rather than
+eyeballing.
 
 ## 7. Imagery
 
@@ -183,6 +213,14 @@ Fonts are therefore loaded with a `<link>` to the Google Fonts CSS API plus
 preconnects. If you are somewhere with gstatic access and want self-hosting
 back, it is a contained change in `layout.tsx` — but re-verify the build.
 
+Currently requested: Poppins 300/400/500/600, Righteous 400, Playfair Display
+600 italic, Ms Madi 400. Playfair and Ms Madi are declared but not yet used by
+any element; Google Fonts only downloads a woff2 once a rule matches text in
+that family, so they cost a few bytes of CSS and no font request until
+`.accent-word` / `.script-note` appear in markup. The previous three families
+(Bricolage Grotesque, Instrument Sans, JetBrains Mono) are gone — mono is now a
+system stack, which is a whole webfont saved.
+
 ## 10. Verification
 
 ```
@@ -196,12 +234,17 @@ prerendered HTML, so they only mean something after a build.
 
 ## 11. What is left
 
-1. **Look at it in a browser.** Nothing visual has been observed. Specifically
-   check: the SplitText line reveals on the hero H1 and section H2s (do lines
-   break sensibly at every width, and does `autoSplit` re-split cleanly on
-   resize?); the pinned horizontal gallery on `/themes/`; the `data-curtain`
-   scrub on the dark pricing band; the spotlight/tilt on cards; and the aurora
-   mask movement — is it too much or too little?
+1. **Look at it in a browser.** Nothing visual has been observed. The fatjoe.com
+   palette and type swap (§6) is the largest unobserved change in the repo: it
+   touched every colour and every heading rule, and the only evidence it is
+   correct is that the numbers match the extract and the build is green. Check
+   the blue/lime pairing on the dark bands first, then whether Poppins at
+   `letter-spacing: normal` and weight 600 still reads as a display face at h1
+   size or has gone soft. Also check: the SplitText line reveals on the hero H1
+   and section H2s (do lines break sensibly at every width, and does `autoSplit`
+   re-split cleanly on resize?); the pinned horizontal gallery on `/themes/`; the
+   `data-curtain` scrub on the dark pricing band; the spotlight/tilt on cards;
+   and the aurora mask movement — is it too much or too little?
 2. **Reduced motion.** Turn it on and confirm every page renders its finished
    state with no hidden content and no animation.
 3. **`public/og-image.png`.** The design is ready at `public/og-image.svg`;

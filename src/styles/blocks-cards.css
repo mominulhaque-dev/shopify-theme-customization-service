@@ -44,7 +44,7 @@
   position: absolute;
   inset: 0 auto 0 0;
   width: 2px;
-  background: linear-gradient(180deg, var(--signal), var(--forest));
+  background: linear-gradient(180deg, var(--accent), var(--brand));
   transform: scaleY(0);
   transform-origin: top;
   transition: transform var(--dur-med) var(--ease-out);
@@ -72,7 +72,7 @@
   font-size: 0.6875rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--forest);
+  color: var(--brand);
 }
 .card-link {
   text-decoration: none;
@@ -84,7 +84,7 @@
   font-size: 0.6875rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--forest);
+  color: var(--brand);
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -107,7 +107,7 @@
 }
 .dark .card:hover,
 .on-deep .card:hover {
-  border-color: var(--signal);
+  border-color: var(--accent);
 }
 
 /* ---------- numbered steps ---------- */
@@ -132,7 +132,7 @@
   content: counter(s, decimal-leading-zero);
   font-family: var(--font-mono);
   font-size: 0.8125rem;
-  color: var(--forest);
+  color: var(--brand);
   padding-top: 0.2rem;
 }
 .steps .step h3 {
@@ -166,7 +166,7 @@
 }
 .dark .steps .step::before,
 .on-deep .steps .step::before {
-  color: var(--signal);
+  color: var(--accent);
 }
 
 /* ---------- checklist (in scope / out of scope) ---------- */

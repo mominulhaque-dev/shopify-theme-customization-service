@@ -1,48 +1,78 @@
 /* ==========================================================================
    Design tokens
-   Palette + type identity ported 1:1 from Homepage_Design_v3_-_Final.html.
-   The *spacing* scale is new: the previous build leaned on 5.5rem section
-   padding and 3.5rem heading gaps, which read as empty rather than airy.
-   Everything vertical now comes from --sp-* so density is tuned in one file.
+   Palette and type identity taken from fatjoe.com (extracted from computed
+   styles, Aug 2026 — see CLAUDE.md §6). It replaces the previous forest-green
+   system wholesale: brand blue #173EB8, acid-lime accent #C3FF00, near-black
+   ink #15141A.
+
+   Token names are deliberately palette-neutral now (--brand, --accent) rather
+   than colour-named (--forest, --signal). The old names described the value,
+   so every one of them became a lie the moment the palette changed.
+
+   The *spacing* scale is unchanged and is not from fatjoe.com: all vertical
+   rhythm comes from --sp-* so density is tuned in one file.
    ========================================================================== */
 :root {
-  /* ---- colour ---- */
-  --ink: #0b1f17;
-  --ink-2: #2c4239;
-  --muted: #4d6259; /* darkened from #566b62: 6.37:1 on --paper, AA for body */
-  --muted-soft: #5f7469; /* captions, breadcrumbs, mono labels — 4.87:1 on --paper */
-  --forest: #0a5d42;
-  --forest-hover: #084832;
-  --deep: #052e21;
-  --deep-2: #073b2b;
-  --signal: #17c47f;
-  --signal-ink: #0e8f5b; /* signal at text-legible contrast on light */
-  --paper: #fbfcfb;
-  --wash: #eef6f1;
-  --wash-2: #e4f0e9;
-  --line: #d5e5dc;
-  --line-strong: #bcd6c8;
-  --line-dark: #12503c;
-  --on-deep: #a9c8bb;
-  --on-deep-dim: #7ba795;
+  /* ---- colour ----
+     Contrast on --paper (#fff), computed not eyeballed:
+       --ink 18.31:1 · --ink-2 12.6:1 · --muted 5.10:1 · --muted-soft 3.07:1
+       --brand 8.68:1 · --accent-ink 4.96:1
+     --muted-soft is fatjoe.com's own body-copy grey and it FAILS WCAG AA for
+     normal text (3.07:1 against the 4.5:1 threshold). It is applied here as
+     instructed; #767676 is the same family at 4.54:1 if it needs to pass. */
+  --ink: #15141a;
+  --ink-2: #383643;
+  --muted: #6e6e6e;
+  --muted-soft: #939393; /* captions, breadcrumbs, mono labels — 3.07:1, sub-AA */
+  --brand: #173eb8;
+  --brand-hover: #12308f; /* derived: fatjoe.com exposes no hover state */
+  --deep: #15141a;
+  --deep-2: #24222e; /* derived lift, for gradients off --deep */
+  --accent: #c3ff00; /* 1.19:1 on white — a fill behind dark text, never text */
+  --accent-ink: #5c7a00; /* derived: the accent at text-legible contrast */
+  --paper: #fff;
+  --wash: #f7f5f1; /* their warm cream band */
+  --wash-2: #f3f3f3; /* their light surface */
+  --line: #e3e3e3; /* derived hairline */
+  --line-strong: #c4c4c4;
+  --line-dark: #383643;
+  --on-deep: #c4c4c4; /* 10.50:1 on --deep */
+  --on-deep-dim: #939393; /* 5.96:1 on --deep — passes AA on dark */
   --white: #fff;
-  --amber: #7e5606;
+  --amber: #7e5606; /* semantic warning, not brand — carried over unchanged */
   --amber-soft: #b8801a;
 
-  /* ---- type ---- */
-  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
+  /* ---- type ----
+     fatjoe.com runs one face for everything: Poppins, weights 300-600, with
+     no letter-spacing anywhere and no weight above 600. Righteous is their
+     wordmark, Playfair Display appears only as 600 italic for an emphasis
+     word inside a headline, Ms Madi is a single script flourish.
 
+     --font-mono is NOT from fatjoe.com — they ship no monospace. The code
+     panels on the customization pages show real Liquid and CSS, where column
+     alignment is the point, so a system mono stack stays. Dropping the
+     JetBrains Mono webfont is a net request saved. */
+  --font-display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --font-logo: "Righteous", "Poppins", system-ui, sans-serif;
+  --font-accent: "Playfair Display", Georgia, serif;
+  --font-script: "Ms Madi", "Segoe Script", cursive;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* Their measured desktop scale: h1 48/52, h2 28/36, h3 24/32, h4 18/24,
+     body 16/24, button 14/18. The clamp() upper bounds are those values; the
+     lower bounds are ours, because 48px of Poppins on a 360px phone does not
+     fit and their mobile breakpoints were not in the extract. */
   --t-mono: 0.75rem;
-  --t-sm: 0.9375rem;
-  --t-base: 1.0625rem;
-  --t-lg: 1.125rem;
-  --t-h3: 1.1875rem;
-  --t-h2-sm: clamp(1.35rem, 2.2vw, 1.65rem);
-  --t-h2: clamp(1.75rem, 3vw, 2.45rem);
-  --t-h1: clamp(2.1rem, 4.4vw, 3.35rem);
-  --t-h1-hero: clamp(2.35rem, 5vw, 3.7rem);
+  --t-sm: 0.875rem; /* 14px — their button size */
+  --t-base: 1rem; /* 16px */
+  --t-lg: 1.125rem; /* 18px */
+  --t-h4: 1.125rem; /* 18px */
+  --t-h3: 1.5rem; /* 24px */
+  --t-h2-sm: clamp(1.25rem, 2.2vw, 1.5rem);
+  --t-h2: clamp(1.5rem, 3vw, 1.75rem); /* → 28px */
+  --t-h1: clamp(2rem, 4.4vw, 3rem); /* → 48px */
+  --t-h1-hero: clamp(2.15rem, 5vw, 3rem); /* → 48px; their h1 is the hero */
 
   /* ---- layout ---- */
   --max: 1200px;
@@ -64,10 +94,10 @@
   --sp-gap-lg: clamp(1.5rem, 3vw, 2.75rem);
 
   /* ---- elevation ---- */
-  --sh-sm: 0 2px 8px -4px rgba(5, 46, 33, 0.18);
-  --sh: 0 14px 30px -22px rgba(5, 46, 33, 0.3);
-  --sh-lg: 0 30px 60px -34px rgba(5, 46, 33, 0.42);
-  --sh-glow: 0 0 0 1px rgba(23, 196, 127, 0.25), 0 20px 45px -28px rgba(10, 93, 66, 0.5);
+  --sh-sm: 0 2px 8px -4px rgba(21, 20, 26, 0.18);
+  --sh: 0 14px 30px -22px rgba(21, 20, 26, 0.3);
+  --sh-lg: 0 30px 60px -34px rgba(21, 20, 26, 0.42);
+  --sh-glow: 0 0 0 1px rgba(195, 255, 0, 0.35), 0 20px 45px -28px rgba(23, 62, 184, 0.5);
 
   /* ---- motion ---- */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -78,7 +108,7 @@
 }
 
 /* Dark-surface scope: any element inside .on-deep inherits legible defaults
-   instead of each dark section re-declaring colours (the old .diff-sec did). */
+   instead of each dark section re-declaring colours. */
 .on-deep {
   color: var(--white);
 }
@@ -95,10 +125,10 @@
   color: var(--white);
 }
 .on-deep .eyebrow {
-  color: var(--signal);
+  color: var(--accent);
 }
 .on-deep a {
-  color: var(--signal);
+  color: var(--accent);
 }
 .on-deep hr,
 .on-deep .rule {

@@ -113,9 +113,8 @@ table.tbl {
 }
 .faq summary {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.05rem;
-  letter-spacing: -0.015em;
   cursor: pointer;
   list-style: none;
   display: flex;
@@ -135,16 +134,16 @@ table.tbl {
   width: 11px;
   height: 11px;
   flex-shrink: 0;
-  background: linear-gradient(var(--forest), var(--forest)) center/100% 1.5px no-repeat,
-    linear-gradient(var(--forest), var(--forest)) center/1.5px 100% no-repeat;
+  background: linear-gradient(var(--brand), var(--brand)) center/100% 1.5px no-repeat,
+    linear-gradient(var(--brand), var(--brand)) center/1.5px 100% no-repeat;
   transition: transform var(--dur-med) var(--ease-out);
 }
 .faq details[open] summary::after {
-  background: linear-gradient(var(--forest), var(--forest)) center/100% 1.5px no-repeat;
+  background: linear-gradient(var(--brand), var(--brand)) center/100% 1.5px no-repeat;
   transform: rotate(180deg);
 }
 .faq summary:hover {
-  color: var(--forest);
+  color: var(--brand);
 }
 .faq details p {
   margin-top: 0.7rem;
@@ -171,7 +170,7 @@ table.tbl {
   transition: border-color var(--dur-fast), transform var(--dur-fast), box-shadow var(--dur-fast);
 }
 .rel:hover {
-  border-color: var(--forest);
+  border-color: var(--brand);
   transform: translateY(-2px);
   box-shadow: var(--sh-sm);
   color: inherit;

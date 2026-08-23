@@ -111,9 +111,9 @@
 .form-row input:focus,
 .form-row textarea:focus {
   outline: none;
-  border-color: var(--forest);
+  border-color: var(--brand);
   background: var(--white);
-  box-shadow: 0 0 0 3px rgba(23, 196, 127, 0.16);
+  box-shadow: 0 0 0 3px rgba(195, 255, 0, 0.16);
 }
 .form-row .hint {
   font-size: 0.8125rem;
@@ -141,7 +141,7 @@
 }
 .form-success {
   border: 1px solid var(--line);
-  border-left: 3px solid var(--signal);
+  border-left: 3px solid var(--accent);
   border-radius: var(--r);
   padding: 1.5rem;
   background: var(--wash);

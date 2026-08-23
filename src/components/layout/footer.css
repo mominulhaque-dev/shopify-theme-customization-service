@@ -39,7 +39,7 @@ footer > .wrap {
   display: inline-block;
 }
 .foot a:hover {
-  color: var(--signal);
+  color: var(--accent);
   transform: translateX(2px);
 }
 .foot-base {
@@ -63,7 +63,7 @@ footer > .wrap {
   text-decoration: none;
 }
 .foot-contact a:hover {
-  color: var(--signal);
+  color: var(--accent);
 }
 .foot-lede {
   max-width: 46ch;
@@ -71,11 +71,11 @@ footer > .wrap {
   color: var(--on-deep);
   margin-bottom: 1.25rem;
 }
+/* Same wordmark treatment as the header: Righteous, one weight, untracked. */
 .foot-mark {
-  font-family: var(--font-display);
-  font-weight: 800;
+  font-family: var(--font-logo);
+  font-weight: 400;
   font-size: 1.05rem;
-  letter-spacing: -0.03em;
   color: var(--white);
   text-decoration: none;
   display: inline-block;

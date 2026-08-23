@@ -20,7 +20,7 @@
 }
 .hero h1 {
   font-size: var(--t-h1-hero);
-  font-weight: 800;
+  font-weight: 600;
   max-width: 16ch;
   margin-bottom: 1.15rem;
 }
@@ -29,14 +29,13 @@
 }
 .hero h1 em {
   font-style: normal;
-  color: var(--forest);
+  color: var(--brand);
 }
 .deck {
   font-family: var(--font-display);
   font-weight: 500;
   font-size: clamp(1.1rem, 1.8vw, 1.45rem);
   color: var(--ink-2);
-  letter-spacing: -0.015em;
   line-height: 1.24;
   margin-bottom: 1rem;
   max-width: 30ch;
@@ -72,20 +71,20 @@
 }
 .creds b {
   color: var(--ink);
-  font-weight: 700;
+  font-weight: 600;
 }
 .partner {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  color: var(--forest);
+  color: var(--brand);
   font-weight: 500;
 }
 .partner::before {
   content: "";
   width: 9px;
   height: 9px;
-  background: var(--signal);
+  background: var(--accent);
   border-radius: 2px;
   transform: rotate(45deg);
 }

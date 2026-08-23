@@ -54,7 +54,7 @@
   height: 62%;
   top: -12%;
   right: -6%;
-  background: radial-gradient(circle, var(--signal), transparent 68%);
+  background: radial-gradient(circle, var(--accent), transparent 68%);
   opacity: 0.3;
 }
 .bd-aurora .bd-blob.b2 {
@@ -62,7 +62,7 @@
   height: 52%;
   top: 22%;
   right: 22%;
-  background: radial-gradient(circle, var(--forest), transparent 70%);
+  background: radial-gradient(circle, var(--brand), transparent 70%);
   opacity: 0.22;
 }
 .bd-aurora .bd-blob.b3 {
@@ -70,7 +70,7 @@
   height: 44%;
   bottom: -14%;
   left: -8%;
-  background: radial-gradient(circle, #7fd9b4, transparent 70%);
+  background: radial-gradient(circle, #dcff6b, transparent 70%);
   opacity: 0.2;
 }
 .bd-mask {
@@ -78,7 +78,7 @@
   --mask-y: 38%;
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at var(--mask-x) var(--mask-y), var(--signal), transparent 56%);
+  background: radial-gradient(circle at var(--mask-x) var(--mask-y), var(--accent), transparent 56%);
   opacity: 0.14;
   mask-image: radial-gradient(circle at var(--mask-x) var(--mask-y), black 0%, transparent 64%);
   -webkit-mask-image: radial-gradient(
@@ -88,7 +88,7 @@
   );
 }
 .bd-dark .bd-mask {
-  background: radial-gradient(circle at var(--mask-x) var(--mask-y), var(--signal), transparent 58%);
+  background: radial-gradient(circle at var(--mask-x) var(--mask-y), var(--accent), transparent 58%);
   opacity: 0.12;
 }
 .bd-dark .bd-blob.b1 {
@@ -99,7 +99,7 @@
   opacity: 0.12;
 }
 .bd-dark .bd-blob.b3 {
-  background: radial-gradient(circle, #0f7a56, transparent 70%);
+  background: radial-gradient(circle, #2a55c9, transparent 70%);
   opacity: 0.3;
 }
 
@@ -107,10 +107,10 @@
 .bd-mesh-layer {
   position: absolute;
   inset: -20%;
-  background: radial-gradient(38% 44% at 22% 28%, rgba(23, 196, 127, 0.3), transparent 70%),
-    radial-gradient(34% 40% at 78% 22%, rgba(10, 93, 66, 0.26), transparent 72%),
-    radial-gradient(44% 46% at 62% 82%, rgba(127, 217, 180, 0.24), transparent 74%),
-    conic-gradient(from 200deg at 50% 50%, rgba(238, 246, 241, 0.5), transparent 40%);
+  background: radial-gradient(38% 44% at 22% 28%, rgba(195, 255, 0, 0.3), transparent 70%),
+    radial-gradient(34% 40% at 78% 22%, rgba(23, 62, 184, 0.26), transparent 72%),
+    radial-gradient(44% 46% at 62% 82%, rgba(220, 255, 107, 0.24), transparent 74%),
+    conic-gradient(from 200deg at 50% 50%, rgba(247, 245, 241, 0.5), transparent 40%);
   /* No saturate(): the layer is four stacked gradients at 0.24-0.5 alpha, so a
      second filter pass over an oversized blurred surface bought nothing. */
   filter: blur(30px);
@@ -119,9 +119,9 @@
   animation: bd-mesh 34s ease-in-out infinite alternate;
 }
 .bd-dark .bd-mesh-layer {
-  background: radial-gradient(36% 42% at 18% 24%, rgba(23, 196, 127, 0.26), transparent 70%),
-    radial-gradient(40% 44% at 82% 30%, rgba(7, 59, 43, 0.9), transparent 72%),
-    radial-gradient(46% 48% at 58% 88%, rgba(15, 122, 86, 0.35), transparent 74%);
+  background: radial-gradient(36% 42% at 18% 24%, rgba(195, 255, 0, 0.26), transparent 70%),
+    radial-gradient(40% 44% at 82% 30%, rgba(36, 34, 46, 0.9), transparent 72%),
+    radial-gradient(46% 48% at 58% 88%, rgba(42, 85, 201, 0.35), transparent 74%);
   opacity: 0.85;
 }
 @keyframes bd-mesh {
@@ -168,13 +168,13 @@
   inset: 0;
   --dot-x: 50%;
   --dot-y: 40%;
-  background-image: radial-gradient(circle, var(--forest) 1.1px, transparent 1.1px);
+  background-image: radial-gradient(circle, var(--brand) 1.1px, transparent 1.1px);
   background-size: 22px 22px;
   opacity: 0.14;
   mask-image: radial-gradient(58% 62% at var(--dot-x) var(--dot-y), black, transparent 72%);
   -webkit-mask-image: radial-gradient(58% 62% at var(--dot-x) var(--dot-y), black, transparent 72%);
 }
 .bd-dark .bd-dots-layer {
-  background-image: radial-gradient(circle, var(--signal) 1.1px, transparent 1.1px);
+  background-image: radial-gradient(circle, var(--accent) 1.1px, transparent 1.1px);
   opacity: 0.16;
 }
