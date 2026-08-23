@@ -37,6 +37,21 @@ export const metadata: Metadata = {
   },
 };
 
+/*
+ * No og:image is advertised yet, deliberately.
+ *
+ * next/og cannot run in this checkout: @vercel/og resolves its bundled font
+ * through a path join that produces an invalid URL when the project directory
+ * contains a space or brackets, and it fails at module load rather than at
+ * render, so the route 500s rather than degrading. Advertising an og:image URL
+ * that returns 500 is worse than advertising none.
+ *
+ * The card design is ready at public/og-image.svg. To finish it: export that to
+ * public/og-image.png at 1200x630, then add
+ *   images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }]
+ * to openGraph above and `images: ["/og-image.png"]` to twitter.
+ */
+
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",

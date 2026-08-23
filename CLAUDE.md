@@ -1,275 +1,222 @@
 # CLAUDE.md — Shopify Theme Customization Services
 
-Read this before doing anything else. It's written so a fresh Claude Code
-session can pick up this project with zero re-analysis.
+Read this before doing anything else. It is written so a fresh session can pick
+up the project with no re-analysis.
 
-## 0. Where this came from
+## 0. State of the build
 
-Built in a Claude.ai chat session (no network access, so **nothing here has
-been `npm install`'d, built, or visually verified**). The design source of
-truth was a single reference file: `Homepage_Design_v3_-_Final.html` (a
-hand-coded static HTML/CSS homepage for a Shopify theme customization
-agency — forest-green palette, Bricolage Grotesque / Instrument Sans /
-JetBrains Mono, pricing-tier ladder, "the wall" editor-vs-code diagram).
+Verified in this environment: `npm run build` compiles and prerenders all 47
+pages, `npm run lint` is clean, `npx tsc --noEmit` is clean, and the two audit
+scripts pass (§10). `npx next start` serves every route with the expected status
+codes.
 
-**Your first task in Claude Code should be:** `npm install`, then `npm run
-dev`, then visually diff the rendered homepage against the original
-`Homepage_Design_v3_-_Final.html` (open both side by side) and fix whatever
-doesn't match pixel-for-pixel. Treat every animation, hover state and
-breakpoint as unverified until you've seen it render.
+**Not verified:** anything that needs eyes on a browser. No screenshot has been
+taken, no hydration observed, no animation watched. Every claim below about how
+something *looks* or *feels* is intent, not observation. The first job in a
+session with a browser is §11.
 
 ## 1. Project overview
 
-A premium Shopify theme *customization* agency site (not "we build themes
-from scratch" — see `/hire/` copy and the scope-wall section, the
-distinction matters and is a real content pillar, not just marketing).
+A Shopify theme *customization* agency site (not "we build themes from
+scratch" — the distinction is a real content pillar, see
+`/custom-theme-development/`).
 
-- **Tech stack:** Next.js 14 (App Router), React 18, TypeScript, plain CSS
-  (global stylesheets, not Tailwind — see §5 for why), GSAP + ScrollTrigger,
-  Lenis for smooth scroll, Resend for the contact form.
-- **Contact details (real, already wired in `src/data/site.ts`):**
+- **Stack:** Next.js 14 (App Router), React 18, TypeScript strict with
+  `noUncheckedIndexedAccess`, plain CSS, GSAP 3.15 + ScrollTrigger + SplitText +
+  DrawSVG + CustomEase, Lenis for smooth scroll, Resend for the contact form.
+- **Contact details (real, in `src/data/site.ts`):**
   - Email: `hihopifythemecustomization@gmail.com`
   - Phone: `01580424024` / `+8801580424024`
   - WhatsApp: `https://wa.me/8801580424024`
 
-## 2. Folder structure
+## 2. Architecture — the three decisions that shape everything
+
+**a. One catch-all route renders 44 pages.** `src/app/[...slug]/page.tsx` looks
+up `src/data/pages/index.ts` and hands the result to `PageRenderer`. Pages are
+data (`PageContent` in `src/types/page.ts`), composed from a discriminated union
+of block types. `generateStaticParams` means they are all still statically
+prerendered; `dynamicParams = false` makes an unknown path a 404 rather than an
+empty render.
+
+To add a page: write `src/data/pages/<name>.ts`, add it to `PAGE_LIST`. That is
+the whole procedure — the sitemap, the static params and the link audit all read
+from that array, so there is no second place to forget.
+
+**b. Motion is declarative.** Sections stay server components and declare intent
+with data attributes (`data-reveal`, `data-split`, `data-parallax`, `data-tilt`,
+`data-magnetic`, `data-counter`, `data-draw`, `data-hscroll`, `data-curtain`,
+`data-marquee`, `data-mask-move`, `data-sweep`, `data-drift`). One client
+component — `MotionProvider` — reads them and builds every GSAP animation inside
+a single `gsap.context`. Adding an effect is an attribute, not another wrapper
+component, and page bundles ship no animation code.
+
+**c. The `.motion` class gates all of it.** An inline script in `layout.tsx` adds
+`.motion` to `<html>` before the body paints, and only when JS is on and
+`prefers-reduced-motion` is not set. Every pre-paint hidden state in
+`src/styles/motion.css` is scoped to `.motion`. So no-JS and reduced-motion
+visitors get the finished state with no flash, and `motionEnabled()` is the
+single check any client code makes before animating.
+
+**If you add a `[data-reveal]` value**, add it in three places or it breaks:
+`MOTION_FROM`/`MOTION_TO` in `src/lib/motion.ts`, the `RevealKind` union in the
+same file, and the pre-paint rule in `src/styles/motion.css`.
+
+## 3. Folder structure
 
 ```
 src/
 ├── app/
-│   ├── layout.tsx          root layout: fonts, global CSS imports, header/footer, Lenis provider, Organization JSON-LD
-│   ├── page.tsx             homepage — composes all section components, FAQPage JSON-LD
-│   ├── globals.css          design tokens (colors/type/spacing) ported 1:1 from the reference HTML
-│   ├── robots.ts / sitemap.ts
-│   ├── not-found.tsx
-│   ├── api/contact/route.ts contact form → Resend
-│   └── hire/page.tsx        contact page, only non-homepage page built so far
+│   ├── layout.tsx            fonts, CSS entry, motion bootstrap, providers, Organization JSON-LD
+│   ├── page.tsx              homepage — composes the section components
+│   ├── [...slug]/page.tsx    every interior page, from the registry
+│   ├── hire/page.tsx         the only hand-built interior page (it has the form)
+│   ├── globals.css           import manifest only — the cascade order lives here
+│   ├── not-found.tsx, robots.ts, sitemap.ts
+│   └── api/contact/route.ts  contact form → Resend
 ├── components/
-│   ├── layout/               Header, Footer, header.css, footer.css
-│   ├── navigation/            HeaderScrollState (scroll shadow), MobileMenu (animated slide-in panel)
-│   ├── sections/               one component per homepage <section>, plus sections.css
-│   ├── cards/                  PriceCard
-│   ├── forms/                   ContactForm + forms.css
-│   └── animations/              SmoothScrollProvider (Lenis+GSAP), Reveal, RevealGroup — the whole motion system funnels through these two
+│   ├── animations/           Backdrop, Reveal, RevealGroup, TextReveal, ImageReveal,
+│   │                         Magnetic, SpotlightCard, Marquee, ScrollProgress,
+│   │                         MotionProvider (the only GSAP client), SmoothScrollProvider
+│   ├── page/                 PageRenderer, PageHero, SectionShell, Breadcrumbs, Block*
+│   ├── sections/             one component per homepage section + sections*.css
+│   ├── ui/                   inline-SVG mockups, BrowserFrame, CodePanel, visuals registry
+│   ├── layout/               Header, Footer + their CSS
+│   ├── navigation/           HeaderScrollState, MobileMenu (focus-trapped)
+│   └── forms/                ContactForm + forms.css
 ├── data/
-│   ├── homepage.ts            ALL homepage copy, verbatim from the reference file — see §3 before touching this
-│   └── site.ts                 nav, footer links, contact details
-├── types/index.ts
-└── lib/gsap.ts                 plugin registration + prefersReducedMotion() helper
+│   ├── homepage.ts           homepage copy, verbatim — see §4
+│   ├── site.ts               nav, footer columns, contact details
+│   └── pages/                one file per interior page + index.ts registry
+├── styles/                   the design system, split by concern (§6)
+├── lib/                      gsap, motion*, linkify, slug
+└── types/                    index.ts (homepage types), page.ts (PageContent)
 ```
 
-## 3. Homepage content — DO NOT REWRITE
+## 4. Homepage content — DO NOT REWRITE
 
-The task brief was explicit: homepage copy must be preserved, not rewritten.
-Every string in `src/data/homepage.ts` was copied verbatim from
-`Homepage_Design_v3_-_Final.html`. If you need to change homepage text,
-that's a deliberate exception to flag to the user, not a default action.
+Every string in `src/data/homepage.ts` is verbatim from the approved design
+reference. Layout, imagery, spacing and animation may change; wording may not.
+Changing homepage copy is a deliberate exception to flag to the user, never a
+default action.
 
-**One known content gap from the port:** a handful of inline links inside
-longer paragraphs (e.g. the scope-wall "Where we stop" list's `comparison`
-link, the diff-section footnote's `store setup` link) were flattened to
-plain text during the port so the data file could stay simple strings. Go
-back to the original HTML (§0) and reinstate those inline `<a>` tags — search
-`homepage.ts` for the plain-text remnants ("see the comparison", "see store
-setup") and wrap the right word in a `<Link>` inside the JSX, not in the
-data string.
+`npm run audit:homepage` enforces this: it extracts every prose string from
+`homepage.ts` and asserts each one appears in the prerendered homepage HTML. 140
+strings currently pass. Run it after any homepage change.
 
-Other pages (everything except `/` and `/hire/`) do NOT have this
-restriction — write real, specific, non-generic agency copy per the
-original brief's §8 rules (no fake clients/stats/awards).
+The inline links that the original port flattened to plain text are restored via
+`src/lib/linkify.tsx` — it maps phrases that already exist in the approved copy
+to their destinations, so no wording was altered to make a link fit. Add to
+`PHRASE_LINKS` there rather than editing the copy.
 
-## 4. Routes — what exists vs. what's next
+Other pages have no such restriction.
 
-**Built:** `/` (homepage), `/hire/` (contact form).
+## 5. Routes — all 47 exist
 
-**Referenced by nav/footer/homepage links but NOT yet built** (creating
-these, with real content, is the single biggest remaining task — check
-`src/data/site.ts` `footerColumns` and `mainNav` for the full canonical
-list before starting, it's the source of truth for the sitemap):
+Homepage, `/hire/`, and 44 registry pages: `/services/` (+4 service pages),
+`/customization/` (+12 layer and theme pages), `/themes/`, `/work/` (+10 case
+studies), `/pricing/`, `/guides/` (+7 guides), `/process/`, `/migration/`,
+`/store-setup/`, `/custom-theme-development/`, `/custom-theme-vs-template/`.
+
+`npm run audit:links` walks the prerendered HTML, collects every internal href
+and checks it against the pages that actually built. It also fails on `#`,
+`javascript:void(0)` and empty hrefs. Currently: 46 distinct internal targets,
+zero broken, zero placeholders, zero orphan pages.
+
+`trailingSlash: true` is on because every href in the site is written with one.
+Three legacy case-study slugs (`/work/client-slug-{1,2,3}`) 308 to their real
+URLs via `next.config.mjs`.
+
+## 6. CSS
+
+Plain CSS, not Tailwind: the reference design specified exact hex values, an
+exact spacing scale and an exact type scale, all of which port 1:1 into custom
+properties. `src/app/globals.css` is an import manifest and nothing else — it is
+the only place the cascade order is declared, and the only stylesheet
+`layout.tsx` imports. Files are split by concern under `src/styles/` plus the
+component-local sheets. Add a new file there and import it in the manifest; do
+not scatter imports into components.
+
+**Density lives in one place.** All vertical rhythm derives from the `--sp-*`
+tokens in `tokens.css`. The previous build used 5.5rem section padding and
+3.5rem heading gaps, which read as empty; section padding is now
+`clamp(2.75rem, 5.5vw, 4.5rem)` and heading gaps `clamp(1.5rem, 2.6vw, 2.25rem)`.
+Retune density there rather than per section.
+
+**Contrast is checked, not assumed.** Every text pair passes WCAG AA:
+`--muted` 6.37:1 on `--paper`, `--muted-soft` 4.87:1, `--ink-2` 10.5:1,
+`--forest` 7.68:1, `--on-deep` 8.22:1 on `--deep`, `--signal` 6.51:1 on `--deep`.
+If you change a colour token, recompute rather than eyeballing.
+
+## 7. Imagery
+
+Every visual is inline SVG — no binary assets, no stock photography. They live in
+`src/components/ui/mockups-*.tsx` and are registered by key in
+`visuals.tsx`, which is what makes a real screenshot a one-line swap later. Page
+data references a visual by name (`visual: "product-page"`), never by import.
+
+Available keys: `theme-editor`, `storefront`, `product-page`, `mobile`,
+`before-after`, `migration`, `sections`, `speed`, `funnel`, `ceiling`, `fonts`,
+`palette`, `breakpoints`, `timeline`, `handover`, `code-liquid`, `code-schema`,
+`code-css`, `code-js`, `code-template`, plus three overlapping compositions
+(`overlap-store`, `overlap-editor`, `overlap-product`).
+
+The code panels contain real, correct theme code (`ui/code-samples.ts`) — Liquid
+that guards for missing objects, schema that produces editable settings, CSS
+scoped to a section id. They double as evidence on the customization pages, so
+keep them correct if you edit them.
+
+## 8. Backgrounds
+
+`Backdrop` has eight variants (`aurora`, `mesh`, `grid`, `dots`, `beams`,
+`rings`, `contour`, `organic`) plus composable `noise` and `shapes`, so adjacent
+bands never share an effect. All decorative: `aria-hidden`, `pointer-events:
+none`, pinned behind content by `.has-backdrop`. Motion comes from CSS keyframes
+plus the `data-mask-move` / `data-sweep` / `data-drift` hooks, so reduced-motion
+visitors get the same composition standing still. The heaviest layers are
+dropped below 700px in `backdrops-2.css`.
+
+## 9. Fonts — why not `next/font`
+
+`next/font/google` fetches woff2 from `fonts.gstatic.com` **at build time**, and
+that host is unreachable from this environment, which failed the whole build.
+Fonts are therefore loaded with a `<link>` to the Google Fonts CSS API plus
+preconnects. If you are somewhere with gstatic access and want self-hosting
+back, it is a contained change in `layout.tsx` — but re-verify the build.
+
+## 10. Verification
 
 ```
-/themes/          /work/             /pricing/          /guides/
-/process/         /migration/        /store-setup/
-/customization/liquid/   /customization/css/   /customization/fonts/
-/customization/sections/  /customization/schema/  /customization/no-code/
-/customization/product-page/  /customization/mobile/
-/customization/dawn/  /customization/prestige/  /customization/spotlight/
-/customization/legacy-themes/
-/guides/theme-editor/  /guides/customize-theme/  /guides/edit-theme/
-/guides/change-theme/  /guides/identify-theme/
-/custom-theme-development/  /custom-theme-vs-template/
-/work/[client-slug]/ (×10 real case studies once real client data exists)
+npm run verify        # build + link audit + homepage content guard
+npm run lint
+npx tsc --noEmit
 ```
 
-Until these exist, every link to them will 404 — the brief's "zero broken
-links" rule is **not yet met**. Prioritize this before polish work.
+`scripts/audit-links.mjs` and `scripts/check-homepage-content.mjs` both read the
+prerendered HTML, so they only mean something after a build.
 
-## 5. Why plain CSS, not Tailwind
+## 11. What is left
 
-The reference design's visual identity (exact hex values, exact spacing
-scale, exact type scale) was already fully specified in the source HTML's
-`<style>` block. Porting it 1:1 into global CSS with the same custom
-properties (`src/app/globals.css`) guaranteed pixel accuracy without a
-Tailwind config translation step I couldn't verify compiles (no network in
-the authoring sandbox — see §0). If you want to migrate to Tailwind later,
-do it as a refactor with visual diffing at each step, not a rewrite.
+1. **Look at it in a browser.** Nothing visual has been observed. Specifically
+   check: the SplitText line reveals on the hero H1 and section H2s (do lines
+   break sensibly at every width, and does `autoSplit` re-split cleanly on
+   resize?); the pinned horizontal gallery on `/themes/`; the `data-curtain`
+   scrub on the dark pricing band; the spotlight/tilt on cards; and the aurora
+   mask movement — is it too much or too little?
+2. **Reduced motion.** Turn it on and confirm every page renders its finished
+   state with no hidden content and no animation.
+3. **`public/og-image.png`.** The design is ready at `public/og-image.svg`;
+   export it at 1200×630 and wire it up per the comment in `layout.tsx`. The
+   `next/og` route was removed because @vercel/og cannot resolve its bundled
+   font when the project path contains a space or brackets, and it fails at
+   module load, so the route 500s rather than degrading.
+4. **Resend credentials.** Set `RESEND_API_KEY` and `CONTACT_EMAIL` (see
+   `.env.example`), then test the idle → submitting → success/error flow against
+   the real endpoint. The route deliberately returns 503 rather than faking a
+   send when the key is missing.
+5. **Case-study specifics.** The ten write-ups are structurally complete and
+   deliberately carry no merchant names or uplift percentages — that is the
+   stated policy on `/work/`, not a gap. If a client signs off on being named,
+   their file in `src/data/pages/cases-*.ts` is where it goes.
+6. **A real favicon.ico** alongside `public/icon.svg`, for older clients.
 
-Global CSS files are imported once, in `src/app/layout.tsx`, in this order:
-`globals.css` → `header.css` → `footer.css` → `sections.css` → `forms.css`.
-New sections should add their own `<name>.css` file next to the component
-and import it in `layout.tsx` the same way — don't scatter imports across
-component files.
-
-## 6. Animation system
-
-Five reusable primitives now live in `src/components/animations/`, each with
-a distinct job rather than one fade-in reused everywhere:
-
-- **`Reveal`** — single-block fade+rise on scroll (GSAP ScrollTrigger,
-  plays once). Used for section intros/paragraphs.
-- **`RevealGroup`** — staggers all children matching a CSS selector
-  (`.tier`, `.spotlight-card`, `.theme-row`, `.step`, `details`), so each
-  section's cards/rows enter with rhythm instead of all at once.
-- **`HeroReveal`** — hero-only entrance timeline for the deck/lede/CTA/
-  creds line (plays on load, not scroll-triggered). Deliberately excludes
-  the H1 — see `TextReveal` below — animating the same node from two
-  places caused a visible conflict during the build.
-- **`TextReveal`** — mask reveal for headings: wraps the heading in an
-  `overflow:hidden` div and animates it in via `clip-path` (inset from the
-  bottom) + a slight rise, so it reads as "unmasking" rather than fading.
-  Used on the hero H1 (`trigger="load"`) and every section H2
-  (`trigger="scroll"`, the default). Deliberately a single-block technique,
-  not per-line/per-character — true line-splitting needs real-browser
-  measurement (`getClientRects()`) that this sandbox can't verify renders
-  correctly across wrap widths and font-loading timing. **If you want true
-  per-line stagger, that's the first upgrade to do once you have a browser
-  open** — verify one heading first before rolling it out everywhere.
-- **`ImageReveal`** — scroll-triggered scale+clip-path settle for imagery
-  (starts at `scale(1.06)` clipped 3% on each edge, eases to full size).
-  Used on the new theme-editor mockup in `ThemesSection` — see §11.
-- **`Magnetic`** — cursor-pull micro-interaction for buttons (desktop
-  pointer only, `matchMedia("(hover: hover) and (pointer: fine)")` guarded).
-  Applied to the hero CTA and final CTA arrow button. Kept small
-  (`strength={10-12}`) per the brief's "professional, not gimmicky" note.
-- **`SpotlightCard`** — cursor-follow radial glow (via `--mx`/`--my` CSS
-  custom properties, read by `.spotlight-card::after` in `sections.css`)
-  plus an optional subtle 3D tilt (`transform-style: preserve-3d`,
-  `rotateX`/`rotateY`). Wraps the case-study cards (`tilt={4}`) and the
-  hero price card (`tilt={3}`). Same pointer-guard as `Magnetic`.
-- **`MaskedAurora`** — the brief's "mask-based background animation"
-  requirement: two blurred, drifting color blobs (CSS keyframe) underneath
-  a `mask-image: radial-gradient(...)` layer whose center point is tweened
-  by GSAP through `--mask-x`/`--mask-y` custom properties on a slow
-  14s yoyo loop — so the *mask itself* moves, not just shapes underneath a
-  static mask. Two variants: `"hero"` (signal-green, positioned via the
-  existing `.hero-ambient` class) and `"dark"` (muted, positioned via
-  `.diff-ambient`, used behind the pricing-tier section alongside the
-  existing `.diff-grid` texture for layered depth).
-- **`SmoothScrollProvider`** — Lenis synced to GSAP's ticker.
-
-All of the above check `prefersReducedMotion()` and either skip entirely or
-render a static end-state — verify this in a real browser with reduced
-motion turned on, it's implemented but unverified (§0).
-
-**Still not built** from the fuller brief: per-line/per-character text
-stagger (see `TextReveal` note above), pinned/horizontal ScrollTrigger
-sections, noise-texture backgrounds, glass-morphism card variants, and
-page-specific motion personalities for pages that don't exist yet (§4) —
-do those as each new page is built, not generically in advance.
-
-## 11. Image strategy — current state
-
-One real illustration exists: `src/components/ui/ThemeEditorMockup.tsx`, an
-inline SVG of a browser window (sidebar settings + storefront preview),
-used in `ThemesSection` as a genuine image+content composition (content
-left, image right, via `.split-visual` in `sections.css`) rather than a
-stock photo. It's intentionally abstract/on-brand rather than a real
-screenshot — swap it for an actual theme-editor screenshot the moment one
-exists, keeping the same `ImageReveal` wrapper and `.split-visual-media`
-class so the reveal animation and layout carry over unchanged.
-
-Every other page-level visual called for in the brief (storefront
-screenshots, before/after panels, mobile mockups, dashboard visuals) is
-still a placeholder gap — build them as each corresponding page (§4) is
-built, following this same pattern: a small `components/ui/*Mockup.tsx` SVG
-or a real optimized image, wrapped in `<ImageReveal>`, named descriptively
-per the brief's filename rule (`shopify-theme-customization.webp`, not
-`image1.webp`) once real assets exist.
-
-## 12. Content depth — not yet done
-
-This round only touched animation/visual layers, per explicit instruction
-not to remove or rewrite homepage content. The separate, larger brief
-requirement — every page having a full information architecture (hero →
-problem → solution → capabilities → process → FAQ → CTA, SEO keyword
-strategy per page, internal linking between related services) — has not
-been started. That's real writing + IA work best done page-by-page once
-the routes in §4 are being built, not retrofitted here.
-
-
-## 7. Email / contact form
-
-`src/app/api/contact/route.ts` uses Resend. It fails loudly (503, logged
-server error) if `RESEND_API_KEY` is unset rather than pretending to send —
-per the brief's "do not fake email delivery" rule. To make it live:
-
-1. Create a Resend account, verify a sending domain (or use their
-   `onboarding@resend.dev` sandbox sender, already set as the `from`).
-2. Set `RESEND_API_KEY` and `CONTACT_EMAIL` in Vercel project env vars (see
-   `.env.example`).
-3. Test the idle → submitting → success/error flow in
-   `src/components/forms/ContactForm.tsx` against the real endpoint.
-
-## 8. SEO status
-
-Done: per-page `Metadata` API usage (see `app/page.tsx`, `app/hire/page.tsx`),
-canonical URLs, Organization + FAQPage JSON-LD, `robots.ts`, `sitemap.ts`.
-
-Not done: `sitemap.ts` only lists the 2 built routes — extend it as pages
-are added (§4). No BreadcrumbList structured data yet (add once nested
-routes like `/customization/dawn/` exist, since breadcrumbs need real
-hierarchy). No `/og-image.jpg` file exists yet — `layout.tsx` references
-`/og-image.jpg` at 1200×630, create and add to `public/`.
-
-## 9. Accessibility status
-
-Done: skip link, visible focus rings (`:focus-visible` outline using the
-`--signal` color), semantic `<header>/<nav>/<main>/<section>/<footer>`,
-real `<button>`/`<a>`/`<form>`/`<label>` throughout, reduced-motion
-handling in both CSS (`globals.css`) and every GSAP animation.
-
-Not verified: color contrast on `--muted` (#566B62) against `--paper`
-(#FBFCFB) for body text — check with a contrast checker before shipping.
-Mobile menu focus trapping isn't implemented (focus can currently escape
-the open panel to the page behind it) — add a focus trap.
-
-## 10. Known gaps / immediate next task
-
-Recommended order for the next session:
-
-1. `npm install`, `npm run dev`, visually diff against
-   `Homepage_Design_v3_-_Final.html`. Fix any drift. **Pay particular
-   attention to the new `TextReveal`/`MaskedAurora`/`SpotlightCard`
-   components (§6) — none of them have been seen in a real browser.**
-   Check: does the hero H1 clip-path mask look intentional or glitchy on
-   first load? Does the spotlight glow track the cursor smoothly on the
-   case-study cards? Does the aurora mask move too much / too little
-   behind the pricing tiers?
-2. Reinstate the flattened inline links noted in §3.
-3. Build out the route list in §4, starting with `/pricing/`, `/work/`,
-   `/process/` since they're the most-linked from the homepage. Give each
-   page real content per the separate content brief (§12) — full IA,
-   keyword strategy, internal links — not just a hero+CTA.
-4. Wire real Resend credentials (§7) and test the form end to end.
-5. Add `/og-image.jpg` and a real `favicon.ico` to `public/` (neither
-   exists yet — `layout.tsx` and `metadata.icons` reference paths that
-   currently 404).
-6. Once §1 is verified working, extend the motion system: per-line text
-   stagger (see `TextReveal` note in §6), pinned/horizontal ScrollTrigger
-   sections, real product screenshots replacing `ThemeEditorMockup.tsx`
-   (§11) with `ImageReveal` wraps.
-7. Full link audit once all routes exist — brief requires zero broken
-   links.
-
-Update this file after each of the above lands, per the original brief's
-instruction to keep it current for the next session.
+Update this file as each of those lands.

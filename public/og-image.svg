@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Shopify theme customization services — scoped and priced before we start">
+  <rect width="1200" height="630" fill="#052e21" />
+
+  <!-- ambient wash, matching the site's hero backdrop -->
+  <defs>
+    <radialGradient id="glowA" cx="0.82" cy="0.12" r="0.6">
+      <stop offset="0%" stop-color="#17c47f" stop-opacity="0.42" />
+      <stop offset="100%" stop-color="#17c47f" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.08" cy="0.95" r="0.55">
+      <stop offset="0%" stop-color="#7fd9b4" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#7fd9b4" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#glowA)" />
+  <rect width="1200" height="630" fill="url(#glowB)" />
+
+  <!-- partner mark -->
+  <rect x="72" y="64" width="16" height="16" fill="#17c47f" transform="rotate(45 80 72)" />
+  <text x="104" y="79" font-family="JetBrains Mono, monospace" font-size="19" letter-spacing="5" fill="#7fd9b4">SHOPIFY PARTNER</text>
+
+  <!-- headline -->
+  <text x="72" y="292" font-family="Bricolage Grotesque, sans-serif" font-size="70" font-weight="800" letter-spacing="-2.5" fill="#ffffff">Shopify theme customization,</text>
+  <text x="72" y="372" font-family="Bricolage Grotesque, sans-serif" font-size="70" font-weight="800" letter-spacing="-2.5" fill="#17c47f">scoped and priced<tspan fill="#ffffff"> before</tspan></text>
+  <text x="72" y="452" font-family="Bricolage Grotesque, sans-serif" font-size="70" font-weight="800" letter-spacing="-2.5" fill="#ffffff">we start.</text>
+
+  <text x="72" y="512" font-family="Instrument Sans, sans-serif" font-size="27" fill="#a9c8bb">Fixed scope, written price, delivery date. From $1,000.</text>
+
+  <!-- footer rule -->
+  <rect x="72" y="552" width="1056" height="1" fill="#12503c" />
+  <text x="72" y="592" font-family="JetBrains Mono, monospace" font-size="21" fill="#7ba795">shopifythemecustomization.com</text>
+  <text x="1128" y="592" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="21" fill="#7ba795">25+ theme projects delivered</text>
+</svg>

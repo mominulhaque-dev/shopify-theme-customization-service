@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { themeNotes, themeRows, themesSection } from "@/data/homepage";
+import Backdrop from "@/components/animations/Backdrop";
 import ImageReveal from "@/components/animations/ImageReveal";
 import Marquee from "@/components/animations/Marquee";
 import Reveal from "@/components/animations/Reveal";
@@ -23,6 +24,7 @@ export default function ThemesSection() {
 
   return (
     <section aria-labelledby="themes-heading" className="has-backdrop">
+      <Backdrop variant="dots" />
       <div className="wrap">
         <div className="split themes-intro">
           <div className="split-copy">
