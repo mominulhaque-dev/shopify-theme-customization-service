@@ -34,7 +34,7 @@ export function BreakpointGrid() {
             <text x={cx} y={188} fontFamily="monospace" fontSize="9.5" fill="#0b1f17">
               {d.label}px
             </text>
-            <text x={cx} y={202} fontFamily="monospace" fontSize="8.5" fill="#6b8077">
+            <text x={cx} y={202} fontFamily="monospace" fontSize="8.5" fill="#5f7469">
               {d.note}
             </text>
           </g>
@@ -68,7 +68,7 @@ export function TimelineGantt() {
       {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((w) => (
         <g key={w}>
           <rect x={168 + w * unit} y="40" width="1" height="216" fill="#eef6f1" />
-          <text x={168 + w * unit} y="32" fontFamily="monospace" fontSize="8.5" fill="#6b8077">
+          <text x={168 + w * unit} y="32" fontFamily="monospace" fontSize="8.5" fill="#5f7469">
             W{w + 1}
           </text>
         </g>

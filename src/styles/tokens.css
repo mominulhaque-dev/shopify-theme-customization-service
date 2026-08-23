@@ -9,8 +9,8 @@
   /* ---- colour ---- */
   --ink: #0b1f17;
   --ink-2: #2c4239;
-  --muted: #4d6259; /* darkened from #566b62 for AA on --paper (7.0:1) */
-  --muted-soft: #6b8077; /* decorative/mono labels only, never body copy */
+  --muted: #4d6259; /* darkened from #566b62: 6.37:1 on --paper, AA for body */
+  --muted-soft: #5f7469; /* captions, breadcrumbs, mono labels — 4.87:1 on --paper */
   --forest: #0a5d42;
   --forest-hover: #084832;
   --deep: #052e21;

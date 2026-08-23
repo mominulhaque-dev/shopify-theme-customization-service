@@ -12,14 +12,16 @@ export default function Header() {
           {siteConfig.shortName}
           <span>{siteConfig.tagline}</span>
         </Link>
-        <ul>
-          {mainNav.map((link) => (
-            <li key={link.href}>
-              <Link href={link.href}>{link.label}</Link>
-            </li>
-          ))}
-        </ul>
-        <Link href="/hire/" className="btn nav-cta">
+        <nav aria-label="Primary">
+          <ul>
+            {mainNav.map((link) => (
+              <li key={link.href}>
+                <Link href={link.href}>{link.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <Link href="/hire/" className="btn btn-sm nav-cta">
           Get a quote
         </Link>
         <MobileMenu />

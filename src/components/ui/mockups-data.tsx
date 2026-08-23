@@ -137,7 +137,7 @@ export function ThemeCeilingChart() {
             </text>
             <rect x="24" y={y} width={full * row.editor} height="20" rx="4" fill="#17c47f" />
             <rect x={24 + full * row.editor} y={y} width={full * (1 - row.editor)} height="20" rx="4" fill="#e3d3b4" />
-            <text x="24" y={y + 36} fontFamily="monospace" fontSize="9" fill="#6b8077">
+            <text x="24" y={y + 36} fontFamily="monospace" fontSize="9" fill="#5f7469">
               {row.note}
             </text>
           </g>

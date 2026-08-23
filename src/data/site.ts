@@ -13,14 +13,26 @@ export const siteConfig = {
   whatsapp: "https://wa.me/8801580424024",
 };
 
+/**
+ * Primary navigation. Every entry points at a real page — "Services" used to be
+ * a homepage anchor, which is a poor destination for the site's most important
+ * commercial term.
+ */
 export const mainNav: NavLink[] = [
-  { label: "Services", href: "/#scope" },
+  { label: "Services", href: "/services/" },
+  { label: "Customization", href: "/customization/" },
   { label: "Themes", href: "/themes/" },
   { label: "Work", href: "/work/" },
   { label: "Pricing", href: "/pricing/" },
   { label: "Guides", href: "/guides/" },
 ];
 
+/**
+ * Footer columns double as the site's internal-link map: every page in the
+ * registry (src/data/pages/index.ts) is reachable from here, which is both an
+ * accessibility win and how the topic clusters get their crawl paths. The link
+ * audit script fails the build's checks if any href here has no page.
+ */
 export const footerColumns: FooterColumn[] = [
   {
     heading: "By layer",
@@ -45,24 +57,39 @@ export const footerColumns: FooterColumn[] = [
     ],
   },
   {
+    heading: "Services",
+    links: [
+      { label: "Theme customization", href: "/customization/" },
+      { label: "Shopify development", href: "/services/shopify-development/" },
+      { label: "Store redesign", href: "/services/store-redesign/" },
+      { label: "Speed optimization", href: "/services/speed-optimization/" },
+      { label: "Conversion optimization", href: "/services/conversion-optimization/" },
+      { label: "Theme migration", href: "/migration/" },
+      { label: "Store setup", href: "/store-setup/" },
+    ],
+  },
+  {
     heading: "Guides",
     links: [
       { label: "Theme editor", href: "/guides/theme-editor/" },
       { label: "Customize a theme", href: "/guides/customize-theme/" },
-      { label: "Edit a theme", href: "/guides/edit-theme/" },
+      { label: "Edit theme code", href: "/guides/edit-theme/" },
       { label: "Change a theme", href: "/guides/change-theme/" },
       { label: "Identify a theme", href: "/guides/identify-theme/" },
-      { label: "Compare themes", href: "/themes/" },
+      { label: "Theme updates", href: "/guides/theme-updates/" },
+      { label: "Hire a developer", href: "/guides/hire-theme-developer/" },
     ],
   },
   {
     heading: "Company",
     links: [
-      { label: "Process", href: "/process/" },
+      { label: "All services", href: "/services/" },
       { label: "Pricing", href: "/pricing/" },
+      { label: "Process", href: "/process/" },
       { label: "Case studies", href: "/work/" },
-      { label: "Theme migration", href: "/migration/" },
-      { label: "Store setup", href: "/store-setup/" },
+      { label: "Compare themes", href: "/themes/" },
+      { label: "Custom development", href: "/custom-theme-development/" },
+      { label: "Custom vs template", href: "/custom-theme-vs-template/" },
       { label: "Hire us", href: "/hire/" },
     ],
   },

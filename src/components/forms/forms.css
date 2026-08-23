@@ -1,46 +1,174 @@
+/* ==========================================================================
+   Forms + the hire page layout
+   ========================================================================== */
+.hire-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+.hire-form {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--white);
+  padding: clamp(1.25rem, 3vw, 1.9rem);
+  box-shadow: var(--sh);
+}
+.hire-aside {
+  display: grid;
+  gap: var(--sp-gap);
+}
+.hire-card {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--wash);
+  padding: 1.1rem 1.25rem 1.25rem;
+}
+.hire-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+.hire-card p {
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+}
+.hire-card p + .ticks {
+  margin-top: 0.85rem;
+}
+.hire-card-quiet {
+  background: none;
+  border-style: dashed;
+}
+.hire-note {
+  margin-top: 0.85rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.hire-contact {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  margin-top: 0.35rem;
+}
+.hire-contact li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  font-size: var(--t-sm);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+.hire-contact li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.hire-contact span {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted-soft);
+}
+.hire-contact a {
+  text-align: right;
+  word-break: break-word;
+}
+
+/* ---------- fields ---------- */
 .form-row {
   display: grid;
-  gap: 0.5rem;
-  margin-bottom: 1.25rem;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
 }
 .form-row label {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   color: var(--muted);
 }
 .form-row input,
 .form-row textarea {
   font-family: var(--font-body);
   font-size: 1rem;
-  padding: 0.85rem 1rem;
+  padding: 0.75rem 0.9rem;
   border: 1px solid var(--line);
-  border-radius: var(--r);
-  background: var(--white);
+  border-radius: var(--r-sm);
+  background: var(--paper);
   color: var(--ink);
+  width: 100%;
+  transition: border-color var(--dur-fast), background var(--dur-fast), box-shadow var(--dur-fast);
+}
+.form-row textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+.form-row input:hover,
+.form-row textarea:hover {
+  border-color: var(--line-strong);
 }
 .form-row input:focus,
 .form-row textarea:focus {
   outline: none;
   border-color: var(--forest);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(23, 196, 127, 0.16);
+}
+.form-row .hint {
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.form-foot {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+}
+.form-foot .form-note {
+  font-size: 0.8125rem;
+  color: var(--muted);
 }
 .form-error {
-  color: #b3261e;
-  font-size: 0.9375rem;
-  margin-bottom: 1rem;
+  color: #a01d16;
+  font-size: var(--t-sm);
+  margin-bottom: 0.85rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid #e7c3bf;
+  border-radius: var(--r-sm);
+  background: #fdf3f2;
 }
 .form-success {
   border: 1px solid var(--line);
+  border-left: 3px solid var(--signal);
   border-radius: var(--r);
-  padding: 2rem;
+  padding: 1.5rem;
   background: var(--wash);
 }
 .form-success h3 {
   font-family: var(--font-display);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
-button[disabled] {
-  opacity: 0.6;
-  cursor: not-allowed;
+.form-success p {
+  color: var(--ink-2);
+  font-size: var(--t-sm);
+}
+
+@media (max-width: 900px) {
+  .hire-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 700px) {
+  .hire-contact li {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .hire-contact a {
+    text-align: left;
+  }
+  .form-foot .btn {
+    width: 100%;
+  }
 }

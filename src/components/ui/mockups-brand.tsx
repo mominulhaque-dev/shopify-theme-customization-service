@@ -44,7 +44,7 @@ export function FontSpecimen() {
           >
             Storefront typography
           </text>
-          <text x="28" y={row.y + 16} fontFamily="monospace" fontSize="8.5" fill="#6b8077" letterSpacing="0.8">
+          <text x="28" y={row.y + 16} fontFamily="monospace" fontSize="8.5" fill="#5f7469" letterSpacing="0.8">
             {row.label}
           </text>
         </g>
@@ -89,7 +89,7 @@ export function PaletteSwatches() {
             <text x={x} y={y + 76} fontFamily="monospace" fontSize="9.5" fill="#0b1f17">
               {sw.name}
             </text>
-            <text x={x} y={y + 90} fontFamily="monospace" fontSize="8.5" fill="#6b8077">
+            <text x={x} y={y + 90} fontFamily="monospace" fontSize="8.5" fill="#5f7469">
               {sw.hex} · {sw.use}
             </text>
           </g>

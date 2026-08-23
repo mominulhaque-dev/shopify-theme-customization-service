@@ -6,13 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "audit:links": "node scripts/audit-links.mjs",
+    "audit:homepage": "node scripts/check-homepage-content.mjs",
+    "verify": "next build && node scripts/audit-links.mjs && node scripts/check-homepage-content.mjs"
   },
   "dependencies": {
     "next": "14.2.15",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "gsap": "^3.12.5",
+    "gsap": "^3.15.0",
     "lenis": "^1.1.14",
     "resend": "^4.0.0"
   },
