@@ -1,73 +1,45 @@
-"use client";
+import type { ElementType, ReactNode } from "react";
+import type { RevealKind } from "@/lib/motion";
 
-import { useEffect, useRef, type ReactNode } from "react";
-import { gsap, registerGsap, prefersReducedMotion } from "@/lib/gsap";
-
-type RevealAs = "div" | "span";
+export type { RevealKind };
 
 interface RevealProps {
   children: ReactNode;
-  /** Vertical offset in px the element travels in from. */
-  y?: number;
+  /** Which entrance to use — see MOTION_FROM in src/lib/motion.ts. */
+  kind?: RevealKind;
   delay?: number;
   duration?: number;
-  as?: RevealAs;
-  className?: string;
-  /** ScrollTrigger start position relative to the viewport. */
+  /** ScrollTrigger start position. */
   start?: string;
+  as?: ElementType;
+  className?: string;
+  id?: string;
 }
 
 /**
- * Fades + translates a single block into view once it crosses the given
- * scroll threshold. Building block for section-level choreography — see
- * RevealGroup for staggered lists (cards, steps, FAQ rows).
+ * Declares a single-block entrance. This is a *server* component: it only
+ * emits data attributes, and MotionProvider (the one client component that
+ * loads GSAP) wires up the actual tween. Nothing here ships JS to the browser.
  */
 export default function Reveal({
   children,
-  y = 28,
-  delay = 0,
-  duration = 0.9,
-  as = "div",
+  kind = "up",
+  delay,
+  duration,
+  start,
+  as: Tag = "div",
   className,
-  start = "top 85%",
+  id,
 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    if (prefersReducedMotion()) {
-      el.style.opacity = "1";
-      el.style.transform = "none";
-      return;
-    }
-
-    registerGsap();
-    gsap.set(el, { opacity: 0, y });
-
-    const ctx = gsap.context(() => {
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration,
-        delay,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start,
-          toggleActions: "play none none none",
-        },
-      });
-    });
-
-    return () => ctx.revert();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const Tag = as;
   return (
-    <Tag ref={ref as never} className={className}>
+    <Tag
+      id={id}
+      className={className}
+      data-reveal={kind}
+      data-delay={delay}
+      data-duration={duration}
+      data-start={start}
+    >
       {children}
     </Tag>
   );

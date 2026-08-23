@@ -1,0 +1,155 @@
+/* ==========================================================================
+   Cross-cutting responsive refinements
+
+   These are deliberate per-breakpoint decisions rather than a shrunk desktop:
+   the hero reorders so the price card follows the claim on a phone, tap targets
+   grow to 44px on touch, decorative layers drop out where they cost the most,
+   and the pinned/side-scrolling behaviours switch to native swiping.
+   ========================================================================== */
+
+/* ---------- large desktop: let the grid breathe, cap the measure ---------- */
+@media (min-width: 1600px) {
+  :root {
+    --max: 1280px;
+    --max-wide: 1420px;
+  }
+}
+
+/* ---------- laptop ---------- */
+@media (max-width: 1180px) {
+  .hero {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .theme-row {
+    grid-template-columns: 12rem 1fr;
+  }
+}
+
+/* ---------- tablet ---------- */
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  /* The card is proof for the headline above it, so on a single column it
+     follows the copy instead of being pushed below the fold by it. */
+  .hero-aside {
+    max-width: 30rem;
+  }
+  .split.scope-intro,
+  .split.themes-intro {
+    gap: 1.5rem;
+  }
+}
+
+/* ---------- phone ---------- */
+@media (max-width: 700px) {
+  body {
+    font-size: 1rem;
+  }
+  :root {
+    --t-base: 1rem;
+    --t-lg: 1.0625rem;
+  }
+  .hero h1,
+  .phero h1 {
+    max-width: 100%;
+  }
+  .hero-cta {
+    gap: 0.75rem;
+  }
+  .hero-cta .btn,
+  .cta-in .btn,
+  .phero .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-cta .magnetic,
+  .cta-band .magnetic,
+  .phero .magnetic {
+    display: flex;
+    width: 100%;
+  }
+  .hero-note {
+    text-align: center;
+    width: 100%;
+  }
+  .figure-cap {
+    font-size: 0.625rem;
+  }
+  .code pre {
+    font-size: 0.72rem;
+  }
+  .theme-marquee {
+    margin-inline: calc(var(--gut) * -1);
+    padding-inline: var(--gut);
+  }
+  .cards.c3,
+  .cards.c4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .price-figure {
+    font-size: 2.25rem;
+  }
+  .creds {
+    gap: 0.4rem 1rem;
+    font-size: 0.6875rem;
+  }
+  .wall-side.right {
+    padding-top: 1.25rem;
+  }
+  .card {
+    padding: 1rem 1.05rem 1.15rem;
+  }
+}
+
+/* ---------- touch: 44px minimum targets, no hover-only affordances ---------- */
+@media (hover: none) {
+  .nav ul a,
+  .mobile-panel a,
+  .foot a,
+  .rel,
+  .chip {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .chip {
+    padding: 0.5rem 0.85rem;
+  }
+  .faq summary {
+    padding: 0.35rem 0;
+    min-height: 44px;
+  }
+  /* Cursor-driven flourishes never fire on touch — make sure the card still
+     reads as interactive by keeping the border/shadow state permanently. */
+  .card,
+  .case,
+  .rel {
+    box-shadow: var(--sh-sm);
+  }
+  .spotlight-card::after {
+    display: none;
+  }
+}
+
+/* ---------- print ---------- */
+@media print {
+  .bd,
+  .scroll-progress,
+  header,
+  footer,
+  .marquee {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  section {
+    padding: 1rem 0;
+    break-inside: avoid;
+  }
+}

@@ -1,57 +1,38 @@
-"use client";
-
-import { useEffect, useRef, type ReactNode } from "react";
-import { gsap, registerGsap, prefersReducedMotion } from "@/lib/gsap";
+import type { ReactNode } from "react";
 
 interface ImageRevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
   start?: string;
+  /**
+   * Fraction of the element's own height it drifts across the scroll range.
+   * Small values only (0.05–0.2) — enough to separate the visual from the text
+   * beside it, not enough to look like it is sliding off the page.
+   */
+  parallax?: number;
 }
 
 /**
- * Scroll-triggered reveal for imagery/illustrations/mockups: the visual
- * starts slightly scaled up and clipped, then settles into place as it
- * enters the viewport — reads as the image "arriving" rather than fading.
- * Separate from TextReveal (which masks from the bottom edge) since images
- * read better easing in from a gentle scale than a hard directional wipe.
+ * Reveal for imagery, mockups and diagrams: a clipped, slightly over-scaled
+ * start that settles into place, optionally with a scrubbed parallax drift.
+ *
+ * The parallax lives on an inner element so the two transforms never fight:
+ * the outer node owns the entrance (scale + clip-path), the inner owns the
+ * scroll-scrubbed y.
  */
-export default function ImageReveal({ children, className, delay = 0, start = "top 82%" }: ImageRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    if (prefersReducedMotion()) {
-      el.style.opacity = "1";
-      el.style.transform = "none";
-      return;
-    }
-
-    registerGsap();
-    gsap.set(el, { opacity: 0, scale: 1.06, clipPath: "inset(3% 3% 3% 3% round 12px)" });
-
-    const ctx = gsap.context(() => {
-      gsap.to(el, {
-        opacity: 1,
-        scale: 1,
-        clipPath: "inset(0% 0% 0% 0% round 12px)",
-        duration: 1.1,
-        delay,
-        ease: "power3.out",
-        scrollTrigger: { trigger: el, start, toggleActions: "play none none none" },
-      });
-    });
-
-    return () => ctx.revert();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+export default function ImageReveal({
+  children,
+  className,
+  delay,
+  start,
+  parallax,
+}: ImageRevealProps) {
+  const inner = parallax ? <div data-parallax={parallax}>{children}</div> : children;
 
   return (
-    <div ref={ref} className={className}>
-      {children}
+    <div className={className} data-reveal="image" data-delay={delay} data-start={start}>
+      {inner}
     </div>
   );
 }

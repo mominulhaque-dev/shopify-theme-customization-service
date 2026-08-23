@@ -1,0 +1,139 @@
+/* ==========================================================================
+   Base + layout primitives
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: auto; /* Lenis owns smooth scrolling */
+  -webkit-text-size-adjust: 100%;
+}
+
+/* clip (not hidden) so sticky positioning still works while decorative
+   backdrops that bleed past the viewport can never create an x-scrollbar */
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--t-base);
+  line-height: 1.62;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---------- containers ---------- */
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gut);
+}
+.wrap-wide {
+  max-width: var(--max-wide);
+}
+.wrap-narrow {
+  max-width: 860px;
+}
+
+/* ---------- section rhythm ---------- */
+section {
+  padding: var(--sp-section) 0;
+  position: relative;
+}
+section.tight {
+  padding: var(--sp-section-tight) 0;
+}
+section.flush-top {
+  padding-top: 0;
+}
+section.flush-bottom {
+  padding-bottom: 0;
+}
+.tint {
+  background: var(--wash);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.tint-soft {
+  background: linear-gradient(180deg, var(--paper), var(--wash));
+}
+.dark {
+  background: var(--deep);
+  color: var(--white);
+  overflow: hidden;
+}
+
+/* Sections that host an absolutely-positioned backdrop need a stacking
+   context so the backdrop's z-index:0 sits under content, not under body. */
+.has-backdrop {
+  isolation: isolate;
+  overflow: hidden;
+}
+.has-backdrop > .wrap,
+.has-backdrop > .wrap-wide {
+  position: relative;
+  z-index: 1;
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--forest);
+  color: var(--white);
+  padding: 0.75rem 1.25rem;
+  z-index: 200;
+  border-radius: 0 0 var(--r-sm) 0;
+  text-decoration: none;
+  font-weight: 600;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

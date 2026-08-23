@@ -1,0 +1,199 @@
+/* ==========================================================================
+   Card, step and checklist blocks
+   Cards use a layered hover — a gradient hairline that wipes in from the left,
+   a lifting shadow and the cursor spotlight — rather than a bare translateY.
+   ========================================================================== */
+.cards {
+  display: grid;
+  gap: var(--sp-gap);
+}
+.cards.c2 {
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+}
+.cards.c3 {
+  grid-template-columns: repeat(auto-fit, minmax(min(17.5rem, 100%), 1fr));
+}
+.cards.c4 {
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+}
+
+.card {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--white);
+  padding: 1.15rem 1.25rem 1.3rem;
+  overflow: hidden;
+  isolation: isolate;
+  display: grid;
+  align-content: start;
+  gap: 0.4rem;
+  transition: border-color var(--dur-med) var(--ease-out), box-shadow var(--dur-med) var(--ease-out),
+    transform var(--dur-med) var(--ease-out);
+}
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--signal), var(--forest));
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+.card:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--sh);
+  transform: translateY(-3px);
+}
+.card:hover::before {
+  transform: scaleY(1);
+}
+.card h3 {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.card p {
+  font-size: var(--t-sm);
+  color: var(--muted);
+}
+.card-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+.card-link .card-go {
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--forest);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.card-link:hover .card-go {
+  gap: 0.7rem;
+}
+.dark .card,
+.on-deep .card {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: var(--line-dark);
+}
+.dark .card h3,
+.on-deep .card h3 {
+  color: var(--white);
+}
+.dark .card p,
+.on-deep .card p {
+  color: var(--on-deep);
+}
+.dark .card:hover,
+.on-deep .card:hover {
+  border-color: var(--signal);
+}
+
+/* ---------- numbered steps ---------- */
+.steps {
+  display: grid;
+  gap: 1rem;
+  counter-reset: s;
+}
+.steps .step {
+  display: grid;
+  grid-template-columns: 2.1rem 1fr;
+  gap: 0.85rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.steps .step:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.steps .step::before {
+  counter-increment: s;
+  content: counter(s, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--forest);
+  padding-top: 0.2rem;
+}
+.steps .step h3 {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-bottom: 0.25rem;
+}
+.steps .step p {
+  font-size: var(--t-sm);
+  color: var(--muted);
+}
+.step-meta {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-soft);
+  margin-top: 0.35rem;
+}
+.steps-split {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: start;
+}
+.dark .steps .step,
+.on-deep .steps .step {
+  border-bottom-color: var(--line-dark);
+}
+.dark .steps .step::before,
+.on-deep .steps .step::before {
+  color: var(--signal);
+}
+
+/* ---------- checklist (in scope / out of scope) ---------- */
+.checks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  gap: var(--sp-gap) clamp(1.5rem, 4vw, 3rem);
+}
+.check-group h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+.check-group > p {
+  font-size: var(--t-sm);
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+}
+.check-group.limit h3 {
+  color: var(--amber);
+}
+.check-group.limit .ticks li::before {
+  background: var(--amber-soft);
+  border-radius: 50%;
+}
+.checks-note {
+  margin-top: var(--sp-block);
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+  max-width: 80ch;
+}
+
+@media (max-width: 900px) {
+  .steps-split {
+    grid-template-columns: 1fr;
+  }
+}

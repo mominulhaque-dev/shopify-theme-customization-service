@@ -1,0 +1,106 @@
+/* ==========================================================================
+   Design tokens
+   Palette + type identity ported 1:1 from Homepage_Design_v3_-_Final.html.
+   The *spacing* scale is new: the previous build leaned on 5.5rem section
+   padding and 3.5rem heading gaps, which read as empty rather than airy.
+   Everything vertical now comes from --sp-* so density is tuned in one file.
+   ========================================================================== */
+:root {
+  /* ---- colour ---- */
+  --ink: #0b1f17;
+  --ink-2: #2c4239;
+  --muted: #4d6259; /* darkened from #566b62 for AA on --paper (7.0:1) */
+  --muted-soft: #6b8077; /* decorative/mono labels only, never body copy */
+  --forest: #0a5d42;
+  --forest-hover: #084832;
+  --deep: #052e21;
+  --deep-2: #073b2b;
+  --signal: #17c47f;
+  --signal-ink: #0e8f5b; /* signal at text-legible contrast on light */
+  --paper: #fbfcfb;
+  --wash: #eef6f1;
+  --wash-2: #e4f0e9;
+  --line: #d5e5dc;
+  --line-strong: #bcd6c8;
+  --line-dark: #12503c;
+  --on-deep: #a9c8bb;
+  --on-deep-dim: #7ba795;
+  --white: #fff;
+  --amber: #7e5606;
+  --amber-soft: #b8801a;
+
+  /* ---- type ---- */
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
+
+  --t-mono: 0.75rem;
+  --t-sm: 0.9375rem;
+  --t-base: 1.0625rem;
+  --t-lg: 1.125rem;
+  --t-h3: 1.1875rem;
+  --t-h2-sm: clamp(1.35rem, 2.2vw, 1.65rem);
+  --t-h2: clamp(1.75rem, 3vw, 2.45rem);
+  --t-h1: clamp(2.1rem, 4.4vw, 3.35rem);
+  --t-h1-hero: clamp(2.35rem, 5vw, 3.7rem);
+
+  /* ---- layout ---- */
+  --max: 1200px;
+  --max-wide: 1340px;
+  --max-text: 66ch;
+  --gut: clamp(1.15rem, 4vw, 2.5rem);
+  --r-xs: 6px;
+  --r-sm: 9px;
+  --r: 12px;
+  --r-lg: 18px;
+  --r-xl: 26px;
+
+  /* ---- vertical rhythm (the density dial) ---- */
+  --sp-section: clamp(2.75rem, 5.5vw, 4.5rem);
+  --sp-section-tight: clamp(2.25rem, 4vw, 3.25rem);
+  --sp-head: clamp(1.5rem, 2.6vw, 2.25rem);
+  --sp-block: clamp(1.25rem, 2.2vw, 1.75rem);
+  --sp-gap: clamp(1rem, 1.8vw, 1.5rem);
+  --sp-gap-lg: clamp(1.5rem, 3vw, 2.75rem);
+
+  /* ---- elevation ---- */
+  --sh-sm: 0 2px 8px -4px rgba(5, 46, 33, 0.18);
+  --sh: 0 14px 30px -22px rgba(5, 46, 33, 0.3);
+  --sh-lg: 0 30px 60px -34px rgba(5, 46, 33, 0.42);
+  --sh-glow: 0 0 0 1px rgba(23, 196, 127, 0.25), 0 20px 45px -28px rgba(10, 93, 66, 0.5);
+
+  /* ---- motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.18s;
+  --dur-med: 0.4s;
+  --dur-slow: 0.7s;
+}
+
+/* Dark-surface scope: any element inside .on-deep inherits legible defaults
+   instead of each dark section re-declaring colours (the old .diff-sec did). */
+.on-deep {
+  color: var(--white);
+}
+.on-deep p,
+.on-deep li {
+  color: var(--on-deep);
+}
+.on-deep h1,
+.on-deep h2,
+.on-deep h3,
+.on-deep h4,
+.on-deep strong,
+.on-deep b {
+  color: var(--white);
+}
+.on-deep .eyebrow {
+  color: var(--signal);
+}
+.on-deep a {
+  color: var(--signal);
+}
+.on-deep hr,
+.on-deep .rule {
+  border-color: var(--line-dark);
+}

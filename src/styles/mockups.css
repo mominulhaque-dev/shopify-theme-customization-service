@@ -1,0 +1,193 @@
+/* ==========================================================================
+   Mockup / visual framing
+   Every page visual is inline SVG (no binary assets, no stock photography):
+   it stays on-brand, scales to any breakpoint, inherits the palette, and can
+   be animated per-element by GSAP. These classes are the frames around them.
+   ========================================================================== */
+.figure {
+  position: relative;
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--white);
+  box-shadow: var(--sh);
+}
+.figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.figure-plain {
+  border: 0;
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+}
+.figure-dark {
+  border-color: var(--line-dark);
+  background: var(--deep-2);
+}
+.figure-lift {
+  box-shadow: var(--sh-lg);
+}
+.figure-cap {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-soft);
+  margin-top: 0.6rem;
+}
+
+/* Overlapping composition: a smaller visual riding over the corner of a
+   larger one. Collapses to a stacked flow below 720px. */
+.figure-stack {
+  position: relative;
+  padding-bottom: 3rem;
+  padding-right: 2rem;
+}
+.figure-stack .figure-front {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 46%;
+  z-index: 2;
+  box-shadow: var(--sh-lg);
+}
+@media (max-width: 720px) {
+  .figure-stack {
+    padding: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .figure-stack .figure-front {
+    position: static;
+    width: 100%;
+  }
+}
+
+/* Browser chrome drawn in CSS so the SVG inside can be pure content. */
+.browser {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--sh);
+}
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.7rem;
+  background: var(--wash);
+  border-bottom: 1px solid var(--line);
+}
+.browser-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--line-strong);
+  flex-shrink: 0;
+}
+.browser-url {
+  margin-left: 0.5rem;
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  color: var(--muted-soft);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.browser-dark {
+  border-color: var(--line-dark);
+  background: var(--deep-2);
+}
+.browser-dark .browser-bar {
+  background: #063324;
+  border-bottom-color: var(--line-dark);
+}
+.browser-dark .browser-url {
+  background: #052e21;
+  border-color: var(--line-dark);
+  color: var(--on-deep-dim);
+}
+.browser-dark .browser-dot {
+  background: var(--line-dark);
+}
+
+/* Phone frame for mobile-layout visuals. */
+.phone {
+  border: 8px solid var(--ink);
+  border-radius: 26px;
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--sh-lg);
+  max-width: 260px;
+  margin-inline: auto;
+  position: relative;
+}
+.phone::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 5px;
+  border-radius: 100px;
+  background: var(--line-strong);
+  z-index: 2;
+}
+
+/* Code panel — real snippets, monospaced, syntax-tinted by span class. */
+.code {
+  background: var(--deep);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: var(--sh);
+}
+.code-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--line-dark);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--on-deep-dim);
+}
+.code pre {
+  margin: 0;
+  padding: 0.9rem 1rem 1.1rem;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--on-deep);
+  tab-size: 2;
+}
+.code .t {
+  color: #7fd9b4;
+}
+.code .k {
+  color: var(--signal);
+}
+.code .s {
+  color: #e0b23a;
+}
+.code .c {
+  color: #5d8a78;
+  font-style: italic;
+}
+.code .p {
+  color: var(--white);
+}

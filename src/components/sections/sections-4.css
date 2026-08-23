@@ -1,0 +1,132 @@
+/* ==========================================================================
+   Homepage sections — part 4: case studies, FAQ divider, final CTA
+   ========================================================================== */
+.cx-border {
+  border-top: 1px solid var(--line);
+  margin-top: var(--sp-section-tight);
+  padding-top: var(--sp-section-tight);
+}
+.work {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-gap);
+}
+.case {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--white);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+  transition: border-color var(--dur-med) var(--ease-out), box-shadow var(--dur-med) var(--ease-out);
+}
+.case:hover {
+  border-color: var(--forest);
+  box-shadow: var(--sh);
+  color: inherit;
+}
+/* The card's own visual: clipped, and scaled a touch on hover so the mockup
+   feels like a window onto the work rather than a static thumbnail. */
+.case-media {
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--wash);
+}
+.case-media > * {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.case:hover .case-media > * {
+  transform: scale(1.035);
+}
+.case-body {
+  padding: 1.1rem 1.15rem 1.25rem;
+}
+.case-theme {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--forest);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 0.5rem;
+}
+.case h3 {
+  font-size: 1.05rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0;
+  margin-bottom: 0.4rem;
+}
+.case p {
+  font-size: var(--t-sm);
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+}
+.case-img-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--muted-soft);
+}
+.case-out {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+  padding-top: 0.7rem;
+  margin-top: 0.85rem;
+}
+.work-more {
+  margin-top: 1.25rem;
+  font-size: var(--t-sm);
+}
+
+/* ---------- final CTA ---------- */
+.cta {
+  background: var(--wash);
+  border-top: 1px solid var(--line);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 0;
+}
+.cta > .wrap {
+  position: relative;
+  z-index: 1;
+}
+.cta-in {
+  display: grid;
+  grid-template-columns: 1.4fr auto;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  padding: clamp(2.5rem, 5vw, 3.75rem) 0;
+}
+.cta-in h2 {
+  font-size: clamp(1.7rem, 2.9vw, 2.3rem);
+  margin-bottom: 0.6rem;
+}
+.cta-in p {
+  color: var(--ink-2);
+  max-width: 58ch;
+}
+
+@media (max-width: 1024px) {
+  .work {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 960px) {
+  .cta-in {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 680px) {
+  .work {
+    grid-template-columns: 1fr;
+  }
+}

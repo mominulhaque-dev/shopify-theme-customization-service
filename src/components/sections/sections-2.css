@@ -1,0 +1,164 @@
+/* ==========================================================================
+   Homepage sections — part 2: scope wall + themes
+   ========================================================================== */
+.scope-intro {
+  margin-bottom: var(--sp-block);
+}
+.wall {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  padding-top: var(--sp-block);
+  border-top: 1px solid var(--line);
+}
+.wall-side {
+  display: grid;
+  gap: 1.35rem;
+  align-content: start;
+}
+.wall-side.left {
+  padding-right: clamp(1.25rem, 3vw, 2.5rem);
+}
+.wall-side.right {
+  padding-left: clamp(1.25rem, 3vw, 2.5rem);
+}
+.wall-rule {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--forest) 12%, var(--forest) 88%, transparent);
+  position: relative;
+}
+.wall-tag {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--forest);
+  background: var(--wash);
+  padding: 0.4rem 0.85rem;
+  white-space: nowrap;
+  border-radius: 100px;
+}
+.zone-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 0.2rem;
+}
+.blk h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.4rem;
+}
+.blk p {
+  font-size: var(--t-sm);
+  color: var(--muted);
+  margin-bottom: 0.7rem;
+}
+.blk ul {
+  list-style: none;
+  display: grid;
+  gap: 0.42rem;
+}
+.blk li {
+  font-size: var(--t-sm);
+  padding-left: 1.35rem;
+  position: relative;
+  color: var(--ink-2);
+}
+.blk li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--signal);
+}
+.blk.limit li::before {
+  background: var(--amber-soft);
+  border-radius: 50%;
+}
+.blk.limit h3 {
+  color: var(--amber);
+}
+.wall-foot {
+  margin-top: var(--sp-block);
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+  max-width: 80ch;
+}
+
+/* ---------- themes ---------- */
+.themes-intro {
+  margin-bottom: var(--sp-block);
+}
+.theme-marquee {
+  padding: 0.85rem 0;
+  border-block: 1px solid var(--line);
+  margin-bottom: var(--sp-block);
+}
+.theme-row {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  padding: 1.35rem 0;
+  border-top: 1px solid var(--line);
+  align-items: baseline;
+}
+.theme-row:last-of-type {
+  border-bottom: 1px solid var(--line);
+}
+.theme-row h3 {
+  font-size: 1.05rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.theme-row h3 small {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0.3rem;
+}
+.theme-note {
+  font-size: var(--t-sm);
+  color: var(--muted);
+  margin-top: 0.75rem;
+  max-width: 78ch;
+}
+
+@media (max-width: 960px) {
+  .wall {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+  .wall-rule {
+    display: none;
+  }
+  .wall-side.left,
+  .wall-side.right {
+    padding: 0;
+  }
+  .wall-side.right {
+    border-top: 2px solid var(--forest);
+    padding-top: 1.5rem;
+  }
+  .theme-row {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+}

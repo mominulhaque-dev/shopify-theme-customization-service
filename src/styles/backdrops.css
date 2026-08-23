@@ -1,0 +1,173 @@
+/* ==========================================================================
+   Animated backdrops — part 1: shell, aurora/mesh, grid, dot matrix
+   Every backdrop is decorative only: aria-hidden, pointer-events:none, and
+   pinned behind content by the .has-backdrop stacking context in base.css.
+   Opacities are deliberately low — the readability of the text on top is the
+   constraint the whole system is tuned against.
+   ========================================================================== */
+.bd {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  contain: layout paint style;
+}
+
+/* ---------- shared blob primitive ---------- */
+.bd-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(64px);
+  will-change: transform;
+  animation: bd-drift 24s ease-in-out infinite;
+}
+.bd-blob.b2 {
+  animation-duration: 31s;
+  animation-delay: -9s;
+}
+.bd-blob.b3 {
+  animation-duration: 27s;
+  animation-delay: -15s;
+}
+@keyframes bd-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(-3%, 4%, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(4%, -3%, 0) scale(0.96);
+  }
+}
+
+/* ---------- aurora: blobs seen through a mask whose centre GSAP moves ----- */
+.bd-aurora .bd-blob.b1 {
+  width: 46%;
+  height: 62%;
+  top: -12%;
+  right: -6%;
+  background: radial-gradient(circle, var(--signal), transparent 68%);
+  opacity: 0.3;
+}
+.bd-aurora .bd-blob.b2 {
+  width: 38%;
+  height: 52%;
+  top: 22%;
+  right: 22%;
+  background: radial-gradient(circle, var(--forest), transparent 70%);
+  opacity: 0.22;
+}
+.bd-aurora .bd-blob.b3 {
+  width: 34%;
+  height: 44%;
+  bottom: -14%;
+  left: -8%;
+  background: radial-gradient(circle, #7fd9b4, transparent 70%);
+  opacity: 0.2;
+}
+.bd-mask {
+  --mask-x: 34%;
+  --mask-y: 38%;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mask-x) var(--mask-y), var(--signal), transparent 56%);
+  opacity: 0.14;
+  mask-image: radial-gradient(circle at var(--mask-x) var(--mask-y), black 0%, transparent 64%);
+  -webkit-mask-image: radial-gradient(
+    circle at var(--mask-x) var(--mask-y),
+    black 0%,
+    transparent 64%
+  );
+}
+.bd-dark .bd-mask {
+  background: radial-gradient(circle at var(--mask-x) var(--mask-y), var(--signal), transparent 58%);
+  opacity: 0.12;
+}
+.bd-dark .bd-blob.b1 {
+  opacity: 0.2;
+}
+.bd-dark .bd-blob.b2 {
+  background: radial-gradient(circle, var(--on-deep), transparent 70%);
+  opacity: 0.12;
+}
+.bd-dark .bd-blob.b3 {
+  background: radial-gradient(circle, #0f7a56, transparent 70%);
+  opacity: 0.3;
+}
+
+/* ---------- mesh: overlapping conic + radial washes, slow hue drift ------- */
+.bd-mesh-layer {
+  position: absolute;
+  inset: -20%;
+  background: radial-gradient(38% 44% at 22% 28%, rgba(23, 196, 127, 0.3), transparent 70%),
+    radial-gradient(34% 40% at 78% 22%, rgba(10, 93, 66, 0.26), transparent 72%),
+    radial-gradient(44% 46% at 62% 82%, rgba(127, 217, 180, 0.24), transparent 74%),
+    conic-gradient(from 200deg at 50% 50%, rgba(238, 246, 241, 0.5), transparent 40%);
+  filter: blur(42px) saturate(115%);
+  opacity: 0.75;
+  will-change: transform;
+  animation: bd-mesh 34s ease-in-out infinite alternate;
+}
+.bd-dark .bd-mesh-layer {
+  background: radial-gradient(36% 42% at 18% 24%, rgba(23, 196, 127, 0.26), transparent 70%),
+    radial-gradient(40% 44% at 82% 30%, rgba(7, 59, 43, 0.9), transparent 72%),
+    radial-gradient(46% 48% at 58% 88%, rgba(15, 122, 86, 0.35), transparent 74%);
+  opacity: 0.85;
+}
+@keyframes bd-mesh {
+  0% {
+    transform: translate3d(-2%, -1%, 0) rotate(0deg) scale(1.02);
+  }
+  100% {
+    transform: translate3d(2%, 2%, 0) rotate(6deg) scale(1.1);
+  }
+}
+
+/* ---------- grid field: ruled lines revealed through a travelling mask ---- */
+.bd-grid-layer {
+  position: absolute;
+  inset: -1px;
+  --grid-x: 50%;
+  --grid-y: 0%;
+  background-image: linear-gradient(var(--line-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-strong) 1px, transparent 1px);
+  background-size: 54px 54px;
+  opacity: 0.55;
+  mask-image: radial-gradient(
+    62% 68% at var(--grid-x) var(--grid-y),
+    black 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    transparent 78%
+  );
+  -webkit-mask-image: radial-gradient(
+    62% 68% at var(--grid-x) var(--grid-y),
+    black 0%,
+    rgba(0, 0, 0, 0.35) 45%,
+    transparent 78%
+  );
+}
+.bd-dark .bd-grid-layer {
+  background-image: linear-gradient(var(--on-deep) 1px, transparent 1px),
+    linear-gradient(90deg, var(--on-deep) 1px, transparent 1px);
+  opacity: 0.07;
+}
+
+/* ---------- dot matrix ---------- */
+.bd-dots-layer {
+  position: absolute;
+  inset: 0;
+  --dot-x: 50%;
+  --dot-y: 40%;
+  background-image: radial-gradient(circle, var(--forest) 1.1px, transparent 1.1px);
+  background-size: 22px 22px;
+  opacity: 0.14;
+  mask-image: radial-gradient(58% 62% at var(--dot-x) var(--dot-y), black, transparent 72%);
+  -webkit-mask-image: radial-gradient(58% 62% at var(--dot-x) var(--dot-y), black, transparent 72%);
+}
+.bd-dark .bd-dots-layer {
+  background-image: radial-gradient(circle, var(--signal) 1.1px, transparent 1.1px);
+  opacity: 0.16;
+}

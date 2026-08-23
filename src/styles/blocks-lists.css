@@ -1,0 +1,218 @@
+/* ==========================================================================
+   Table, price list, FAQ, related links, CTA band
+   ========================================================================== */
+.tbl-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--white);
+}
+table.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 40rem;
+  font-size: var(--t-sm);
+}
+.tbl th,
+.tbl td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.tbl thead th {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--wash);
+  white-space: nowrap;
+}
+.tbl tbody tr:last-child td {
+  border-bottom: none;
+}
+.tbl tbody tr {
+  transition: background var(--dur-fast);
+}
+.tbl tbody tr:hover {
+  background: var(--wash);
+}
+.tbl td:first-child {
+  font-weight: 600;
+  color: var(--ink);
+}
+.tbl-note {
+  font-size: var(--t-sm);
+  color: var(--muted);
+  margin-top: 0.85rem;
+  max-width: 78ch;
+}
+
+/* ---------- price list ---------- */
+.prices {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.price-row {
+  display: grid;
+  grid-template-columns: 1.1fr 1.6fr auto;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: baseline;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.price-row h3 {
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.price-row p {
+  font-size: var(--t-sm);
+  color: var(--muted);
+}
+.price-figs {
+  text-align: right;
+  white-space: nowrap;
+}
+.price-figs b {
+  font-family: var(--font-mono);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: block;
+  color: var(--ink);
+}
+.price-figs span {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  color: var(--muted);
+}
+.dark .prices,
+.dark .price-row {
+  border-color: var(--line-dark);
+}
+.dark .price-figs b {
+  color: var(--white);
+}
+.dark .price-figs span,
+.dark .price-row p {
+  color: var(--on-deep);
+}
+
+/* ---------- FAQ ---------- */
+.faq {
+  max-width: 840px;
+}
+.faq details {
+  border-bottom: 1px solid var(--line);
+  padding: 1.05rem 0;
+}
+.faq summary {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.015em;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.25rem;
+  align-items: center;
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary::after {
+  content: "";
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  background: linear-gradient(var(--forest), var(--forest)) center/100% 1.5px no-repeat,
+    linear-gradient(var(--forest), var(--forest)) center/1.5px 100% no-repeat;
+  transition: transform var(--dur-med) var(--ease-out);
+}
+.faq details[open] summary::after {
+  transform: rotate(90deg);
+  background: linear-gradient(var(--forest), var(--forest)) center/100% 1.5px no-repeat;
+}
+.faq summary:hover {
+  color: var(--forest);
+}
+.faq details p {
+  margin-top: 0.7rem;
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+  max-width: 74ch;
+}
+
+/* ---------- related links ---------- */
+.related {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  gap: 0.85rem;
+}
+.rel {
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 0.85rem 1rem;
+  background: var(--white);
+  text-decoration: none;
+  color: inherit;
+  display: grid;
+  gap: 0.25rem;
+  transition: border-color var(--dur-fast), transform var(--dur-fast), box-shadow var(--dur-fast);
+}
+.rel:hover {
+  border-color: var(--forest);
+  transform: translateY(-2px);
+  box-shadow: var(--sh-sm);
+  color: inherit;
+}
+.rel b {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.rel span {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* ---------- CTA band ---------- */
+.cta-band {
+  display: grid;
+  grid-template-columns: 1.5fr auto;
+  gap: clamp(1.25rem, 4vw, 3rem);
+  align-items: center;
+}
+.cta-band h2 {
+  font-size: clamp(1.65rem, 2.8vw, 2.2rem);
+  margin-bottom: 0.5rem;
+}
+.cta-band p {
+  color: var(--ink-2);
+  max-width: 56ch;
+}
+.dark .cta-band p {
+  color: var(--on-deep);
+}
+
+@media (max-width: 820px) {
+  .price-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .price-figs {
+    text-align: left;
+  }
+  .price-figs b {
+    display: inline;
+    margin-right: 0.6rem;
+  }
+  .cta-band {
+    grid-template-columns: 1fr;
+  }
+}

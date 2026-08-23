@@ -256,7 +256,8 @@ export const workSection = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    href: "/work/client-slug-1/",
+    href: "/work/apparel-dawn-product-page/",
+    visual: "product-page",
     imgLabel: "Before / after screenshot — the product page",
     theme: "Dawn",
     title: "[Client name], apparel",
@@ -264,7 +265,8 @@ export const caseStudies: CaseStudy[] = [
     outcomeLabel: "[ Result the client measured ]",
   },
   {
-    href: "/work/client-slug-2/",
+    href: "/work/home-goods-prestige-brand-system/",
+    visual: "storefront",
     imgLabel: "Before / after screenshot — the collection grid",
     theme: "Prestige",
     title: "[Client name], home goods",
@@ -272,7 +274,8 @@ export const caseStudies: CaseStudy[] = [
     outcomeLabel: "[ Result the client measured ]",
   },
   {
-    href: "/work/client-slug-3/",
+    href: "/work/accessories-brooklyn-to-dawn-migration/",
+    visual: "theme-editor",
     imgLabel: "Before / after screenshot — the theme editor",
     theme: "Brooklyn to Dawn",
     title: "[Client name], accessories",

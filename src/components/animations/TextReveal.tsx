@@ -1,94 +1,51 @@
-"use client";
-
-import { useEffect, useRef, type ElementType, type ReactNode } from "react";
-import { gsap, registerGsap, prefersReducedMotion } from "@/lib/gsap";
+import type { ElementType, ReactNode } from "react";
 
 interface TextRevealProps {
   children: ReactNode;
   as?: ElementType;
   className?: string;
-  /** Scroll-triggered (default) or plays immediately on mount, e.g. inside the hero. */
+  /**
+   * `lines` (default) masks each measured line and rises them in sequence —
+   * the real per-line stagger, via GSAP SplitText, that the earlier
+   * single-block clip-path version could only approximate. `words` and
+   * `chars` are for short display strings only; never body copy.
+   */
+  mode?: "lines" | "words" | "chars";
+  /** `load` plays immediately (above-the-fold headings); default waits for scroll. */
   trigger?: "scroll" | "load";
   delay?: number;
   start?: string;
+  id?: string;
 }
 
 /**
- * Mask-reveal heading: the heading sits inside an `overflow: hidden` wrapper
- * and animates in via `clip-path` (inset from the bottom edge) combined with
- * a slight rise + fade, so it reads as the text being "unmasked" rather than
- * a generic fade. Deliberately a single-block technique (not per-line/
- * per-character split) since accurate line-splitting needs real-browser
- * measurement this sandbox can't verify — see CLAUDE.md "Animation system"
- * for the per-line upgrade path once this is running in a browser.
+ * Heading reveal. Server component: emits `data-split` and MotionProvider does
+ * the splitting after webfonts settle (measuring line boxes before the display
+ * face loads produces wrong breaks) and re-splits on resize.
  *
- * Reserved for hero H1s and section H2s per the brief, not body copy.
+ * Reserved for h1/h2 — splitting body paragraphs hurts both reading and
+ * screen-reader output for no visual gain.
  */
 export default function TextReveal({
   children,
   as: Tag = "h2",
   className,
+  mode = "lines",
   trigger = "scroll",
-  delay = 0,
-  start = "top 85%",
+  delay,
+  start,
+  id,
 }: TextRevealProps) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const innerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const inner = innerRef.current;
-    if (!inner) return;
-
-    if (prefersReducedMotion()) {
-      inner.style.opacity = "1";
-      inner.style.clipPath = "none";
-      inner.style.transform = "none";
-      return;
-    }
-
-    registerGsap();
-    gsap.set(inner, {
-      opacity: 0,
-      y: "0.5em",
-      clipPath: "inset(0 0 100% 0)",
-    });
-
-    const play = () =>
-      gsap.to(inner, {
-        opacity: 1,
-        y: "0em",
-        clipPath: "inset(0 0 0% 0)",
-        duration: 0.9,
-        delay,
-        ease: "power4.out",
-      });
-
-    if (trigger === "load") {
-      play();
-      return;
-    }
-
-    const ctx = gsap.context(() => {
-      gsap.to(inner, {
-        opacity: 1,
-        y: "0em",
-        clipPath: "inset(0 0 0% 0)",
-        duration: 0.9,
-        delay,
-        ease: "power4.out",
-        scrollTrigger: { trigger: wrapperRef.current, start, toggleActions: "play none none none" },
-      });
-    });
-
-    return () => ctx.revert();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
-    <div ref={wrapperRef} className="text-reveal-wrap">
-      <Tag ref={innerRef as never} className={className}>
-        {children}
-      </Tag>
-    </div>
+    <Tag
+      id={id}
+      className={className}
+      data-split={mode}
+      data-trigger={trigger}
+      data-delay={delay}
+      data-start={start}
+    >
+      {children}
+    </Tag>
   );
 }

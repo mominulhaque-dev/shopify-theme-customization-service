@@ -1,0 +1,174 @@
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+h1 {
+  font-size: var(--t-h1);
+  font-weight: 800;
+}
+h2 {
+  font-size: var(--t-h2);
+}
+h3 {
+  font-size: var(--t-h3);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--forest);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:hover {
+  color: var(--forest-hover);
+}
+
+/* Inline link inside body copy — underline grows from the left on hover
+   rather than simply appearing, so prose links feel considered. */
+.ilink {
+  color: var(--forest);
+  text-decoration: none;
+  position: relative;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.ilink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0.999);
+  transform-origin: left;
+  opacity: 0.45;
+  transition: opacity var(--dur-fast), transform var(--dur-med) var(--ease-out);
+}
+.ilink:hover::after {
+  opacity: 1;
+  transform: scaleX(1) translateY(1px);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--forest);
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--signal);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+.on-deep .eyebrow::before,
+.dark .eyebrow::before {
+  background: var(--signal);
+}
+
+/* ---------- section heads ---------- */
+.head {
+  max-width: 62ch;
+  margin-bottom: var(--sp-head);
+}
+.head h2,
+.head h1 {
+  margin-bottom: 0.7rem;
+}
+.head p {
+  color: var(--ink-2);
+}
+.head p + p {
+  margin-top: 0.7rem;
+}
+.head-center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.head-center .eyebrow {
+  justify-content: center;
+}
+
+.deck-sm {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.0625rem;
+  color: var(--forest);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.85rem;
+}
+.h2-col {
+  font-size: var(--t-h2-sm);
+  margin-bottom: 0.5rem;
+}
+.col-lede {
+  font-size: var(--t-sm);
+  color: var(--ink-2);
+  margin-bottom: 1.15rem;
+  max-width: 46ch;
+}
+.h2-sm {
+  font-size: var(--t-h2-sm);
+  margin-bottom: 1.15rem;
+}
+.lede {
+  font-size: var(--t-lg);
+  color: var(--ink-2);
+  max-width: 58ch;
+}
+
+/* ---------- prose ---------- */
+.prose {
+  max-width: var(--max-text);
+}
+.prose > * + * {
+  margin-top: 0.85rem;
+}
+.prose h3 {
+  margin-top: 1.6rem;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.4rem;
+}
+.prose li {
+  color: var(--ink-2);
+}
+.prose strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.mono-note {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted-soft);
+}

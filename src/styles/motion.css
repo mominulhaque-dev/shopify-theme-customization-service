@@ -1,0 +1,165 @@
+/* ==========================================================================
+   Motion — pre-paint hidden states + interaction primitives
+
+   The `.motion` class is added to <html> by a synchronous inline script in
+   layout.tsx *before* body paint, and only when JS is on and the visitor has
+   not asked for reduced motion. Everything below is therefore scoped to
+   `.motion`, which means: no JS / no JS-enabled motion / reduced motion all
+   render the finished state with zero flash of invisible content.
+
+   The from-states here mirror MOTION_FROM in src/lib/motion.ts — keep the two
+   in sync when adding a new [data-reveal] value.
+   ========================================================================== */
+.motion [data-reveal] {
+  will-change: transform, opacity;
+}
+.motion [data-reveal="up"] {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+}
+.motion [data-reveal="up-sm"] {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+}
+.motion [data-reveal="fade"] {
+  opacity: 0;
+}
+.motion [data-reveal="scale"] {
+  opacity: 0;
+  transform: scale(0.94);
+}
+.motion [data-reveal="image"] {
+  opacity: 0;
+  transform: scale(1.05);
+  clip-path: inset(4% 4% 4% 4% round 12px);
+}
+.motion [data-reveal="mask-up"] {
+  opacity: 0;
+  clip-path: inset(0 0 102% 0);
+  transform: translate3d(0, 0.32em, 0);
+}
+.motion [data-reveal="mask-left"] {
+  clip-path: inset(0 101% 0 0);
+}
+.motion [data-reveal="blur"] {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translate3d(0, 18px, 0);
+}
+.motion [data-reveal="skew"] {
+  opacity: 0;
+  transform: translate3d(0, 34px, 0) skewY(2.5deg);
+}
+.motion [data-reveal="rise-rotate"] {
+  opacity: 0;
+  transform: translate3d(0, 40px, 0) rotate(-1.4deg);
+}
+
+/* Grouped/staggered items. Items are direct children of the group, or list
+   items one level down (a group wrapping a <ul>) — both covered here so the
+   hidden state still lands before paint. */
+.motion [data-reveal-group] > *,
+.motion [data-reveal-group] > ul > li,
+.motion [data-reveal-group] > ol > li {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.motion [data-parallax],
+.motion [data-drift] {
+  will-change: transform;
+}
+
+/* ---------- split-text reveal ----------
+   SplitText writes its own inline styles for the line masks; these classes
+   only need to guarantee block layout and that descenders are not clipped. */
+.split-line {
+  display: block;
+  padding-bottom: 0.04em;
+}
+.split-word,
+.split-char {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+.text-reveal-wrap {
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
+/* ---------- cursor-follow spotlight card ---------- */
+.spotlight-card {
+  position: relative;
+  transform-style: preserve-3d;
+}
+.spotlight-card > * {
+  position: relative;
+  z-index: 1;
+}
+.spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(23, 196, 127, 0.16),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity var(--dur-med) var(--ease-out);
+  pointer-events: none;
+  z-index: 2;
+}
+.spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* ---------- magnetic wrapper ---------- */
+.magnetic {
+  display: inline-flex;
+  will-change: transform;
+}
+
+/* ---------- infinite marquee ---------- */
+.marquee {
+  overflow: hidden;
+  position: relative;
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  will-change: transform;
+}
+/* Each half carries its own internal gap plus a trailing gap, so the two
+   halves are exactly equal in width and a -50% shift loops seamlessly. */
+.marquee-set {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-right: 0.75rem;
+  flex: 0 0 auto;
+}
+
+/* ---------- scroll progress ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--forest), var(--signal));
+  z-index: 120;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none !important;
+  }
+}

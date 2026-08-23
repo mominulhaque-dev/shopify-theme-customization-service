@@ -48,6 +48,8 @@ export interface TimeRow {
 
 export interface CaseStudy {
   href: string;
+  /** Key into the visual registry (src/components/ui/visuals.tsx). */
+  visual: "product-page" | "storefront" | "theme-editor" | "before-after" | "mobile";
   imgLabel: string;
   theme: string;
   title: string;

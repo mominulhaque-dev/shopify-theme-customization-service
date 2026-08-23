@@ -1,30 +1,35 @@
 import { pricingCard } from "@/data/homepage";
-import Reveal from "@/components/animations/Reveal";
 import SpotlightCard from "@/components/animations/SpotlightCard";
 
+/**
+ * The hero's published-pricing card. Copy verbatim from the reference; the card
+ * itself gets the cursor spotlight and a slight tilt so the page's single most
+ * commercially important element is also the most tactile.
+ *
+ * No entrance animation of its own — the hero owns the choreography and wraps
+ * this so the card arrives after the claim it substantiates.
+ */
 export default function PriceCard() {
   return (
-    <Reveal as="div" y={20} delay={0.3} start="top 90%">
-      <SpotlightCard tilt={3}>
-        <aside className="price-card">
-          <div className="price-card-top">
-            <span className="eyebrow">{pricingCard.eyebrow}</span>
-            <div className="price-figure">
-              <sup>{pricingCard.figurePrefix}</sup>
-              {pricingCard.figure}
-            </div>
-            <p>{pricingCard.note}</p>
+    <SpotlightCard tilt={3}>
+      <aside className="price-card">
+        <div className="price-card-top">
+          <span className="eyebrow">{pricingCard.eyebrow}</span>
+          <div className="price-figure">
+            <sup>{pricingCard.figurePrefix}</sup>
+            {pricingCard.figure}
           </div>
-          <ul>
-            {pricingCard.items.map((item) => (
-              <li key={item.label}>
-                <span>{item.label}</span>
-                <b>{item.price}</b>
-              </li>
-            ))}
-          </ul>
-        </aside>
-      </SpotlightCard>
-    </Reveal>
+          <p>{pricingCard.note}</p>
+        </div>
+        <ul>
+          {pricingCard.items.map((item) => (
+            <li key={item.label}>
+              <span>{item.label}</span>
+              <b>{item.price}</b>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </SpotlightCard>
   );
 }

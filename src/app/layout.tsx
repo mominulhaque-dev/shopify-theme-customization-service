@@ -1,36 +1,20 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import MotionProvider from "@/components/animations/MotionProvider";
+import ScrollProgress from "@/components/animations/ScrollProgress";
 import SmoothScrollProvider from "@/components/animations/SmoothScrollProvider";
 import { siteConfig } from "@/data/site";
 
 import "./globals.css";
-import "@/components/layout/header.css";
-import "@/components/layout/footer.css";
-import "@/components/sections/sections.css";
-import "@/components/forms/forms.css";
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  variable: "--font-bricolage",
-  weight: ["500", "700", "800"],
-  display: "swap",
-});
-
-const instrument = Instrument_Sans({
-  subsets: ["latin"],
-  variable: "--font-instrument",
-  weight: ["400", "500", "600"],
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jetbrains",
-  weight: ["400", "500", "700"],
-  display: "swap",
-});
+/**
+ * Runs synchronously before the body paints. It adds `.motion` to <html> only
+ * when JS is available and the visitor has not asked for reduced motion, which
+ * is what lets the pre-paint hidden states in styles/motion.css exist without
+ * ever trapping content invisible: no class, no hiding, no animation.
+ */
+const MOTION_BOOTSTRAP = `try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('motion')}}catch(e){}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -45,16 +29,11 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    images: ["/og-image.jpg"],
-  },
-  icons: {
-    icon: "/favicon.ico",
   },
 };
 
@@ -68,16 +47,40 @@ const organizationJsonLd = {
   description: siteConfig.description,
   priceRange: "$1,000–$12,000",
   areaServed: "Worldwide",
+  knowsAbout: [
+    "Shopify theme customization",
+    "Shopify Liquid development",
+    "Online Store 2.0 migration",
+    "Shopify store speed optimization",
+    "Shopify conversion rate optimization",
+  ],
   makesOffer: [
     { "@type": "Offer", itemOffered: { "@type": "Service", name: "Shopify theme customization" } },
     { "@type": "Offer", itemOffered: { "@type": "Service", name: "Online Store 2.0 migration" } },
+    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Shopify store redesign" } },
   ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${instrument.variable} ${jetbrains.variable}`}>
+    <html lang="en">
+      <head>
+        {/* Google Fonts over <link> rather than next/font: the build environment
+            cannot reach fonts.gstatic.com, and a font fetch that fails at build
+            time fails the whole build. Preconnects keep the runtime cost close
+            to self-hosting. See CLAUDE.md §"Fonts". */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+      </head>
       <body>
+        {/* eslint-disable-next-line react/no-danger */}
+        <script dangerouslySetInnerHTML={{ __html: MOTION_BOOTSTRAP }} />
         <script
           type="application/ld+json"
           // eslint-disable-next-line react/no-danger
@@ -86,10 +89,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#main" className="skip-link">
           Skip to content
         </a>
+        <ScrollProgress />
         <SmoothScrollProvider>
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
+          <MotionProvider>
+            <Header />
+            <main id="main">{children}</main>
+            <Footer />
+          </MotionProvider>
         </SmoothScrollProvider>
       </body>
     </html>

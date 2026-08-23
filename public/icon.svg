@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Shopify theme customization services">
+  <rect width="64" height="64" rx="14" fill="#052e21" />
+  <!-- the "wall": editor settings on the left, code past the line on the right -->
+  <rect x="12" y="16" width="16" height="4" rx="2" fill="#7fd9b4" />
+  <rect x="12" y="26" width="12" height="4" rx="2" fill="#7fd9b4" opacity="0.7" />
+  <rect x="12" y="36" width="16" height="4" rx="2" fill="#7fd9b4" opacity="0.7" />
+  <rect x="12" y="46" width="9" height="4" rx="2" fill="#7fd9b4" opacity="0.5" />
+  <rect x="31" y="12" width="1.6" height="40" fill="#17c47f" />
+  <path d="M40 22l-6 10 6 10" stroke="#17c47f" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M48 22l6 10-6 10" stroke="#17c47f" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
