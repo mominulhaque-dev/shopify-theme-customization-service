@@ -106,10 +106,6 @@
 .crumbs [aria-current] {
   color: var(--ink-2);
 }
-.phero-dark + .crumbs a,
-.crumbs-dark a {
-  color: var(--on-deep-dim);
-}
 
 @media (max-width: 900px) {
   .phero-in {

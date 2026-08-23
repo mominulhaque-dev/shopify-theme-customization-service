@@ -17,8 +17,16 @@
   grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
 }
 
+/* Grid children must fill their row or the card borders in a row will not line
+   up when the copy lengths differ. The SpotlightCard wrapper is the grid item,
+   so both it and the card inside it need to stretch. */
+.cards > .spotlight-card,
+.work > .spotlight-card {
+  height: 100%;
+}
 .card {
   position: relative;
+  height: 100%;
   border: 1px solid var(--line);
   border-radius: var(--r);
   background: var(--white);

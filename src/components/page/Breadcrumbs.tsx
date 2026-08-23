@@ -6,18 +6,15 @@ import type { LinkRef } from "@/types/page";
  * mirrored as BreadcrumbList JSON-LD by PageRenderer, which is what earns the
  * breadcrumb display in search results for the nested /customization/* and
  * /guides/* routes.
+ *
+ * Note it renders *above* the hero band, so it always sits on the page
+ * background rather than on the hero's. It therefore has no dark variant — an
+ * earlier one tinted the links for dark-hero pages and left them at roughly
+ * 2:1 against white.
  */
-export default function Breadcrumbs({
-  trail,
-  current,
-  tone = "light",
-}: {
-  trail: LinkRef[];
-  current: string;
-  tone?: "light" | "dark";
-}) {
+export default function Breadcrumbs({ trail, current }: { trail: LinkRef[]; current: string }) {
   return (
-    <nav aria-label="Breadcrumb" className={`wrap crumbs ${tone === "dark" ? "crumbs-dark" : ""}`}>
+    <nav aria-label="Breadcrumb" className="wrap crumbs">
       <ol>
         <li>
           <Link href="/">Home</Link>

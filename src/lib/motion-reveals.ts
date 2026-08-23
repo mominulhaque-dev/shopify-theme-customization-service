@@ -13,6 +13,20 @@ import {
   groupItems,
 } from "@/lib/motion";
 
+/**
+ * Releases the compositing hint once an entrance has finished.
+ *
+ * `will-change` is declared in CSS for every hidden element so the first frame
+ * of the tween is cheap, but leaving it on afterwards keeps a GPU layer alive
+ * for every revealed node — on a long page that is a hundred-odd layers doing
+ * nothing. Clearing it inline (which beats the class selector) hands the memory
+ * back as soon as the element is at rest.
+ */
+function releaseHint(targets: Element | Element[]) {
+  const list = Array.isArray(targets) ? targets : [targets];
+  for (const el of list) (el as HTMLElement).style.willChange = "auto";
+}
+
 /** Single-element entrance reveals: [data-reveal="up|image|mask-up|blur|…"]. */
 export function buildReveals(root: ParentNode) {
   root.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
@@ -26,6 +40,7 @@ export function buildReveals(root: ParentNode) {
       delay: attrNum(el, "delay", 0),
       ease: attrStr(el, "ease", "settle"),
       overwrite: "auto",
+      onComplete: () => releaseHint(el),
       scrollTrigger: {
         trigger: el,
         start: attrStr(el, "start", DEFAULT_START),
@@ -56,6 +71,7 @@ export function buildGroups(root: ParentNode) {
       stagger: attrNum(group, "stagger", 0.075),
       ease: "settle",
       overwrite: "auto",
+      onComplete: () => releaseHint(items),
       scrollTrigger: {
         trigger: group,
         start: attrStr(group, "start", "top 84%"),
@@ -101,6 +117,7 @@ export function buildSplits(root: ParentNode) {
             stagger: mode === "chars" ? 0.014 : 0.085,
             ease: "swift",
             delay: attrNum(el, "delay", 0),
+            onComplete: () => releaseHint(targets as Element[]),
             scrollTrigger: onLoad
               ? undefined
               : {

@@ -48,7 +48,7 @@ export default function PageRenderer({ page }: { page: PageContent }) {
       ))}
 
       {page.breadcrumbs && page.breadcrumbs.length > 0 && (
-        <Breadcrumbs trail={page.breadcrumbs} current={page.hero.eyebrow} tone={page.hero.tone} />
+        <Breadcrumbs trail={page.breadcrumbs} current={page.hero.eyebrow} />
       )}
       <PageHero hero={page.hero} />
 

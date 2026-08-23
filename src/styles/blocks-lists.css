@@ -126,6 +126,10 @@ table.tbl {
 .faq summary::-webkit-details-marker {
   display: none;
 }
+/* Plus/minus built from two 1.5px bars. Closed shows both; open removes the
+   vertical bar and spins the remaining one, so it reads as a minus. Rotating
+   *after* dropping the vertical bar was the bug here — a horizontal bar turned
+   90 degrees is a vertical bar, so "open" rendered as a pipe. */
 .faq summary::after {
   content: "";
   width: 11px;
@@ -136,8 +140,8 @@ table.tbl {
   transition: transform var(--dur-med) var(--ease-out);
 }
 .faq details[open] summary::after {
-  transform: rotate(90deg);
   background: linear-gradient(var(--forest), var(--forest)) center/100% 1.5px no-repeat;
+  transform: rotate(180deg);
 }
 .faq summary:hover {
   color: var(--forest);
