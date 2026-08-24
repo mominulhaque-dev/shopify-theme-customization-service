@@ -24,6 +24,14 @@ const MOTION_BOOTSTRAP = `try{if(!matchMedia('(prefers-reduced-motion: reduce)')
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
+  },
   title: {
     default: `${siteConfig.name}: Scope, Cost and Timeline`,
     template: `%s | ${siteConfig.shortName}`,
