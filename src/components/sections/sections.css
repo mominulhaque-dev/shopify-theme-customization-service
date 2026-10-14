@@ -91,6 +91,12 @@
 .hero-aside {
   position: relative;
 }
+.hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r);
+}
 
 /* ---------- price card ---------- */
 .price-card {

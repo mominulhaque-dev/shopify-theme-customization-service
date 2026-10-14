@@ -105,7 +105,7 @@ export const scopeRight: ScopeBlock[] = [
       "Checkout, unless you run Shopify Plus",
       "Platform limits Shopify enforces on all stores",
       "Inventory, ERP and backend systems",
-      "Ground-up theme builds, see the comparison",
+      "Ground-up theme builds and migrations",
     ],
   },
 ];

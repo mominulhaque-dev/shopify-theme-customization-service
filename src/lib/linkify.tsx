@@ -11,14 +11,14 @@ import type { ReactNode } from "react";
  * first so a short phrase nested inside a longer one cannot win.
  */
 const PHRASE_LINKS: Record<string, string> = {
-  "see the comparison": "/custom-theme-vs-template/",
-  "see store setup": "/store-setup/",
-  "theme updates and migration": "/migration/",
-  "the full process": "/process/",
-  "custom theme development versus customization": "/custom-theme-development/",
-  "hiring a Shopify theme developer": "/guides/hire-theme-developer/",
-  "custom theme versus template": "/custom-theme-vs-template/",
-  "migrating to Online Store 2.0": "/migration/",
+  // "see the comparison": "/custom-theme-vs-template/",
+  // "see store setup": "/store-setup/",
+  // "theme updates and migration": "/migration/",
+  // "the full process": "/process/",
+  // "custom theme development versus customization": "/custom-theme-development/",
+  // "hiring a Shopify theme developer": "/guides/hire-theme-developer/",
+  // "custom theme versus template": "/custom-theme-vs-template/",
+  // "migrating to Online Store 2.0": "/migration/",
 };
 
 const PHRASES = Object.keys(PHRASE_LINKS).sort((a, b) => b.length - a.length);

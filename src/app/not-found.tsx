@@ -35,7 +35,7 @@ export default function NotFound() {
           </Reveal>
           <Reveal kind="fade" delay={0.4}>
             <div className="related" style={{ marginTop: "2rem" }}>
-              <Link href="/customization/" className="rel">
+              <Link href="/" className="rel">
                 <b>Theme customization</b>
                 <span>Every layer we work in, priced</span>
               </Link>

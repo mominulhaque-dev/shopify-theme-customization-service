@@ -5,7 +5,7 @@ import Magnetic from "@/components/animations/Magnetic";
 import Reveal from "@/components/animations/Reveal";
 import RevealGroup from "@/components/animations/RevealGroup";
 import TextReveal from "@/components/animations/TextReveal";
-import PriceCard from "@/components/cards/PriceCard";
+import Image from "next/image";
 
 /**
  * Homepage hero. Copy is verbatim from the approved reference (CLAUDE.md §3);
@@ -65,7 +65,14 @@ export default function Hero() {
           </div>
 
           <Reveal kind="up" delay={0.45} className="hero-aside">
-            <PriceCard />
+            <Image
+              src="/shopifythemecustomizationservices_hero.png"
+              alt="Shopify theme customization illustration"
+              width={1200}
+              height={896}
+              priority
+              className="hero-image"
+            />
           </Reveal>
         </div>
       </div>

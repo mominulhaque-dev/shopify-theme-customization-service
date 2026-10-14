@@ -97,15 +97,15 @@ export default function ThemesSection() {
 }
 
 const CHIP_PAGES: Record<string, string> = {
-  Dawn: "/customization/dawn/",
-  Prestige: "/customization/prestige/",
-  Spotlight: "/customization/spotlight/",
-  Debut: "/customization/legacy-themes/",
-  Brooklyn: "/customization/legacy-themes/",
-  Minimal: "/customization/legacy-themes/",
-  Supply: "/customization/legacy-themes/",
-  Turbo: "/customization/legacy-themes/",
-  Narrative: "/customization/legacy-themes/",
+  // Dawn: "/customization/dawn/",
+  // Prestige: "/customization/prestige/",
+  // Spotlight: "/customization/spotlight/",
+  // Debut: "/customization/legacy-themes/",
+  // Brooklyn: "/customization/legacy-themes/",
+  // Minimal: "/customization/legacy-themes/",
+  // Supply: "/customization/legacy-themes/",
+  // Turbo: "/customization/legacy-themes/",
+  // Narrative: "/customization/legacy-themes/",
 };
 
 function themeChipHref(chip: string) {

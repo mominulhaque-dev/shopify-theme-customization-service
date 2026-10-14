@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { diffSection, diffTiers } from "@/data/homepage";
+import { diffSection, diffTiers, pricingCard } from "@/data/homepage";
 import Backdrop from "@/components/animations/Backdrop";
 import Reveal from "@/components/animations/Reveal";
 import RevealGroup from "@/components/animations/RevealGroup";
@@ -29,6 +29,8 @@ export default function DiffSection() {
           </TextReveal>
           <Reveal kind="up-sm" delay={0.08}>
             <p className="deck-sm">{diffSection.deckSm}</p>
+            <span className="eyebrow">{pricingCard.eyebrow}</span>
+            <p>{pricingCard.note}</p>
             <p>{diffSection.paragraph}</p>
           </Reveal>
         </div>
