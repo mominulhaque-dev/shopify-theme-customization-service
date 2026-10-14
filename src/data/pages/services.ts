@@ -31,7 +31,7 @@ export const page: PageContent = {
     {
       type: "cards",
       eyebrow: "What we do",
-      heading: "Six services, one storefront layer",
+      heading: "Shopify theme services",
       lede: "Pick the one that matches the problem. If you are not sure which it is, send the store URL and we will tell you which one your request actually is — including when the answer is that you do not need us yet.",
       columns: 3,
       items: [
@@ -39,7 +39,6 @@ export const page: PageContent = {
           meta: "From $1,000",
           title: "Theme customization",
           body: "Change the theme you already own. Sections, templates, Liquid, CSS, and schema so your team keeps control after handover.",
-          href: "/customization/",
         },
         {
           meta: "From $2,800",
@@ -51,19 +50,16 @@ export const page: PageContent = {
           meta: "From $6,500",
           title: "Store redesign",
           body: "A new brand system applied across every template, with the section library your marketing team needs to keep shipping.",
-          href: "/services/store-redesign/",
         },
         {
           meta: "From $2,400",
           title: "Speed optimization",
           body: "Theme-level Core Web Vitals work: render-blocking assets, image pipeline, third-party scripts, unused sections.",
-          href: "/services/speed-optimization/",
         },
         {
           meta: "From $2,800",
           title: "Conversion optimization",
           body: "Product page, cart and collection changes aimed at the step your analytics say is leaking, not at a generic checklist.",
-          href: "/services/conversion-optimization/",
         },
         {
           meta: "From $4,200",
@@ -148,12 +144,10 @@ export const page: PageContent = {
       type: "related",
       heading: "Go deeper",
       items: [
-        { label: "Theme customization", href: "/customization/", note: "Every layer we touch inside a theme" },
         { label: "Pricing", href: "/pricing/", note: "The full ladder and what moves an estimate" },
-        { label: "Process", href: "/process/", note: "How a project actually runs, stage by stage" },
         { label: "Themes we support", href: "/themes/", note: "Dawn, Prestige, Spotlight, legacy" },
         { label: "Case studies", href: "/work/", note: "Documented projects, including the rescopes" },
-        { label: "Guides", href: "/guides/", note: "Do it yourself, if that is the right call" },
+        { label: "Store setup", href: "/store-setup/", note: "A new store, ready to launch" },
       ],
     },
     ctaBlock(

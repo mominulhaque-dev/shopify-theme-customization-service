@@ -13,12 +13,6 @@ import { readdir, readFile } from "node:fs/promises";
 import { join, relative, sep } from "node:path";
 
 const APP_DIR = join(process.cwd(), ".next", "server", "app");
-const REDIRECTS = new Set([
-  "/work/client-slug-1/",
-  "/work/client-slug-2/",
-  "/work/client-slug-3/",
-]);
-
 async function walk(dir) {
   const out = [];
   let entries;
@@ -35,7 +29,7 @@ async function walk(dir) {
   return out;
 }
 
-/** ".next/server/app/customization/liquid.html" → "/customization/liquid/" */
+/** ".next/server/app/services/shopify-development.html" → "/services/shopify-development/" */
 function routeOf(file) {
   const rel = relative(APP_DIR, file).split(sep).join("/").replace(/\.html$/, "");
   if (rel === "index") return "/";
@@ -73,7 +67,7 @@ for (const file of files) {
     if (raw.startsWith("/_next/") || raw.startsWith("/api/")) continue;
 
     const path = normalise(raw.split(/[?#]/)[0]);
-    if (routes.has(path) || REDIRECTS.has(path)) {
+    if (routes.has(path)) {
       seen.set(path, (seen.get(path) ?? 0) + 1);
       continue;
     }

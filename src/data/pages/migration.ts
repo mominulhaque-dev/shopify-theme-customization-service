@@ -139,11 +139,8 @@ export const page: PageContent = {
     {
       type: "related",
       items: [
-        { label: "Legacy theme customization", href: "/customization/legacy-themes/", note: "Patching, and its limits" },
         { label: "Themes we support", href: "/themes/", note: "Where you are migrating to" },
-        { label: "Dawn customization", href: "/customization/dawn/", note: "The usual destination" },
-        { label: "Sections and blocks", href: "/customization/sections/", note: "What gets rebuilt" },
-        { label: "Change your theme", href: "/guides/change-theme/", note: "Doing it yourself, carefully" },
+        { label: "Shopify development", href: "/services/shopify-development/", note: "Custom sections and theme logic" },
         { label: "Pricing", href: "/pricing/", note: "Where migration sits" },
       ],
     },

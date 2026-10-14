@@ -16,27 +16,6 @@ const nextConfig = {
     formats: ["image/avif", "image/webp"],
   },
 
-  async redirects() {
-    return [
-      /* The three case studies the homepage linked to before they had real
-         slugs. Kept so any shared or indexed URL still resolves. */
-      {
-        source: "/work/client-slug-1",
-        destination: "/work/apparel-dawn-product-page/",
-        permanent: true,
-      },
-      {
-        source: "/work/client-slug-2",
-        destination: "/work/home-goods-prestige-brand-system/",
-        permanent: true,
-      },
-      {
-        source: "/work/client-slug-3",
-        destination: "/work/accessories-brooklyn-to-dawn-migration/",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default nextConfig;

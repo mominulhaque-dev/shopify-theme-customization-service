@@ -22,7 +22,7 @@ interface BackdropProps {
 /**
  * Decorative section backdrop. Eight variants so no two adjacent bands share
  * the same effect — the aurora belongs to the hero, the grid to the pricing
- * ladder, contour lines to process/timeline pages, and so on.
+ * ladder, contour lines to timeline sections, and so on.
  *
  * All of it is inert: aria-hidden, pointer-events:none, pinned behind content
  * by `.has-backdrop` (base.css). Motion comes from CSS keyframes plus the

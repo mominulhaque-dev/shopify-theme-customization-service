@@ -142,8 +142,8 @@ export const page: PageContent = {
       items: [
         { label: "Custom development", href: "/custom-theme-development/", note: "When bespoke is justified" },
         { label: "Themes we support", href: "/themes/", note: "Choosing a template" },
-        { label: "Dawn customization", href: "/customization/dawn/", note: "The free starting point" },
-        { label: "Store redesign", href: "/services/store-redesign/", note: "Making a template yours" },
+        { label: "Dawn and other themes", href: "/themes/", note: "Choosing a template" },
+        { label: "Shopify development", href: "/services/shopify-development/", note: "Adding behavior to a theme" },
         { label: "Store setup", href: "/store-setup/", note: "If you are launching" },
         { label: "Pricing", href: "/pricing/", note: "What customization costs" },
       ],

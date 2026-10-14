@@ -22,7 +22,7 @@ export const page: PageContent = {
     lede: "Building a Shopify theme from zero is legitimate work and we can do it. We also talk most enquiries out of it, because deep customization of a maintained theme reaches the same visual result for a fraction of the cost and keeps you on an update path. Here is the honest comparison.",
     meta: ["Custom build: $25,000+", "Deep customization: $6,500–$12,000", "Same visual outcome, usually"],
     cta: { label: "Get both options quoted", href: "/hire/" },
-    secondary: { label: "See customization", href: "/customization/" },
+    secondary: { label: "See customization services", href: "/services/" },
     visual: "before-after",
     backdrop: "mesh",
   },
@@ -122,8 +122,7 @@ export const page: PageContent = {
       type: "related",
       items: [
         { label: "Custom theme vs template", href: "/custom-theme-vs-template/", note: "The buying decision" },
-        { label: "Customization", href: "/customization/", note: "What we recommend instead" },
-        { label: "Store redesign", href: "/services/store-redesign/", note: "A new look, kept maintainable" },
+        { label: "Services", href: "/services/", note: "Theme work without a ground-up build" },
         { label: "Shopify development", href: "/services/shopify-development/", note: "Behaviour without a rebuild" },
         { label: "Themes we support", href: "/themes/", note: "Starting points" },
         { label: "Pricing", href: "/pricing/", note: "The published ladder" },

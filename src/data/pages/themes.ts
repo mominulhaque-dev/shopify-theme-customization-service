@@ -22,7 +22,7 @@ export const page: PageContent = {
     lede: "Every theme has a ceiling. How much customization it absorbs, how much stays editable afterwards, and what a change costs all depend on which theme you started with. These are the ones we work in regularly and know the constraints of by heart.",
     meta: ["Online Store 2.0", "Premium vendor themes", "Legacy and vintage"],
     cta: { label: "Ask about your theme", href: "/hire/" },
-    secondary: { label: "Customization services", href: "/customization/" },
+    secondary: { label: "Customization services", href: "/services/" },
     visual: "ceiling",
     backdrop: "rings",
   },
@@ -74,7 +74,7 @@ export const page: PageContent = {
       ],
       visual: "sections",
       caption: "One section definition, three merchant-editable instances",
-      cta: { label: "Dawn customization", href: "/customization/dawn/" },
+      cta: { label: "Dawn customization", href: "/services/" },
       media: "right",
     },
     {
@@ -110,7 +110,7 @@ export const page: PageContent = {
       ],
       visual: "migration",
       caption: "What a migration actually rebuilds",
-      cta: { label: "Legacy theme customization", href: "/customization/legacy-themes/" },
+      cta: { label: "Legacy theme customization", href: "/services/" },
       media: "right",
     },
     {
@@ -139,7 +139,7 @@ export const page: PageContent = {
         },
         {
           q: "How do I find out which theme my store is running?",
-          a: "In your admin under Online Store → Themes, the current theme's name and version are listed. If you inherited the store and the name has been changed, the theme's own files usually still identify it — our guide to identifying a theme walks through both checks.",
+          a: "In your admin under Online Store → Themes, the current theme's name and version are listed. If you inherited the store and the name has been changed, the theme's own files usually still identify it, or we can identify it from your store URL.",
         },
         {
           q: "Should I upgrade my theme to the latest version before customizing?",
@@ -150,11 +150,8 @@ export const page: PageContent = {
     {
       type: "related",
       items: [
-        { label: "Identify your theme", href: "/guides/identify-theme/", note: "Two ways to check, one minute" },
-        { label: "Change your theme", href: "/guides/change-theme/", note: "What transfers and what does not" },
-        { label: "Theme updates", href: "/guides/theme-updates/", note: "Keeping customizations through upgrades" },
         { label: "Migration to 2.0", href: "/migration/", note: "Rebuild, do not copy" },
-        { label: "Customization by layer", href: "/customization/", note: "Liquid, CSS, sections, schema" },
+        { label: "Customization services", href: "/services/", note: "Work tailored to your theme" },
         { label: "Pricing", href: "/pricing/", note: "What each tier includes" },
       ],
     },

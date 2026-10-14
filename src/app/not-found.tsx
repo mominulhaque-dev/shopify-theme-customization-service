@@ -5,7 +5,7 @@ import TextReveal from "@/components/animations/TextReveal";
 
 /**
  * 404. Rather than a dead end, it offers the routes people actually arrive
- * looking for — the four commercial hubs and the guides index.
+ * looking for — the site's published commercial routes.
  */
 export default function NotFound() {
   return (
@@ -35,7 +35,7 @@ export default function NotFound() {
           </Reveal>
           <Reveal kind="fade" delay={0.4}>
             <div className="related" style={{ marginTop: "2rem" }}>
-              <Link href="/" className="rel">
+              <Link href="/services/" className="rel">
                 <b>Theme customization</b>
                 <span>Every layer we work in, priced</span>
               </Link>
@@ -47,9 +47,9 @@ export default function NotFound() {
                 <b>Themes</b>
                 <span>Dawn, Prestige, Spotlight, legacy</span>
               </Link>
-              <Link href="/guides/" className="rel">
-                <b>Guides</b>
-                <span>Including when not to hire anyone</span>
+              <Link href="/work/" className="rel">
+                <b>Case studies</b>
+                <span>Examples of theme customization work</span>
               </Link>
             </div>
           </Reveal>

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Backdrop from "@/components/animations/Backdrop";
 import Reveal from "@/components/animations/Reveal";
 import RevealGroup from "@/components/animations/RevealGroup";
@@ -94,7 +93,7 @@ export default function HirePage() {
                     <li>Screenshots or links to examples</li>
                   </ul>
                   <p className="hire-note">
-                    Not sure which theme you are on? <Link href="/guides/identify-theme/">Check in a minute</Link>.
+                    Not sure which theme you are on? Its name and version are in Online Store → Themes in your Shopify admin.
                   </p>
                 </aside>
 
@@ -102,8 +101,7 @@ export default function HirePage() {
                   <h3>We will tell you if you do not need us</h3>
                   <p>
                     Roughly half of what merchants send us is work the theme editor already does. If
-                    yours is, we will point you at the{" "}
-                    <Link href="/guides/">relevant guide</Link> instead of quoting for it.
+                    yours is, we will explain what to change yourself instead of quoting for it.
                   </p>
                 </aside>
               </RevealGroup>
@@ -142,7 +140,7 @@ export default function HirePage() {
             },
             {
               q: "What if my budget is below your smallest tier?",
-              a: "We will say so plainly rather than stretching the work to fit. In most of those cases the honest answer is a guide on this site, and we would rather send you there than take a project neither of us should be doing.",
+              a: "We will say so plainly rather than stretching the work to fit. In most of those cases, we will explain what you can do yourself rather than take a project neither of us should be doing.",
             },
             {
               q: "Do you work with clients in other time zones?",
@@ -158,11 +156,9 @@ export default function HirePage() {
           heading: "Before you send it",
           items: [
             { label: "Pricing", href: "/pricing/", note: "The published ladder and what moves a quote" },
-            { label: "Process", href: "/process/", note: "What the fixed price buys" },
-            { label: "Customization services", href: "/customization/", note: "Which layer your request lives in" },
+            { label: "Services", href: "/services/", note: "What we can help you change" },
             { label: "Case studies", href: "/work/", note: "Ten projects, including the rescopes" },
-            { label: "Hiring a developer", href: "/guides/hire-theme-developer/", note: "Eight questions to ask us" },
-            { label: "Without coding", href: "/customization/no-code/", note: "Check you need us at all" },
+            { label: "Themes", href: "/themes/", note: "Theme generations and trade-offs" },
           ],
         }}
       />

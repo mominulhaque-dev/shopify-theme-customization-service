@@ -133,7 +133,7 @@ export interface PageHeroContent {
 }
 
 export interface PageContent {
-  /** Route path, leading and trailing slash, e.g. "/customization/liquid/". */
+  /** Route path, leading and trailing slash, e.g. "/services/shopify-development/". */
   slug: string;
   title: string;
   description: string;

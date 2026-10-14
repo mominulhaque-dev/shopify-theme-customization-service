@@ -10,9 +10,9 @@ import { linkify } from "@/lib/linkify";
 /**
  * Selected work + FAQ. Copy verbatim (§3).
  *
- * Each case card now leads with a real mockup of the surface it rebuilt instead
- * of an empty gradient, and keeps the reference file's caption underneath it as
- * the figure label — so the card says what was changed before you click.
+ * Each case card leads with a real mockup of the surface it rebuilt instead of
+ * an empty gradient, and keeps the reference file's caption underneath it as
+ * the figure label.
  *
  * FAQ answers run through `linkify`, which restores the inline links the port
  * flattened (CLAUDE.md §3) without altering a word of the approved copy.
@@ -35,7 +35,7 @@ export default function WorkSection() {
 
         <RevealGroup className="work" itemReveal="rise-rotate" stagger={0.1}>
           {caseStudies.map((study) => (
-            <SpotlightCard key={study.href} tilt={4}>
+            <SpotlightCard key={study.title} tilt={4}>
               <Link href={study.href} className="case">
                 <div className="case-media">
                   <Visual name={study.visual} />

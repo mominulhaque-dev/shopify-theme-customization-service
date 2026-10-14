@@ -5,10 +5,10 @@ up the project with no re-analysis.
 
 ## 0. State of the build
 
-Verified in this environment: `npm run build` compiles and prerenders all 47
-pages, `npm run lint` is clean, `npx tsc --noEmit` is clean, and the two audit
-scripts pass (§10). `npx next start` serves every route with the expected status
-codes.
+Verified in this environment: `npm run build` compiles and prerenders the 11
+published content routes, `npm run lint` is clean, `npx tsc --noEmit` is clean,
+and the two audit scripts pass (§10). Runtime status codes were not rechecked
+after pruning routes.
 
 **Not verified:** anything that needs eyes on a browser. No screenshot has been
 taken, no hydration observed, no animation watched. Every claim below about how
@@ -31,7 +31,7 @@ scratch" — the distinction is a real content pillar, see
 
 ## 2. Architecture — the three decisions that shape everything
 
-**a. One catch-all route renders 44 pages.** `src/app/[...slug]/page.tsx` looks
+**a. One catch-all route renders 9 interior pages.** `src/app/[...slug]/page.tsx` looks
 up `src/data/pages/index.ts` and hands the result to `PageRenderer`. Pages are
 data (`PageContent` in `src/types/page.ts`), composed from a discriminated union
 of block types. `generateStaticParams` means they are all still statically
@@ -110,21 +110,21 @@ to their destinations, so no wording was altered to make a link fit. Add to
 
 Other pages have no such restriction.
 
-## 5. Routes — all 47 exist
+## 5. Routes — 11 published content URLs
 
-Homepage, `/hire/`, and 44 registry pages: `/services/` (+4 service pages),
-`/customization/` (+12 layer and theme pages), `/themes/`, `/work/` (+10 case
-studies), `/pricing/`, `/guides/` (+7 guides), `/process/`, `/migration/`,
-`/store-setup/`, `/custom-theme-development/`, `/custom-theme-vs-template/`.
+Homepage, `/hire/`, and 9 registry pages: `/services/`,
+`/services/shopify-development/`, `/themes/`, `/work/`, `/pricing/`,
+`/migration/`, `/store-setup/`, `/custom-theme-development/`, and
+`/custom-theme-vs-template/`. Other page routes are not registered and return
+404; only these URLs appear in the sitemap.
 
 `npm run audit:links` walks the prerendered HTML, collects every internal href
 and checks it against the pages that actually built. It also fails on `#`,
-`javascript:void(0)` and empty hrefs. Currently: 46 distinct internal targets,
+`javascript:void(0)` and empty hrefs. Currently: 11 distinct internal targets,
 zero broken, zero placeholders, zero orphan pages.
 
 `trailingSlash: true` is on because every href in the site is written with one.
-Three legacy case-study slugs (`/work/client-slug-{1,2,3}`) 308 to their real
-URLs via `next.config.mjs`.
+Routes not in the published list have no legacy redirects and resolve to 404.
 
 ## 6. CSS
 

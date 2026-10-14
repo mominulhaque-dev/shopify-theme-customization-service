@@ -10,7 +10,6 @@ import { siteConfig } from "@/data/site";
 const HIGH_PRIORITY = new Set([
   "/",
   "/services/",
-  "/customization/",
   "/pricing/",
   "/hire/",
   "/themes/",

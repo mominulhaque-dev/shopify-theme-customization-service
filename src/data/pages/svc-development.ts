@@ -23,7 +23,7 @@ export const page: PageContent = {
     lede: "Development is the work a theme setting cannot reach: new sections with their own schema, Liquid that expresses your catalogue's real rules, JavaScript behaviour that survives the theme editor re-rendering a section. All of it written so your team keeps control afterwards.",
     meta: ["From $2,800", "Theme layer only", "Schema on everything we build"],
     cta: { label: "Get a development quote", href: "/hire/" },
-    secondary: { label: "Or read the Liquid page", href: "/customization/liquid/" },
+    secondary: { label: "Explore our services", href: "/services/" },
     visual: "code-liquid",
     backdrop: "grid",
     tone: "dark",
@@ -125,11 +125,8 @@ export const page: PageContent = {
     {
       type: "related",
       items: [
-        { label: "Liquid customization", href: "/customization/liquid/", note: "Template and object logic" },
-        { label: "Sections and blocks", href: "/customization/sections/", note: "What we build most" },
-        { label: "Theme schema", href: "/customization/schema/", note: "Why settings matter" },
         { label: "Custom development vs customization", href: "/custom-theme-development/", note: "Which you need" },
-        { label: "Product page work", href: "/customization/product-page/", note: "The usual target" },
+        { label: "Themes we support", href: "/themes/", note: "Starting points for custom development" },
         { label: "Pricing", href: "/pricing/", note: "The ladder in full" },
       ],
     },

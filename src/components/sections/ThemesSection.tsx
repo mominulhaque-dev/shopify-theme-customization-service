@@ -81,7 +81,7 @@ export default function ThemesSection() {
               <div>
                 <div className="chips">
                   {row.chips.map((chip) => (
-                    <Link href={themeChipHref(chip)} className="chip" key={chip}>
+                    <Link href={themeChipHref()} className="chip" key={chip}>
                       {chip}
                     </Link>
                   ))}
@@ -96,18 +96,6 @@ export default function ThemesSection() {
   );
 }
 
-const CHIP_PAGES: Record<string, string> = {
-  // Dawn: "/customization/dawn/",
-  // Prestige: "/customization/prestige/",
-  // Spotlight: "/customization/spotlight/",
-  // Debut: "/customization/legacy-themes/",
-  // Brooklyn: "/customization/legacy-themes/",
-  // Minimal: "/customization/legacy-themes/",
-  // Supply: "/customization/legacy-themes/",
-  // Turbo: "/customization/legacy-themes/",
-  // Narrative: "/customization/legacy-themes/",
-};
-
-function themeChipHref(chip: string) {
-  return CHIP_PAGES[chip] ?? "/themes/";
+function themeChipHref() {
+  return "/themes/";
 }

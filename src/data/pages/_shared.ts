@@ -9,12 +9,6 @@ import type { LinkRef, PageBlock } from "@/types/page";
  */
 
 export const CRUMB_SERVICES: LinkRef[] = [{ label: "Services", href: "/services/" }];
-export const CRUMB_CUSTOMIZATION: LinkRef[] = [
-  { label: "Services", href: "/services/" },
-  { label: "Customization", href: "/customization/" },
-];
-export const CRUMB_GUIDES: LinkRef[] = [{ label: "Guides", href: "/guides/" }];
-export const CRUMB_WORK: LinkRef[] = [{ label: "Work", href: "/work/" }];
 
 /** The published ladder. Same four tiers as the homepage, same figures. */
 export const TIER_ITEMS = [

@@ -143,11 +143,9 @@ export const page: PageContent = {
       type: "related",
       items: [
         { label: "Themes we support", href: "/themes/", note: "Choosing with the ceiling in mind" },
-        { label: "Customization", href: "/customization/", note: "After launch, when you change things" },
-        { label: "Dawn customization", href: "/customization/dawn/", note: "The usual starting theme" },
-        { label: "Speed optimization", href: "/services/speed-optimization/", note: "Keep the launch baseline" },
+        { label: "Customization services", href: "/services/", note: "After launch, when you change things" },
         { label: "Pricing", href: "/pricing/", note: "How fixed pricing works" },
-        { label: "Process", href: "/process/", note: "Scope, stage, build, hand over" },
+        { label: "Themes we support", href: "/themes/", note: "Choosing a theme for your store" },
       ],
     },
     ctaBlock(

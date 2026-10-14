@@ -4,8 +4,7 @@ import type { LinkRef } from "@/types/page";
 /**
  * Breadcrumb trail. Emitted as a nav + ordered list for assistive tech and
  * mirrored as BreadcrumbList JSON-LD by PageRenderer, which is what earns the
- * breadcrumb display in search results for the nested /customization/* and
- * /guides/* routes.
+ * breadcrumb display in search results for nested routes.
  *
  * Note it renders *above* the hero band, so it always sits on the page
  * background rather than on the hero's. It therefore has no dark variant — an

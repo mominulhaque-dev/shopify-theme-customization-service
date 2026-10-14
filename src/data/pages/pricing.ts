@@ -22,7 +22,7 @@ export const page: PageContent = {
     lede: "Most agencies answer this with a contact form. Here is the range before you talk to anyone: four tiers, what each one changes in your theme, and the three variables that move a quote up or down. Every project is fixed-price before work starts.",
     meta: ["From $1,000", "Fixed price before work starts", "Quote in 2 business days"],
     cta: { label: "Get a scoped quote", href: "/hire/" },
-    secondary: { label: "See what is included", href: "/process/" },
+    secondary: { label: "Explore services", href: "/services/" },
     visual: "code-template",
     backdrop: "grid",
     tone: "dark",
@@ -143,7 +143,7 @@ export const page: PageContent = {
         },
         {
           q: "What is the cheapest useful thing you do?",
-          a: "A single-section edit at $1,000: one section added or reworked with schema so it stays editable afterwards. It suits stores that know exactly what is missing. Below that, you are better served by our guides than by hiring anyone.",
+          a: "A single-section edit at $1,000: one section added or reworked with schema so it stays editable afterwards. It suits stores that know exactly what is missing. Below that, you are better served making the change yourself than hiring anyone.",
         },
         {
           q: "Do you offer retainers?",
@@ -154,8 +154,7 @@ export const page: PageContent = {
     {
       type: "related",
       items: [
-        { label: "Process", href: "/process/", note: "What the fixed price buys, stage by stage" },
-        { label: "Customization services", href: "/customization/", note: "Which layer your request lives in" },
+        { label: "Services", href: "/services/", note: "What we do and how projects run" },
         { label: "Migration", href: "/migration/", note: "Quoted separately, and why" },
         { label: "Store setup", href: "/store-setup/", note: "New store, not an existing theme" },
         { label: "Case studies", href: "/work/", note: "Scope and outcome per project" },
