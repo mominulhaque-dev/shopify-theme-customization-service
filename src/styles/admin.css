@@ -1,0 +1,380 @@
+/* ==========================================================================
+   Admin panel. Everything is scoped under .adm so none of it reaches the
+   public site, and the site's section/animation styles are not used here.
+   ========================================================================== */
+.adm {
+  --adm-bg: #f6f7fb;
+  --adm-card: #ffffff;
+  --adm-line: #e4e6ee;
+  --adm-text: #15141a;
+  --adm-muted: #5d6070;
+  --adm-brand: #173eb8;
+  --adm-brand-soft: #e8edfb;
+  --adm-ok: #157a3c;
+  --adm-ok-soft: #e6f6ec;
+  --adm-err: #b42318;
+  --adm-err-soft: #fdecea;
+  --adm-warn: #9a6200;
+  --adm-warn-soft: #fff4dc;
+  --adm-r: 12px;
+  min-height: 100vh;
+  background: var(--adm-bg);
+  color: var(--adm-text);
+  font-family: var(--font-body, "Poppins", system-ui, sans-serif);
+  font-size: 14px;
+  line-height: 1.5;
+}
+.adm h1 {
+  font-size: 1.6rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+.adm h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+.adm code {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 0.85em;
+  background: var(--adm-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+.adm a {
+  color: var(--adm-brand);
+}
+.adm-muted {
+  color: var(--adm-muted);
+}
+.adm-small {
+  font-size: 0.8125rem;
+}
+.adm-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+/* shell */
+.adm-shell {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  min-height: 100vh;
+}
+.adm-side {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.25rem 1rem;
+  background: var(--adm-card);
+  border-right: 1px solid var(--adm-line);
+}
+.adm-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+.adm-brand strong {
+  display: block;
+  font-size: 0.95rem;
+}
+.adm-brand span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--adm-muted);
+}
+.adm-side nav {
+  display: grid;
+  gap: 2px;
+}
+.adm-side nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  color: var(--adm-text);
+  text-decoration: none;
+  font-weight: 500;
+}
+.adm-side nav a span {
+  width: 1.1rem;
+  text-align: center;
+  color: var(--adm-muted);
+}
+.adm-side nav a:hover {
+  background: var(--adm-bg);
+}
+.adm-side nav a.is-active {
+  background: var(--adm-brand-soft);
+  color: var(--adm-brand);
+}
+.adm-side nav a.is-active span {
+  color: var(--adm-brand);
+}
+.adm-side-foot {
+  margin-top: auto;
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+}
+.adm-main {
+  padding: 1.75rem clamp(1rem, 3vw, 2.5rem) 4rem;
+  max-width: 1200px;
+  width: 100%;
+}
+.adm-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.adm-topbar,
+.adm-scrim {
+  display: none;
+}
+
+/* cards, tiles */
+.adm-card {
+  background: var(--adm-card);
+  border: 1px solid var(--adm-line);
+  border-radius: var(--adm-r);
+  padding: 1.25rem;
+}
+.adm-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+  gap: 1rem;
+}
+.adm-tile {
+  display: grid;
+  gap: 0.35rem;
+  text-decoration: none;
+  color: inherit !important;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.adm-tile:hover {
+  border-color: var(--adm-brand);
+  box-shadow: 0 4px 18px rgba(23, 62, 184, 0.08);
+}
+.adm-stat {
+  font-size: 1.9rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+/* forms */
+.adm-field {
+  display: grid;
+  gap: 0.35rem;
+}
+.adm-field > span {
+  font-weight: 500;
+  font-size: 0.8125rem;
+}
+.adm input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.adm select,
+.adm textarea {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  background: #fff;
+  border: 1px solid var(--adm-line);
+  border-radius: 8px;
+  padding: 0.55rem 0.7rem;
+  min-height: 2.5rem;
+}
+.adm textarea {
+  min-height: 6rem;
+  resize: vertical;
+}
+.adm input:focus-visible,
+.adm select:focus-visible,
+.adm textarea:focus-visible,
+.adm button:focus-visible,
+.adm a:focus-visible {
+  outline: 2px solid var(--adm-brand);
+  outline-offset: 1px;
+}
+.adm-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  gap: 1rem;
+}
+
+/* buttons */
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--adm-line);
+  background: #fff;
+  color: var(--adm-text);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.adm-btn:hover {
+  border-color: var(--adm-muted);
+}
+.adm-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.adm-btn-primary {
+  background: var(--adm-brand);
+  border-color: var(--adm-brand);
+  color: #fff !important;
+}
+.adm-btn-primary:hover {
+  background: #1234a0;
+  border-color: #1234a0;
+}
+.adm-btn-danger {
+  color: var(--adm-err) !important;
+  border-color: #f2c4bf;
+}
+.adm-btn-danger:hover {
+  background: var(--adm-err-soft);
+  border-color: var(--adm-err);
+}
+.adm-btn-ghost {
+  background: transparent;
+}
+.adm-btn-sm {
+  min-height: 2rem;
+  padding: 0 0.7rem;
+  font-size: 0.8125rem;
+}
+.adm-btn-block {
+  width: 100%;
+}
+
+/* alerts, badges */
+.adm-alert {
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+}
+.adm-alert-error {
+  background: var(--adm-err-soft);
+  color: var(--adm-err);
+}
+.adm-alert-ok {
+  background: var(--adm-ok-soft);
+  color: var(--adm-ok);
+}
+.adm-alert-warn {
+  background: var(--adm-warn-soft);
+  color: var(--adm-warn);
+}
+.adm-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--adm-bg);
+  border: 1px solid var(--adm-line);
+  white-space: nowrap;
+}
+
+/* tables */
+.adm-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--adm-line);
+  border-radius: 10px;
+  background: #fff;
+}
+.adm-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.adm-table th,
+.adm-table td {
+  text-align: left;
+  padding: 0.65rem 0.8rem;
+  border-bottom: 1px solid var(--adm-line);
+  vertical-align: middle;
+}
+.adm-table th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--adm-muted);
+  background: #fafbfd;
+  white-space: nowrap;
+}
+.adm-table tr:last-child td {
+  border-bottom: 0;
+}
+
+/* login */
+.adm-login {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+.adm-login-card {
+  width: min(100%, 24rem);
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.75rem;
+}
+
+/* phones */
+@media (max-width: 860px) {
+  .adm-shell {
+    grid-template-columns: 1fr;
+  }
+  .adm-topbar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    padding: 0.6rem 1rem;
+    background: var(--adm-card);
+    border-bottom: 1px solid var(--adm-line);
+  }
+  .adm-menu-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--adm-line);
+    border-radius: 8px;
+    background: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  .adm-side {
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    width: min(80vw, 280px);
+    transform: translateX(-100%);
+    transition: transform 0.2s ease-out;
+  }
+  .adm-side.is-open {
+    transform: none;
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.15);
+  }
+  .adm-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: rgba(21, 20, 26, 0.45);
+  }
+}

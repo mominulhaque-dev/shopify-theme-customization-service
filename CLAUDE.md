@@ -149,6 +149,32 @@ zero broken, zero placeholders, zero orphan pages.
 `trailingSlash: true` is on because every href in the site is written with one.
 Routes not in the published list have no legacy redirects and resolve to 404.
 
+## 5b. Admin panel (Nov 2026, in progress)
+
+`/admin` lives in the same app. Public routes moved into the `app/(site)` route
+group, whose layout is `SiteChrome` (header, footer, motion, Organization
+JSON-LD); `app/admin` has its own layout and loads none of that. The 404 page
+wraps itself in `SiteChrome`.
+
+- **Database:** Supabase. Schema for every planned feature is in
+  `supabase/migrations/0001_admin.sql` (RLS on every table; first auth user
+  becomes admin via trigger; public reads limited to published/active rows).
+- **Clients:** `src/lib/supabase/server.ts` — `createSessionClient` (admin,
+  cookie session), `createPublicClient` (anon reads, keeps pages static),
+  `createServiceClient` (secret key, server-only writes).
+- **Auth:** `src/middleware.ts` (matcher `/admin/:path*`) refreshes the session
+  and redirects to `/admin/login/`; `requireAdmin()` in `src/lib/admin/auth.ts`
+  checks the `admins` table on every page/action.
+- **Settings:** `getSettings()` (`src/lib/settings.ts`) is cached under the
+  `settings` tag with hard-coded fallbacks; saving in `/admin/settings/` calls
+  `revalidateTag("settings")`. Tier price/time feed `DiffSection` and every
+  `priceList` block via `PageRenderer`; contact details feed header, footer,
+  mobile menu and `/hire/`. Tier names stay in code (homepage copy guard).
+- **Styles:** `src/styles/admin.css`, all scoped under `.adm`.
+- **Env:** `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`,
+  `SUPABASE_SECRET_KEY` (server only). Without them the site uses defaults and
+  `/admin` shows a "not configured" notice.
+
 ## 6. CSS
 
 Plain CSS, not Tailwind: the reference design specified exact hex values, an

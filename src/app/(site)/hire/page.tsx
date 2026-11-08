@@ -7,7 +7,8 @@ import ContactForm from "@/components/forms/ContactForm";
 import { FaqSection, RelatedSection } from "@/components/page/BlockFaq";
 import { StepsSection } from "@/components/page/BlockCards";
 import { PROCESS_STEPS } from "@/data/pages/_shared";
-import { siteConfig, OG_IMAGE } from "@/data/site";
+import { OG_IMAGE } from "@/data/site";
+import { getSettings } from "@/lib/settings";
 
 export const metadata: Metadata = {
   title: "Get a Scoped Shopify Theme Customization Quote",
@@ -22,7 +23,8 @@ export const metadata: Metadata = {
  * only page with a real form, and the form's states (idle, submitting, success,
  * error) are the point of it.
  */
-export default function HirePage() {
+export default async function HirePage() {
+  const settings = await getSettings();
   return (
     <>
       <div className="phero has-backdrop">
@@ -66,15 +68,15 @@ export default function HirePage() {
                   <ul className="hire-contact">
                     <li>
                       <span>Email</span>
-                      <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+                      <a href={`mailto:${settings.email}`}>{settings.email}</a>
                     </li>
                     <li>
                       <span>Phone</span>
-                      <a href={`tel:${siteConfig.phoneE164}`}>{siteConfig.phoneDisplay}</a>
+                      <a href={`tel:${settings.phoneE164}`}>{settings.phoneDisplay}</a>
                     </li>
                     <li>
                       <span>WhatsApp</span>
-                      <a href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer">
+                      <a href={settings.whatsappUrl} target="_blank" rel="noopener noreferrer">
                         Message us
                       </a>
                     </li>

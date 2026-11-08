@@ -6,6 +6,7 @@ import { CardsSection, ChecklistSection, StepsSection } from "@/components/page/
 import { CtaSection, PriceSection, ProseSection, TableSection } from "@/components/page/BlockLists";
 import { FaqSection, RelatedSection } from "@/components/page/BlockFaq";
 import { siteConfig, OG_IMAGE } from "@/data/site";
+import { getSettings } from "@/lib/settings";
 import type { PageContent } from "@/types/page";
 
 /** Per-page Metadata from the same object that renders the page. */
@@ -33,7 +34,8 @@ export function pageMetadata(page: PageContent): Metadata {
  * each page choosing a different block order, tone sequence and backdrop set
  * rather than from bespoke layout code per page.
  */
-export default function PageRenderer({ page }: { page: PageContent }) {
+export default async function PageRenderer({ page }: { page: PageContent }) {
+  const { tiers } = await getSettings();
   const faq = page.blocks.find((block) => block.type === "faq");
   const jsonLd = buildJsonLd(page, faq);
 
@@ -71,7 +73,20 @@ export default function PageRenderer({ page }: { page: PageContent }) {
           case "table":
             return <TableSection key={key} block={block} />;
           case "priceList":
-            return <PriceSection key={key} block={block} />;
+            // Price and time come from /admin/settings; labels and notes stay in code.
+            return (
+              <PriceSection
+                key={key}
+                block={{
+                  ...block,
+                  items: block.items.map((item, i) => ({
+                    ...item,
+                    price: tiers[i]?.price ?? item.price,
+                    time: tiers[i]?.time ?? item.time,
+                  })),
+                }}
+              />
+            );
           case "prose":
             return <ProseSection key={key} block={block} />;
           case "faq":

@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Backdrop from "@/components/animations/Backdrop";
 import { footerBlurb, footerMenu, siteConfig } from "@/data/site";
+import type { SiteSettings } from "@/lib/settings";
 
 /**
  * Footer: brand and a one-line description on the left, the site menu in one
  * column, and the ways to reach us in another.
  */
-export default function Footer() {
+export default function Footer({ settings }: { settings: SiteSettings }) {
   return (
     <footer>
       <Backdrop variant="mesh" tone="dark" noise />
@@ -35,13 +36,13 @@ export default function Footer() {
             <h4>Contact</h4>
             <ul>
               <li>
-                <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+                <a href={`mailto:${settings.email}`}>{settings.email}</a>
               </li>
               <li>
-                <a href={`tel:${siteConfig.phoneE164}`}>{siteConfig.phoneDisplay}</a>
+                <a href={`tel:${settings.phoneE164}`}>{settings.phoneDisplay}</a>
               </li>
               <li>
-                <a href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer">
+                <a href={settings.whatsappUrl} target="_blank" rel="noopener noreferrer">
                   WhatsApp
                 </a>
               </li>
