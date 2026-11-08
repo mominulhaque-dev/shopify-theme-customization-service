@@ -7,13 +7,14 @@ import ContactForm from "@/components/forms/ContactForm";
 import { FaqSection, RelatedSection } from "@/components/page/BlockFaq";
 import { StepsSection } from "@/components/page/BlockCards";
 import { PROCESS_STEPS } from "@/data/pages/_shared";
-import { siteConfig } from "@/data/site";
+import { siteConfig, OG_IMAGE } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Get a Scoped Shopify Theme Customization Quote",
   description:
-    "Send your Shopify store URL and what you want changed. Get a fixed-price, fixed-timeline scope back within two business days. No discovery call required to get a number.",
+    "Send your Shopify store URL and what you want changed. Get a fixed price and delivery date within two business days. No call needed.",
   alternates: { canonical: "/hire/" },
+  openGraph: { url: "/hire/", type: "website", images: [OG_IMAGE] },
 };
 
 /**

@@ -25,16 +25,14 @@ const MOTION_BOOTSTRAP = `try{if(!matchMedia('(prefers-reduced-motion: reduce)')
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   robots: {
-    index: false,
-    follow: false,
-    googleBot: {
-      index: false,
-      follow: false,
-    },
+    index: true,
+    follow: true,
   },
   title: {
     default: `${siteConfig.name}: Scope, Cost and Timeline`,
-    template: `%s | ${siteConfig.shortName}`,
+    // Page titles already lead with "Shopify …"; a brand suffix pushed most of
+    // them past the ~60 characters search results show.
+    template: "%s",
   },
   description: siteConfig.description,
   openGraph: {
@@ -43,14 +41,13 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     url: siteConfig.url,
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
-    /* `summary` rather than `summary_large_image` until public/og-image.png
-       exists — a large-image card with no image resolves to an empty panel,
-       where the small card degrades to a normal title/description link. */
-    card: "summary",
+    card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
+    images: ["/og-image.png"],
   },
 };
 
@@ -67,21 +64,7 @@ export const viewport: Viewport = {
   themeColor: "#ffffff",
 };
 
-/*
- * No og:image is advertised yet, deliberately.
- *
- * next/og cannot run in this checkout: @vercel/og resolves its bundled font
- * through a path join that produces an invalid URL when the project directory
- * contains a space or brackets, and it fails at module load rather than at
- * render, so the route 500s rather than degrading. Advertising an og:image URL
- * that returns 500 is worse than advertising none.
- *
- * The card design is ready at public/og-image.svg. To finish it: export that to
- * public/og-image.png at 1200x630, then add
- *   images: [{ url: "/og-image.png", width: 1200, height: 630, alt: siteConfig.name }]
- * to openGraph above, `images: ["/og-image.png"]` to twitter, and switch the
- * twitter card back to "summary_large_image".
- */
+/* Share card: public/og-image.png (1200x630), a static export; no next/og route. */
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
@@ -124,8 +107,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Righteous&family=Playfair+Display:ital,wght@1,600&family=Ms+Madi&display=swap"
         />
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/icon.svg" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
       <body>
         <script

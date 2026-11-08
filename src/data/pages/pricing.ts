@@ -5,7 +5,7 @@ export const page: PageContent = {
   slug: "/pricing/",
   title: "Shopify Theme Customization Pricing: Published Rates",
   description:
-    "What Shopify theme customization costs: four published tiers from $50 to $1,500, what each includes, the three variables that move an estimate, and what is quoted separately.",
+    "Shopify theme customization pricing: four fixed tiers from $50 to $1,500, what each includes and what changes a price. No hourly billing.",
   seo: {
     intent: "commercial",
     primary: "Shopify theme customization cost",

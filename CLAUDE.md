@@ -80,7 +80,7 @@ src/
 │   ├── sections/             one component per homepage section + sections*.css
 │   ├── ui/                   inline-SVG mockups, BrowserFrame, CodePanel, visuals registry
 │   ├── layout/               Header, Footer + their CSS
-│   ├── navigation/           HeaderScrollState, MobileMenu (focus-trapped)
+│   ├── navigation/           HeaderScrollState, MobileMenu (right-hand drawer, portalled to <body>)
 │   └── forms/                ContactForm + forms.css
 ├── data/
 │   ├── homepage.ts           homepage copy, verbatim — see §4
@@ -131,9 +131,11 @@ to `BLOG_POSTS`.
 (`footerMenu` in `site.ts`) and a contact column. The old link-map columns are
 gone from the footer only; every page still exists.
 
-⚠️ **Search engines are blocked.** `layout.tsx` sets `robots: { index: false,
-follow: false }` and `robots.ts` disallows `/`. Nothing, the blog included,
-will rank until both are switched back for launch.
+**Indexing (launch, Nov 2026).** `layout.tsx` sets `index, follow`; `robots.ts`
+allows `/`, disallows `/api/` and points at the sitemap. The 404 page is
+`noindex`. Titles have no brand suffix (template `"%s"`) and every meta
+description is under 160 characters — keep new pages within ~60 / ~155.
+Every page's Open Graph tags carry `OG_IMAGE` (`public/og-image.png`).
 
 Published price ladder (Nov 2026): $50 / $250 / $800 / $1,500, set once in
 `TIER_ITEMS` (`src/data/pages/_shared.ts`) and `diffTiers` (`homepage.ts`).
@@ -286,14 +288,7 @@ prerendered HTML, so they only mean something after a build.
    and the aurora mask movement — is it too much or too little?
 2. **Reduced motion.** Turn it on and confirm every page renders its finished
    state with no hidden content and no animation.
-3. **`public/og-image.png`.** The design is ready at `public/og-image.svg`;
-   export it at 1200×630 and wire it up per the comment in `layout.tsx` — which
-   includes switching `twitter.card` back to `summary_large_image` (it is
-   `summary` while no image exists, because a large-image card with no image
-   renders as an empty panel). The `next/og` route was removed because @vercel/og
-   cannot resolve its bundled font when the project path contains a space or
-   brackets, and it fails at module load, so the route 500s rather than
-   degrading.
+3. ~~`public/og-image.png`~~ Done (static 1200×630 PNG, `summary_large_image`).
 4. **Resend credentials.** See `.env.example`. `RESEND_API_KEY` (sending-only
    key) + `CONTACT_EMAIL` turn on contact-form notifications. `RESEND_FROM`
    (set only after a sending domain is verified in Resend) also turns on the
@@ -305,6 +300,7 @@ prerendered HTML, so they only mean something after a build.
    deliberately carry no merchant names or uplift percentages — that is the
    stated policy on `/work/`, not a gap. If a client signs off on being named,
    their file in `src/data/pages/cases-*.ts` is where it goes.
-6. **A real favicon.ico** alongside `public/icon.svg`, for older clients.
+6. ~~A real favicon.ico~~ Done: `icon.svg`, `favicon.ico` (16/32/48) and
+   `apple-touch-icon.png`, all logo concept B (awning + slider).
 
 Update this file as each of those lands.

@@ -5,7 +5,7 @@ export const page: PageContent = {
   slug: "/services/shopify-development/",
   title: "Shopify Development Services: Sections, Liquid and JS",
   description:
-    "Shopify development inside your theme: custom sections with schema, Liquid logic, metafield-driven content, custom elements and app block placement. What we build, what we do not, and what it costs.",
+    "Custom Shopify sections, product page features and theme logic, built into the theme you already have and editable by your team. Fixed price before we start.",
   breadcrumbs: CRUMB_SERVICES,
   seo: {
     intent: "commercial",

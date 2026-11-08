@@ -6,7 +6,7 @@ import { InlineLinks, plainText } from "@/components/blog/InlineLinks";
 import { Visual } from "@/components/ui/visuals";
 import NewsletterBand from "@/components/blog/NewsletterBand";
 import { BLOG_AUTHOR, BLOG_POSTS, getPost, type BlogBlock } from "@/data/blog";
-import { siteConfig } from "@/data/site";
+import { OG_IMAGE, siteConfig } from "@/data/site";
 import { slug as toSlug } from "@/lib/slug";
 
 export const dynamicParams = false;
@@ -29,6 +29,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
       title: post.metaTitle,
       description: post.description,
       publishedTime: post.date,
+      images: [OG_IMAGE],
     },
   };
 }

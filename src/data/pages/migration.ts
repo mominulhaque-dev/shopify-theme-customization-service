@@ -5,7 +5,7 @@ export const page: PageContent = {
   slug: "/migration/",
   title: "Shopify Online Store 2.0 Migration: Rebuild, Not Copy",
   description:
-    "Migrating a legacy Shopify theme to Online Store 2.0: what transfers, what has to be rebuilt as sections and schema, how long it takes, what it costs, and when patching is still the cheaper answer.",
+    "Move an old Shopify theme to Online Store 2.0: what comes across, what gets rebuilt, how long it takes, and when keeping the old theme is cheaper.",
   seo: {
     intent: "commercial",
     primary: "Shopify Online Store 2.0 migration",

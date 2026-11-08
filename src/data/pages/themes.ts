@@ -5,7 +5,7 @@ export const page: PageContent = {
   slug: "/themes/",
   title: "Shopify Themes We Customize: Ceilings and Trade-offs",
   description:
-    "Dawn, Refresh, Craft, Prestige, Spotlight, Impulse, Debut, Brooklyn and more. How far customization goes in each, what stays editable, and which theme to choose if you plan to customize.",
+    "Dawn, Prestige, Spotlight, Impulse, Debut and more: how easily each Shopify theme can be customized, and which to choose if you plan to change it.",
   seo: {
     intent: "commercial",
     primary: "Shopify themes we customize",

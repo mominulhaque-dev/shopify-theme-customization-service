@@ -5,7 +5,7 @@ export const page: PageContent = {
   slug: "/store-setup/",
   title: "Shopify Store Setup: Launch-Ready Theme From Zero",
   description:
-    "Shopify store setup for new merchants: theme selection, brand system, essential templates, navigation, apps, policies and pre-launch QA — quoted as a fixed-price launch package.",
+    "Shopify store setup for new stores: theme, brand, key pages, navigation, apps and pre-launch checks, delivered as one fixed-price launch package.",
   seo: {
     intent: "commercial",
     primary: "Shopify store setup",

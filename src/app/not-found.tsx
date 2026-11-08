@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Backdrop from "@/components/animations/Backdrop";
 import Reveal from "@/components/animations/Reveal";
 import TextReveal from "@/components/animations/TextReveal";
+
+export const metadata: Metadata = {
+  title: "Page not found",
+  robots: { index: false },
+};
 
 /**
  * 404. Rather than a dead end, it offers the routes people actually arrive

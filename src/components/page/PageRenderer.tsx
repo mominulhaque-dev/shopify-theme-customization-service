@@ -5,7 +5,7 @@ import { GallerySection, ShowcaseSection, SplitSection } from "@/components/page
 import { CardsSection, ChecklistSection, StepsSection } from "@/components/page/BlockCards";
 import { CtaSection, PriceSection, ProseSection, TableSection } from "@/components/page/BlockLists";
 import { FaqSection, RelatedSection } from "@/components/page/BlockFaq";
-import { siteConfig } from "@/data/site";
+import { siteConfig, OG_IMAGE } from "@/data/site";
 import type { PageContent } from "@/types/page";
 
 /** Per-page Metadata from the same object that renders the page. */
@@ -19,6 +19,7 @@ export function pageMetadata(page: PageContent): Metadata {
       description: page.description,
       url: `${siteConfig.url}${page.slug}`,
       type: "website",
+      images: [OG_IMAGE],
     },
   };
 }

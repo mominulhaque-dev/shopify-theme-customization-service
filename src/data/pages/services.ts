@@ -5,7 +5,7 @@ export const page: PageContent = {
   slug: "/services/",
   title: "Shopify Services: Theme Customization, Development and Redesign",
   description:
-    "Every service we offer on Shopify themes: customization, Liquid development, store redesign, speed work and Online Store 2.0 migration. A written scope for each before any code moves.",
+    "Shopify theme customization, development, store redesign, speed work and Online Store 2.0 migration. A written scope and fixed price before any work starts.",
   seo: {
     intent: "commercial",
     primary: "Shopify services",

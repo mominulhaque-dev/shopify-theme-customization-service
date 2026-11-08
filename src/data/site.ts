@@ -1,12 +1,20 @@
 import type { NavLink } from "@/types";
 
+/** Share card used by every page's Open Graph / Twitter tags. */
+export const OG_IMAGE = {
+  url: "/og-image.png",
+  width: 1200,
+  height: 630,
+  alt: "Shopify Theme Customization Services",
+};
+
 export const siteConfig = {
   name: "Shopify Theme Customization Services",
   shortName: "Shopify Theme Customization",
   tagline: "Services",
   url: "https://www.shopifythemecustomizationservices.com",
   description:
-    "Shopify theme customization services for merchants on Dawn, Prestige and Online Store 2.0 themes. Scope, pricing, turnaround, code-level edits, and completed client work.",
+    "Shopify theme customization for store owners: new sections, better product pages and a cleaner look on the theme you have. Fixed price from $50.",
   email: "hihopifythemecustomization@gmail.com",
   phoneDisplay: "01580424024",
   phoneE164: "+8801580424024",

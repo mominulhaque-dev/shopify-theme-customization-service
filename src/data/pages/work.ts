@@ -5,7 +5,7 @@ export const page: PageContent = {
   slug: "/work/",
   title: "Shopify Theme Customization Case Studies",
   description:
-    "Ten documented Shopify theme customization projects: the starting theme, the scope requested, the technical constraint we hit, and what changed. Including the projects that needed a rescope.",
+    "Ten Shopify theme customization projects: the starting theme, what the owner asked for, what got in the way and what changed, including the ones we rescoped.",
   seo: {
     intent: "commercial",
     primary: "Shopify theme customization case studies",

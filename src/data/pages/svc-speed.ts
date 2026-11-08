@@ -5,7 +5,7 @@ export const page: PageContent = {
   slug: "/services/speed-optimization/",
   title: "Shopify Speed Optimization at the Theme Level",
   description:
-    "Shopify speed optimization that fixes causes rather than scores: render-blocking assets, image pipeline, third-party scripts, unused sections and Core Web Vitals measured before and after.",
+    "Make your Shopify store load faster on real shoppers' phones. We fix the causes (images, apps, scripts) and measure Core Web Vitals before and after.",
   breadcrumbs: CRUMB_SERVICES,
   seo: {
     intent: "commercial",

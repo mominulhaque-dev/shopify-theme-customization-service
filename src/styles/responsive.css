@@ -109,7 +109,7 @@
 /* ---------- touch: 44px minimum targets, no hover-only affordances ---------- */
 @media (hover: none) {
   .nav ul a,
-  .mobile-panel a,
+  .mnav-drawer a,
   .foot a,
   .rel,
   .chip {

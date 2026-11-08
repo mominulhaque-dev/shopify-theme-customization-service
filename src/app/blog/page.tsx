@@ -6,14 +6,14 @@ import RevealGroup from "@/components/animations/RevealGroup";
 import { Visual } from "@/components/ui/visuals";
 import NewsletterBand from "@/components/blog/NewsletterBand";
 import { BLOG_POSTS } from "@/data/blog";
-import { siteConfig } from "@/data/site";
+import { OG_IMAGE, siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
   title: { absolute: "Shopify Theme Customization Blog: Guides for Store Owners" },
   description:
     "Plain-English guides on Shopify theme customization: what things cost, when to upgrade your theme, and changes that help shoppers buy.",
   alternates: { canonical: "/blog/" },
-  openGraph: { url: "/blog/", type: "website" },
+  openGraph: { url: "/blog/", type: "website", images: [OG_IMAGE] },
 };
 
 function formatDate(iso: string) {

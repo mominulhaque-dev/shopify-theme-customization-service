@@ -5,7 +5,7 @@ export const page: PageContent = {
   slug: "/services/store-redesign/",
   title: "Shopify Store Redesign Without Rebuilding From Scratch",
   description:
-    "Shopify store redesign applied to the theme you already run: brand system, type scale, template-by-template rework and a reusable section library. Fixed price, staging theme, no lost content.",
+    "Give your Shopify store a new look without switching themes: your brand applied to every page, on a copy of your store, at a fixed price. No lost content.",
   breadcrumbs: CRUMB_SERVICES,
   seo: {
     intent: "commercial",
