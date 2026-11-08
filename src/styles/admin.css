@@ -126,6 +126,18 @@
   max-width: 1200px;
   width: 100%;
 }
+/* Vertical rhythm between top-level blocks on every admin page. */
+.adm-main > * + * {
+  margin-top: 1rem;
+}
+.adm-main > .adm-head + * {
+  margin-top: 0;
+}
+.adm-alert-warn {
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+}
 .adm-head {
   display: flex;
   justify-content: space-between;
@@ -872,11 +884,11 @@ td .adm-badge:first-child {
   padding: 0;
 }
 .adm-step {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 0.5rem;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 0.5rem 0.6rem;
+  align-items: start;
+  padding: 0.6rem 0.7rem;
   border: 1px solid var(--adm-line);
   border-left: 4px solid var(--adm-line);
   border-radius: 8px;
@@ -888,20 +900,32 @@ td .adm-badge:first-child {
   border-left-color: var(--adm-ok);
   background: var(--adm-ok-soft);
 }
+/* Title on its own line so it is readable; status, date and Save below. */
 .adm-step-form {
-  flex: 1;
   min-width: 0;
   display: grid;
-  grid-template-columns: minmax(10rem, 1fr) 9rem 9.5rem auto;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
   gap: 0.4rem;
   align-items: center;
 }
+.adm-step-form > input[name="title"] {
+  grid-column: 1 / -1;
+  font-weight: 500;
+}
 .adm-step-add {
-  grid-template-columns: minmax(10rem, 1fr) 9.5rem auto;
+  grid-template-columns: minmax(0, 1fr) 10rem auto;
+}
+.adm-step-add > input[name="title"] {
+  grid-column: auto;
+  font-weight: 400;
 }
 .adm-step-tools {
   display: flex;
+  flex-direction: column;
   gap: 0.15rem;
+}
+.adm-step-tools form {
+  display: contents;
 }
 .adm-copy {
   display: flex;
@@ -912,12 +936,124 @@ td .adm-badge:first-child {
   font-size: 0.75rem !important;
 }
 @media (max-width: 700px) {
-  .adm-step-form,
   .adm-step-add {
     grid-template-columns: 1fr 1fr;
   }
-  .adm-step-form > input:first-child,
-  .adm-step-add > input:first-child {
+  .adm-step-add > input[name="title"] {
     grid-column: 1 / -1;
   }
+}
+
+/* ---------- dashboard ---------- */
+.adm-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(11rem, 100%), 1fr));
+  gap: 0.75rem;
+}
+.adm-statcard {
+  display: grid;
+  gap: 0.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.adm .adm-statcard {
+  color: var(--adm-text);
+}
+.adm-statcard:hover {
+  border-color: var(--adm-brand);
+  transform: translateY(-1px);
+}
+.adm-statcard.is-brand .adm-stat {
+  color: var(--adm-brand);
+}
+.adm-statcard.is-warn {
+  border-color: #f0d49a;
+  background: var(--adm-warn-soft);
+}
+.adm-statcard.is-warn .adm-stat {
+  color: var(--adm-warn);
+}
+.adm-dash {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  margin-top: 1rem;
+}
+@media (max-width: 1000px) {
+  .adm-dash {
+    grid-template-columns: 1fr;
+  }
+}
+.adm-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+.adm-feed {
+  list-style: none;
+  padding: 0;
+  display: grid;
+}
+.adm-feed li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--adm-line);
+}
+.adm-feed li:last-child {
+  border-bottom: 0;
+}
+.adm-feed a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  min-width: 0;
+  color: var(--adm-text);
+  text-decoration: none;
+}
+.adm-feed a:hover strong {
+  color: var(--adm-brand);
+}
+.adm-feed-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.adm-checklist {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+.adm-checklist li {
+  display: grid;
+  grid-template-columns: 1.25rem 1fr;
+  gap: 0.5rem;
+}
+.adm-checklist li > span {
+  color: var(--adm-muted);
+}
+.adm-checklist li.is-ok > span {
+  color: var(--adm-ok);
+  font-weight: 600;
+}
+.adm-checklist div {
+  display: grid;
+}
+.adm-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--adm-line);
+  font-size: 0.875rem;
+}
+.adm-table td .adm-badge-err {
+  margin-left: 0.4rem;
 }

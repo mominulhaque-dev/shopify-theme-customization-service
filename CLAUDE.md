@@ -147,33 +147,56 @@ and checks it against the pages that actually built. It also fails on `#`,
 zero broken, zero placeholders, zero orphan pages.
 
 `trailingSlash: true` is on because every href in the site is written with one.
-Routes not in the published list have no legacy redirects and resolve to 404.
+Routes not in the published list resolve to 404 unless a redirect is added in `/admin/redirects/` (one click seeds the removed Nov 2026 URLs).
 
-## 5b. Admin panel (Nov 2026, in progress)
+## 5b. Admin panel (Nov 2026)
 
-`/admin` lives in the same app. Public routes moved into the `app/(site)` route
+`/admin` lives in the same app. Public routes are in the `app/(site)` route
 group, whose layout is `SiteChrome` (header, footer, motion, Organization
 JSON-LD); `app/admin` has its own layout and loads none of that. The 404 page
-wraps itself in `SiteChrome`.
+wraps itself in `SiteChrome`. Every admin screen was smoke-tested in a browser
+against a mock Supabase (all 200, no horizontal overflow at 390px); none has
+been exercised against the real project yet.
 
-- **Database:** Supabase. Schema for every planned feature is in
-  `supabase/migrations/0001_admin.sql` (RLS on every table; first auth user
-  becomes admin via trigger; public reads limited to published/active rows).
+- **Database:** Supabase project `btifnsdqlwxictgbaqdk`. Migrations
+  `supabase/migrations/0001`–`0003` are applied to it. RLS on every table;
+  `private.is_admin()` (non-exposed schema) gates writes; the first auth user
+  becomes admin via trigger; public reads are limited to published/active rows.
 - **Clients:** `src/lib/supabase/server.ts` — `createSessionClient` (admin,
   cookie session), `createPublicClient` (anon reads, keeps pages static),
-  `createServiceClient` (secret key, server-only writes).
-- **Auth:** `src/middleware.ts` (matcher `/admin/:path*`) refreshes the session
-  and redirects to `/admin/login/`; `requireAdmin()` in `src/lib/admin/auth.ts`
-  checks the `admins` table on every page/action.
-- **Settings:** `getSettings()` (`src/lib/settings.ts`) is cached under the
-  `settings` tag with hard-coded fallbacks; saving in `/admin/settings/` calls
-  `revalidateTag("settings")`. Tier price/time feed `DiffSection` and every
-  `priceList` block via `PageRenderer`; contact details feed header, footer,
-  mobile menu and `/hire/`. Tier names stay in code (homepage copy guard).
-- **Styles:** `src/styles/admin.css`, all scoped under `.adm`.
-- **Env:** `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`,
-  `SUPABASE_SECRET_KEY` (server only). Without them the site uses defaults and
-  `/admin` shows a "not configured" notice.
+  `createServiceClient` (secret key, server-only: contact form, newsletter,
+  cron, client portal).
+- **Middleware** (`src/middleware.ts`, all page paths except `_next`, `api`
+  and files): `/admin/*` refreshes the session and redirects to
+  `/admin/login/`; every other path is checked against active `redirects`
+  (fetched over REST, cached 60 s per instance, never blocks a page).
+  `requireAdmin()` re-checks the `admins` table on every page/action.
+- **Features** (`app/admin/(panel)/…`, nav in `components/admin/AdminNav.tsx`):
+  - Dashboard: counts, latest leads, env setup checklist.
+  - Leads: saved by `/api/contact` *before* email/Telegram, spam = honeypot +
+    3 s fill time + 3 per 10 min per email. Status/notes, CSV.
+  - Follow-up: `vercel.json` cron → `/api/cron/follow-up/` (Bearer
+    `CRON_SECRET`), leads still New after 24 h, once each (`reminded_at`).
+  - Projects + client portal: steps with status/due dates; public
+    `/portal/<token>/` (noindex, robots-disallowed, read with the service key).
+  - Subscribers: `/api/subscribe` writes the table (and Resend audience if set).
+  - Blog: TipTap editor → `body_html`, sanitised on save (`lib/blog-html.ts`).
+    `getPosts()` (`lib/posts.ts`, tag `posts`) falls back to `data/blog.ts`
+    until any post is published in the DB; "Import" copies the five into it.
+  - Case studies: `/work/<slug>/` + before/after slider; listed on `/work/`
+    after the intro block (`PageRenderer`), tag `cases`.
+  - Media: Supabase Storage bucket `media` (raster images ≤ 5 MB, no SVG);
+    `MediaPicker` / `MediaLibraryDialog` reuse it in forms.
+  - Redirects: normalised paths (`lib/redirects.ts`), loop check, one-click
+    seed of the 35 pages removed in Nov (`data/legacy-redirects.ts`).
+  - Settings: `getSettings()` cached under `settings`; tier price/time feed
+    `DiffSection` and `priceList` blocks; contact details feed header,
+    footer, mobile menu, `/hire/` and the portal.
+- **Gotcha:** server-action `<form>`s get hidden inputs injected first, so
+  never style form children with `:first-child`; target by `name`.
+- **Styles:** `admin.css` (scoped `.adm`), `cases.css`, `portal.css`.
+- **Env:** see `.env.example` — Supabase (3), Resend (4), Telegram (2),
+  `CRON_SECRET`. The dashboard lists which are missing.
 
 ## 6. CSS
 
