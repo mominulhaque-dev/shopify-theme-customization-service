@@ -13,6 +13,7 @@ export const ADMIN_NAV = [
   { href: "/admin/blog/", label: "Blog", icon: "✎" },
   { href: "/admin/cases/", label: "Case studies", icon: "◩" },
   { href: "/admin/media/", label: "Media", icon: "▣" },
+  { href: "/admin/redirects/", label: "Redirects", icon: "↪" },
   { href: "/admin/settings/", label: "Settings", icon: "⚙" },
 ];
 

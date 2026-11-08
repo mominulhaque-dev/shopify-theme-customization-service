@@ -826,3 +826,12 @@ td .adm-badge:first-child {
     grid-template-columns: 1fr;
   }
 }
+.adm-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+.adm-dim td {
+  opacity: 0.55;
+}
