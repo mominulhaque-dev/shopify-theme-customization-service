@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Hero from "@/components/sections/Hero";
 import ScopeSection from "@/components/sections/ScopeSection";
+import VideoSection from "@/components/sections/VideoSection";
 import ThemesSection from "@/components/sections/ThemesSection";
 import DiffSection from "@/components/sections/DiffSection";
 import ProcessSection from "@/components/sections/ProcessSection";
@@ -34,6 +35,7 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Hero />
+      <VideoSection />
       <ScopeSection />
       <ThemesSection />
       <DiffSection />

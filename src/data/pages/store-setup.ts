@@ -20,10 +20,10 @@ export const page: PageContent = {
     eyebrow: "Store setup",
     h1: "New Shopify store, set up to be changed later",
     lede: "Setting up a store is mostly decisions, not code: which theme, which templates you actually need at launch, what your team will need to edit weekly. We make those decisions with you, build the launch-ready storefront, and hand over something your team can run.",
-    meta: ["From $3,400", "2–3 weeks to launch-ready", "Built on Online Store 2.0"],
+    meta: ["2–3 weeks to launch-ready", "Built on Online Store 2.0"],
     cta: { label: "Get a setup quote", href: "/hire/" },
     secondary: { label: "See theme options", href: "/themes/" },
-    visual: "overlap-store",
+    visual: "ill-new-store",
     backdrop: "aurora",
   },
   blocks: [
@@ -41,8 +41,8 @@ export const page: PageContent = {
         "Navigation, policies, shipping and tax configuration",
         "A brand system your team can extend without us",
       ],
-      visual: "palette",
-      caption: "Tokens written into the theme, not scattered inline",
+      visual: "ill-brand-kit",
+      caption: "One brand kit, applied to every page",
       media: "right",
     },
     {
@@ -111,7 +111,7 @@ export const page: PageContent = {
           body: "A recorded pass through the theme editor showing your team which sections they own, which settings do what, and where not to go.",
         },
       ],
-      visual: "handover",
+      visual: "ill-handover",
       tone: "tint",
     },
     {

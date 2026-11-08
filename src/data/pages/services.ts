@@ -1,11 +1,11 @@
 import type { PageContent } from "@/types/page";
-import { ctaBlock, priceBlock } from "@/data/pages/_shared";
+import { ctaBlock } from "@/data/pages/_shared";
 
 export const page: PageContent = {
   slug: "/services/",
-  title: "Shopify Services: Theme Customization, Development and CRO",
+  title: "Shopify Services: Theme Customization, Development and Redesign",
   description:
-    "Every service we offer on Shopify themes: customization, Liquid development, Online Store 2.0 migration, redesign, speed work and conversion optimization. Scope and price for each.",
+    "Every service we offer on Shopify themes: customization, Liquid development, store redesign, speed work and Online Store 2.0 migration. A written scope for each before any code moves.",
   seo: {
     intent: "commercial",
     primary: "Shopify services",
@@ -14,17 +14,16 @@ export const page: PageContent = {
       "Shopify development agency",
       "Shopify store redesign",
       "Shopify speed optimization",
-      "Shopify conversion optimization",
     ],
   },
   hero: {
     eyebrow: "Services",
     h1: "Shopify services, each one scoped before it starts",
-    lede: "We work on the storefront layer: the theme, the templates, the Liquid, the CSS and the JavaScript your customers actually meet. Six services, each with a published price range and a written scope you approve before any code moves.",
+    lede: "We work on the storefront layer: the theme, the templates, the Liquid, the CSS and the JavaScript your customers actually meet. Five services, each with a written scope you approve before any code moves.",
     meta: ["Shopify Partner", "25+ theme projects delivered", "Fixed scope, fixed date"],
     cta: { label: "Get a scoped quote", href: "/hire/" },
     secondary: { label: "See pricing", href: "/pricing/" },
-    visual: "overlap-store",
+    visual: "image-customize",
     backdrop: "aurora",
   },
   blocks: [
@@ -36,33 +35,26 @@ export const page: PageContent = {
       columns: 3,
       items: [
         {
-          meta: "From $1,000",
           title: "Theme customization",
           body: "Change the theme you already own. Sections, templates, Liquid, CSS, and schema so your team keeps control after handover.",
+          href: "/",
         },
         {
-          meta: "From $2,800",
           title: "Shopify development",
           body: "Custom sections, apps blocks, metafield-driven content and the JavaScript behaviour a theme setting cannot reach.",
           href: "/services/shopify-development/",
         },
         {
-          meta: "From $6,500",
           title: "Store redesign",
           body: "A new brand system applied across every template, with the section library your marketing team needs to keep shipping.",
+          href: "/services/store-redesign/",
         },
         {
-          meta: "From $2,400",
           title: "Speed optimization",
           body: "Theme-level Core Web Vitals work: render-blocking assets, image pipeline, third-party scripts, unused sections.",
+          href: "/services/speed-optimization/",
         },
         {
-          meta: "From $2,800",
-          title: "Conversion optimization",
-          body: "Product page, cart and collection changes aimed at the step your analytics say is leaking, not at a generic checklist.",
-        },
-        {
-          meta: "From $4,200",
           title: "Online Store 2.0 migration",
           body: "Move off a legacy theme with every existing customization rebuilt as schema-driven sections rather than lost.",
           href: "/migration/",
@@ -83,13 +75,10 @@ export const page: PageContent = {
         "A theme fighting every request — usually a migration",
         "A store that does not exist yet — store setup",
       ],
-      visual: "ceiling",
-      caption: "How much each theme generation absorbs before code is required",
-      cta: { label: "Compare customization and development", href: "/custom-theme-development/" },
+      visual: "image-store",
       media: "right",
       tone: "tint",
     },
-    priceBlock(),
     {
       type: "steps",
       eyebrow: "Engagement",
@@ -117,7 +106,7 @@ export const page: PageContent = {
           meta: "Documented",
         },
       ],
-      visual: "timeline",
+      visual: "ill-process",
     },
     {
       type: "faq",
@@ -140,19 +129,11 @@ export const page: PageContent = {
         },
       ],
     },
-    {
-      type: "related",
-      heading: "Go deeper",
-      items: [
-        { label: "Pricing", href: "/pricing/", note: "The full ladder and what moves an estimate" },
-        { label: "Themes we support", href: "/themes/", note: "Dawn, Prestige, Spotlight, legacy" },
-        { label: "Case studies", href: "/work/", note: "Documented projects, including the rescopes" },
-        { label: "Store setup", href: "/store-setup/", note: "A new store, ready to launch" },
-      ],
-    },
     ctaBlock(
       "Tell us what you want changed",
-      "Send your store URL and a short description. You get a scoped quote with a fixed price and a delivery date within two business days, and no obligation once you have it."
+      "Send your store URL and a short description. You get a scoped quote with a fixed price and a delivery date within two business days, and no obligation once you have it.",
+      true,
+      { secondary: false }
     ),
   ],
 };

@@ -23,7 +23,7 @@ export const page: PageContent = {
     meta: ["25+ projects delivered", "10 documented", "Rescopes included, not hidden"],
     cta: { label: "Start a project", href: "/hire/" },
     secondary: { label: "See pricing", href: "/pricing/" },
-    visual: "overlap-product",
+    visual: "image-store",
     backdrop: "dots",
   },
   blocks: [
@@ -42,7 +42,7 @@ export const page: PageContent = {
         "Technical constraints written up, not smoothed over",
         "Two of the ten needed a mid-project rescope, and say so",
       ],
-      visual: "before-after",
+      visual: "ill-redesign",
       caption: "Every write-up covers the surface that changed",
       media: "right",
     },
@@ -112,10 +112,10 @@ export const page: PageContent = {
       heading: "The surfaces these projects touched",
       lede: "Nine of the ten involved at least one of these four.",
       items: [
-        { visual: "product-page", caption: "Product templates", body: "Variant logic, bundles, subscriptions, sticky add-to-cart." },
-        { visual: "storefront", caption: "Collection and home", body: "Filtering, merchandising blocks, editorial layouts." },
-        { visual: "mobile", caption: "Mobile layout", body: "Thumb reach, tap targets, image weight, sticky bars." },
-        { visual: "speed", caption: "Performance", body: "Core Web Vitals held to a budget, measured before and after." },
+        { visual: "ill-new-section", caption: "Product templates", body: "Variant logic, bundles, subscriptions, sticky add-to-cart." },
+        { visual: "ill-brand-kit", caption: "Collection and home", body: "Filtering, merchandising blocks, editorial layouts." },
+        { visual: "ill-works-everywhere", caption: "Mobile layout", body: "Thumb reach, tap targets, image weight, sticky bars." },
+        { visual: "ill-speed", caption: "Performance", body: "Core Web Vitals held to a budget, measured before and after." },
       ],
     },
     {

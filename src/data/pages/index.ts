@@ -8,8 +8,8 @@ import { page as storeSetup } from "@/data/pages/store-setup";
 import { page as work } from "@/data/pages/work";
 
 import { page as svcDevelopment } from "@/data/pages/svc-development";
-import { page as cmpCustomDevelopment } from "@/data/pages/cmp-custom-development";
-import { page as cmpCustomVsTemplate } from "@/data/pages/cmp-custom-vs-template";
+import { page as svcRedesign } from "@/data/pages/svc-redesign";
+import { page as svcSpeed } from "@/data/pages/svc-speed";
 
 /**
  * The interior pages intentionally published by this site.
@@ -28,8 +28,8 @@ export const PAGE_LIST: PageContent[] = [
   migration,
   storeSetup,
   svcDevelopment,
-  cmpCustomDevelopment,
-  cmpCustomVsTemplate,
+  svcRedesign,
+  svcSpeed,
 ];
 
 /** Slug → content, keyed by the route path with leading and trailing slashes. */

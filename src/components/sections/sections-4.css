@@ -130,3 +130,32 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Explainer video band, directly under the hero. */
+.video-in {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+.video-frame {
+  border-radius: var(--r);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: var(--sh-lg);
+  background: var(--deep);
+}
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+@media (max-width: 960px) {
+  .video-in {
+    grid-template-columns: 1fr;
+  }
+}
+.video-in h2 {
+  margin-bottom: 0.85rem;
+}

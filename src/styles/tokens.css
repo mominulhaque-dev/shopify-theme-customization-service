@@ -127,7 +127,9 @@
 .on-deep .eyebrow {
   color: var(--accent);
 }
-.on-deep a {
+/* Buttons excluded: `.on-deep a` (0,1,1) outranks `.btn-signal` (0,1,0), which
+   painted lime text on the lime button and made its label invisible. */
+.on-deep a:not(.btn) {
   color: var(--accent);
 }
 .on-deep hr,

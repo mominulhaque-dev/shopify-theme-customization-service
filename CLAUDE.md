@@ -18,8 +18,7 @@ session with a browser is §11.
 ## 1. Project overview
 
 A Shopify theme *customization* agency site (not "we build themes from
-scratch" — the distinction is a real content pillar, see
-`/custom-theme-development/`).
+scratch").
 
 - **Stack:** Next.js 14 (App Router), React 18, TypeScript strict with
   `noUncheckedIndexedAccess`, plain CSS, GSAP 3.15 + ScrollTrigger + SplitText +
@@ -95,12 +94,13 @@ src/
 ## 4. Homepage content — DO NOT REWRITE
 
 Every string in `src/data/homepage.ts` is verbatim from the approved design
-reference. Layout, imagery, spacing and animation may change; wording may not.
+reference, as amended by the client's Nov 2026 revision doc (new prices, four
+FAQ sentences removed, case-study section removed). Layout, imagery, spacing and animation may change; wording may not.
 Changing homepage copy is a deliberate exception to flag to the user, never a
 default action.
 
 `npm run audit:homepage` enforces this: it extracts every prose string from
-`homepage.ts` and asserts each one appears in the prerendered homepage HTML. 140
+`homepage.ts` and asserts each one appears in the prerendered homepage HTML. 124
 strings currently pass. Run it after any homepage change.
 
 The inline links that the original port flattened to plain text are restored via
@@ -113,10 +113,31 @@ Other pages have no such restriction.
 ## 5. Routes — 11 published content URLs
 
 Homepage, `/hire/`, and 9 registry pages: `/services/`,
-`/services/shopify-development/`, `/themes/`, `/work/`, `/pricing/`,
-`/migration/`, `/store-setup/`, `/custom-theme-development/`, and
-`/custom-theme-vs-template/`. Other page routes are not registered and return
-404; only these URLs appear in the sitemap.
+`/services/shopify-development/`, `/services/store-redesign/`,
+`/services/speed-optimization/`, `/themes/`, `/work/`, `/pricing/`,
+`/migration/` and `/store-setup/` — the "Yes" rows of the "URLs" tab in
+sitemap-urls.xlsx (Nov 2026 revision). Other page routes are not registered and
+return 404; only these URLs appear in the sitemap, with `lastmod` only (no
+`changefreq`/`priority`, by request).
+
+**Blog (Nov 2026).** `/blog/` and `/blog/<slug>/` are hand-built routes in
+`src/app/blog/`, fed by `src/data/blog.ts` (five posts). Each post carries its
+own meta title/description, BlogPosting + FAQPage + BreadcrumbList JSON-LD, a
+table of contents and internal links written as `[text](/path/)`. Both blog
+URLs are added to the sitemap in `sitemap.ts`. To publish a post, add an object
+to `BLOG_POSTS`.
+
+**Footer (Nov 2026).** Brand + one-line blurb, a single menu column
+(`footerMenu` in `site.ts`) and a contact column. The old link-map columns are
+gone from the footer only; every page still exists.
+
+⚠️ **Search engines are blocked.** `layout.tsx` sets `robots: { index: false,
+follow: false }` and `robots.ts` disallows `/`. Nothing, the blog included,
+will rank until both are switched back for launch.
+
+Published price ladder (Nov 2026): $50 / $250 / $800 / $1,500, set once in
+`TIER_ITEMS` (`src/data/pages/_shared.ts`) and `diffTiers` (`homepage.ts`).
+Service pages carry no "From $" figures any more.
 
 `npm run audit:links` walks the prerendered HTML, collects every internal href
 and checks it against the pages that actually built. It also fails on `#`,
@@ -188,7 +209,25 @@ Available keys: `theme-editor`, `storefront`, `product-page`, `mobile`,
 `before-after`, `migration`, `sections`, `speed`, `funnel`, `ceiling`, `fonts`,
 `palette`, `breakpoints`, `timeline`, `handover`, `code-liquid`, `code-schema`,
 `code-css`, `code-js`, `code-template`, plus three overlapping compositions
-(`overlap-store`, `overlap-editor`, `overlap-product`).
+(`overlap-store`, `overlap-editor`, `overlap-product`). As of Nov 2026 no page
+uses these wireframes any more — every page visual is an `ill-*` illustration
+(see below) or a raster image.
+
+**Outcome illustrations (Nov 2026).** Most visitors are store owners, not
+developers, so the code panels and the "ceiling" chart were swapped, wherever a
+merchant reads, for plain illustrations in `ui/illustrations.tsx`, registered
+as `ill-new-section`, `ill-edit-yourself`, `ill-works-everywhere`,
+`ill-fixed-quote`, `ill-safe-update`, `ill-theme-fit`, `ill-migration`,
+`ill-process`, `ill-handover`, `ill-redesign`, `ill-brand-kit`, `ill-speed` and
+`ill-new-store`. Galleries no longer pin and scroll sideways; they are a plain grid. Raster images are
+`image-customize` and `image-store` (PNGs in `public/`). The homepage pricing
+tiers each carry a `TierScopeIcon`. To use a real screenshot instead, change
+the key in the page data.
+
+**Explainer video.** `VideoSection` (under the hero) plays
+`public/video/explainer.mp4`: 49 s, 1280×720, English voiceover (Kokoro TTS,
+voice `af_heart`) with captions in `explainer.en.vtt`. It is loaded only on
+play (`preload="none"`). The scenes reuse the `ill-*` illustrations.
 
 The code panels contain real, correct theme code (`ui/code-samples.ts`) — Liquid
 that guards for missing objects, schema that produces editable settings, CSS
@@ -255,10 +294,13 @@ prerendered HTML, so they only mean something after a build.
    cannot resolve its bundled font when the project path contains a space or
    brackets, and it fails at module load, so the route 500s rather than
    degrading.
-4. **Resend credentials.** Set `RESEND_API_KEY` and `CONTACT_EMAIL` (see
-   `.env.example`), then test the idle → submitting → success/error flow against
-   the real endpoint. The route deliberately returns 503 rather than faking a
-   send when the key is missing.
+4. **Resend credentials.** See `.env.example`. `RESEND_API_KEY` (sending-only
+   key) + `CONTACT_EMAIL` turn on contact-form notifications. `RESEND_FROM`
+   (set only after a sending domain is verified in Resend) also turns on the
+   customer auto-reply. `RESEND_AUDIENCE_ID` turns on the blog newsletter
+   sign-up (`/api/subscribe`). Shared helpers are in `src/lib/email.ts`; sends
+   use idempotency keys. Routes return 503 rather than faking a send when
+   unconfigured.
 5. **Case-study specifics.** The ten write-ups are structurally complete and
    deliberately carry no merchant names or uplift percentages — that is the
    stated policy on `/work/`, not a gap. If a client signs off on being named,

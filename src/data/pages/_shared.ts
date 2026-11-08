@@ -14,26 +14,26 @@ export const CRUMB_SERVICES: LinkRef[] = [{ label: "Services", href: "/services/
 export const TIER_ITEMS = [
   {
     label: "Single-section edit",
-    price: "$1,000",
+    price: "$50",
     time: "2–4 days",
     note: "One section added or reworked, with schema so it stays editable afterwards.",
   },
   {
     label: "Page-level build",
-    price: "$2,800",
+    price: "$250",
     time: "1–2 weeks",
     note: "One template rebuilt end to end, including every new block it needs and its mobile behaviour.",
   },
   {
     label: "Full theme customization",
-    price: "$6,500",
-    time: "3–5 weeks",
+    price: "$800",
+    time: "2–3 weeks",
     note: "Every template touched, a reusable section library, a performance pass and device QA.",
   },
   {
     label: "Multi-template rebuild",
-    price: "$12,000",
-    time: "6–8 weeks",
+    price: "$1,500",
+    time: "3–4 weeks",
     note: "Theme architecture reworked on your existing base, new schema throughout, training and handover docs.",
   },
 ];
@@ -52,13 +52,18 @@ export function priceBlock(overrides?: { heading?: string; lede?: string }): Pag
   };
 }
 
-export function ctaBlock(heading: string, body: string, dark = true): PageBlock {
+export function ctaBlock(
+  heading: string,
+  body: string,
+  dark = true,
+  options?: { secondary?: boolean }
+): PageBlock {
   return {
     type: "cta",
     heading,
     body,
     cta: { label: "Get a scoped quote", href: "/hire/" },
-    secondary: { label: "See pricing", href: "/pricing/" },
+    ...(options?.secondary === false ? {} : { secondary: { label: "See pricing", href: "/pricing/" } }),
     tone: dark ? "dark" : "tint",
   };
 }

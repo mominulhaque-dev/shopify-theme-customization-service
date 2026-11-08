@@ -21,10 +21,10 @@ export const page: PageContent = {
     eyebrow: "Development",
     h1: "Shopify development, inside the theme rather than around it",
     lede: "Development is the work a theme setting cannot reach: new sections with their own schema, Liquid that expresses your catalogue's real rules, JavaScript behaviour that survives the theme editor re-rendering a section. All of it written so your team keeps control afterwards.",
-    meta: ["From $2,800", "Theme layer only", "Schema on everything we build"],
+    meta: ["Theme layer only", "Schema on everything we build"],
     cta: { label: "Get a development quote", href: "/hire/" },
     secondary: { label: "Explore our services", href: "/services/" },
-    visual: "code-liquid",
+    visual: "ill-new-section",
     backdrop: "grid",
     tone: "dark",
   },
@@ -44,8 +44,8 @@ export const page: PageContent = {
         "Custom elements for interaction that re-initialises cleanly",
         "App block placement and dead script-tag cleanup",
       ],
-      visual: "code-schema",
-      caption: "Schema is what makes a build editable rather than fixed",
+      visual: "ill-edit-yourself",
+      caption: "What we build stays editable by you",
       media: "right",
     },
     {
@@ -62,8 +62,8 @@ export const page: PageContent = {
         "Reduced-motion respected at the component level",
         "Progressive: the markup works before the script runs",
       ],
-      visual: "code-js",
-      caption: "A component that survives the theme editor re-rendering it",
+      visual: "ill-works-everywhere",
+      caption: "Checked on computer, phone and in the theme editor",
       tone: "tint",
     },
     {
@@ -125,7 +125,7 @@ export const page: PageContent = {
     {
       type: "related",
       items: [
-        { label: "Custom development vs customization", href: "/custom-theme-development/", note: "Which you need" },
+        { label: "Store redesign", href: "/services/store-redesign/", note: "When the brand, not the behaviour, is the problem" },
         { label: "Themes we support", href: "/themes/", note: "Starting points for custom development" },
         { label: "Pricing", href: "/pricing/", note: "The ladder in full" },
       ],

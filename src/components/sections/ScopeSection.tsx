@@ -3,7 +3,7 @@ import ImageReveal from "@/components/animations/ImageReveal";
 import Reveal from "@/components/animations/Reveal";
 import RevealGroup from "@/components/animations/RevealGroup";
 import TextReveal from "@/components/animations/TextReveal";
-import { ThemeCeilingChart } from "@/components/ui/mockups-data";
+import { Visual } from "@/components/ui/visuals";
 import { linkify } from "@/lib/linkify";
 import type { ScopeBlock } from "@/types";
 
@@ -55,10 +55,10 @@ export default function ScopeSection() {
           <div className="split-media">
             <ImageReveal delay={0.12} parallax={0.06}>
               <div className="figure">
-                <ThemeCeilingChart />
+                <Visual name="ill-edit-yourself" />
               </div>
             </ImageReveal>
-            <p className="figure-cap">Editor reach by theme generation</p>
+            <p className="figure-cap">You keep control after handover</p>
           </div>
         </div>
 

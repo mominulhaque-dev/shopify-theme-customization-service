@@ -1,5 +1,4 @@
 import type {
-  CaseStudy,
   DiffTier,
   FaqItem,
   PricingLineItem,
@@ -34,13 +33,13 @@ export const hero = {
 export const pricingCard = {
   eyebrow: "Published pricing",
   figurePrefix: "from",
-  figure: "$1,000",
+  figure: "$50",
   note: "Most agencies answer this with a contact form. Here is the range, before you talk to anyone.",
   items: [
-    { label: "Single-section edit", price: "$1,000" },
-    { label: "Page-level build", price: "$2,800" },
-    { label: "Full theme customization", price: "$6,500" },
-    { label: "Multi-template rebuild", price: "$12,000" },
+    { label: "Single-section edit", price: "$50" },
+    { label: "Page-level build", price: "$250" },
+    { label: "Full theme customization", price: "$800" },
+    { label: "Multi-template rebuild", price: "$1,500" },
   ] satisfies PricingLineItem[],
 };
 
@@ -162,7 +161,7 @@ export const diffTiers: DiffTier[] = [
       { op: "mod", label: "Stylesheet", path: "assets/theme.css" },
       { op: "mod", label: "Theme settings", path: "config/settings_schema.json" },
     ],
-    price: "$1,000",
+    price: "$50",
     time: "2–4 days",
   },
   {
@@ -176,7 +175,7 @@ export const diffTiers: DiffTier[] = [
       { op: "add", label: "Reusable snippets", path: "snippets/" },
       { op: "mod", label: "Stylesheet and scripts", path: "assets/" },
     ],
-    price: "$2,800",
+    price: "$250",
     time: "1–2 weeks",
   },
   {
@@ -190,8 +189,8 @@ export const diffTiers: DiffTier[] = [
       { op: "mod", label: "Layout", path: "layout/theme.liquid" },
       { op: "mod", label: "Settings and locales", path: "config/, locales/" },
     ],
-    price: "$6,500",
-    time: "3–5 weeks",
+    price: "$800",
+    time: "2–3 weeks",
   },
   {
     id: "Tier 04",
@@ -203,8 +202,8 @@ export const diffTiers: DiffTier[] = [
       { op: "add", label: "New schema throughout", path: "merchant-editable" },
       { op: "add", label: "Handover docs", path: "change log and notes" },
     ],
-    price: "$12,000",
-    time: "6–8 weeks",
+    price: "$1,500",
+    time: "3–4 weeks",
   },
 ];
 
@@ -218,8 +217,8 @@ export const timelineSection = {
 export const timeRows: TimeRow[] = [
   { label: "Single-section edit", time: "2–4 days" },
   { label: "Page-level build", time: "1–2 weeks" },
-  { label: "Full theme customization", time: "3–5 weeks" },
-  { label: "Multi-template rebuild", time: "6–8 weeks" },
+  { label: "Full theme customization", time: "2–3 weeks" },
+  { label: "Multi-template rebuild", time: "3–4 weeks" },
   { label: "Online Store 2.0 migration", time: "2–3 weeks" },
 ];
 
@@ -247,43 +246,6 @@ export const processSteps: ProcessStep[] = [
   },
 ];
 
-export const workSection = {
-  eyebrow: "Selected work",
-  h2: "Customization work we have shipped",
-  paragraph:
-    "Twenty-five theme projects delivered, ten written up in full. Each case study lists the starting theme, the scope requested, the technical constraint we hit, and what the client tracked afterwards. Where a decision would go differently today, we say so rather than editing it out. Projects that needed a rescope are documented alongside the ones that ran clean, because the first kind is more useful to read before hiring anyone.",
-};
-
-export const caseStudies: CaseStudy[] = [
-  {
-    href: "/work/",
-    visual: "product-page",
-    imgLabel: "Before / after screenshot — the product page",
-    theme: "Dawn",
-    title: "[Client name], apparel",
-    body: "Product page rebuilt around variant-aware bundles, with a custom size guide block the merchandising team edits themselves.",
-    outcomeLabel: "[ Result the client measured ]",
-  },
-  {
-    href: "/work/",
-    visual: "storefront",
-    imgLabel: "Before / after screenshot — the collection grid",
-    theme: "Prestige",
-    title: "[Client name], home goods",
-    body: "Brand system applied across every template, plus a filtered collection rebuild that kept the vendor's update path intact.",
-    outcomeLabel: "[ Result the client measured ]",
-  },
-  {
-    href: "/work/",
-    visual: "theme-editor",
-    imgLabel: "Before / after screenshot — the theme editor",
-    theme: "Brooklyn to Dawn",
-    title: "[Client name], accessories",
-    body: "Legacy theme migrated to Online Store 2.0 with every existing customization rebuilt as editable sections.",
-    outcomeLabel: "[ Result the client measured ]",
-  },
-];
-
 export const faqSection = {
   eyebrow: "Common questions",
   h2: "Frequently asked questions",
@@ -299,12 +261,12 @@ export const faqItems: FaqItem[] = [
   {
     question: "Will my customization survive a theme update?",
     answer:
-      "It depends where the code lives. Changes made through the theme editor and in separate asset files carry over cleanly. Direct edits to core theme files get overwritten the moment the vendor ships an update. We write customizations to be update-safe wherever the theme's structure allows, and document the exceptions. See theme updates and migration.",
+      "It depends where the code lives. Changes made through the theme editor and in separate asset files carry over cleanly. Direct edits to core theme files get overwritten the moment the vendor ships an update. We write customizations to be update-safe wherever the theme's structure allows, and document the exceptions.",
   },
   {
     question: "Do you need access to my live store?",
     answer:
-      "We need collaborator access, but we never work in your live theme. Every change happens on a duplicate and you decide when it publishes. Collaborator access means no password sharing and access you can revoke at any time. Read the full process.",
+      "We need collaborator access, but we never work in your live theme. Every change happens on a duplicate and you decide when it publishes. Collaborator access means no password sharing and access you can revoke at any time.",
   },
   {
     question: "What is the difference between customization and development?",
@@ -314,12 +276,12 @@ export const faqItems: FaqItem[] = [
   {
     question: "Should I hire a Shopify Partner for theme customization?",
     answer:
-      "Partner status means the agency is in Shopify's formal programme and uses collaborator access rather than your account password. It is a floor, not a guarantee, so check it alongside published work and clear scoping. We are a Shopify Partner with 25+ theme projects delivered and ten documented publicly. More on vetting at hiring a Shopify theme developer.",
+      "Partner status means the agency is in Shopify's formal programme and uses collaborator access rather than your account password. It is a floor, not a guarantee, so check it alongside published work and clear scoping. We are a Shopify Partner with 25+ theme projects delivered and ten documented publicly.",
   },
   {
     question: "Can I customize a free Shopify theme?",
     answer:
-      "Yes. Free themes including Dawn accept custom CSS, custom sections and Liquid changes exactly like paid ones. The difference is what you get out of the box, not the ceiling. Compare the trade-offs in custom theme versus template.",
+      "Yes. Free themes including Dawn accept custom CSS, custom sections and Liquid changes exactly like paid ones. The difference is what you get out of the box, not the ceiling.",
   },
 ];
 

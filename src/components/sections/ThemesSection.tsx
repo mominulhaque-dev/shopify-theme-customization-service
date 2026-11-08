@@ -1,23 +1,19 @@
 import Link from "next/link";
 import { themeNotes, themeRows, themesSection } from "@/data/homepage";
 import Backdrop from "@/components/animations/Backdrop";
+import { Visual } from "@/components/ui/visuals";
 import ImageReveal from "@/components/animations/ImageReveal";
 import Marquee from "@/components/animations/Marquee";
 import Reveal from "@/components/animations/Reveal";
 import RevealGroup from "@/components/animations/RevealGroup";
 import TextReveal from "@/components/animations/TextReveal";
-import BrowserFrame from "@/components/ui/BrowserFrame";
-import ThemeEditorMockup from "@/components/ui/ThemeEditorMockup";
-import { SectionStackDiagram } from "@/components/ui/mockups-diagram";
 
 /**
  * Which themes we customize. Copy verbatim (CLAUDE.md §3).
  *
- * The visual is an overlapping composition — the theme editor with the section
- * architecture diagram riding its corner — because the argument on this section
- * is precisely that what the editor exposes depends on how the theme is built.
- * Every theme chip is a real link: named themes to their own page, the rest to
- * the comparison.
+ * The visual compares the three kinds of theme from the store owner's side
+ * (easy to change / change with care / upgrade first) rather than showing the
+ * theme editor's internals.
  */
 export default function ThemesSection() {
   const allChips = themeRows.flatMap((row) => row.chips);
@@ -36,22 +32,12 @@ export default function ThemesSection() {
             </TextReveal>
             <Reveal kind="up-sm" delay={0.08}>
               <p>{themesSection.paragraph}</p>
-              <p className="btn-row" style={{ marginTop: "1.15rem" }}>
-                <Link href="/themes/" className="btn btn-outline btn-sm">
-                  Compare theme ceilings
-                </Link>
-              </p>
             </Reveal>
           </div>
           <div className="split-media">
             <ImageReveal delay={0.12} parallax={0.07}>
-              <div className="figure-stack">
-                <BrowserFrame url="admin.shopify.com/store/…/themes/editor">
-                  <ThemeEditorMockup />
-                </BrowserFrame>
-                <div className="figure-front figure">
-                  <SectionStackDiagram />
-                </div>
+              <div className="figure">
+                <Visual name="ill-theme-fit" />
               </div>
             </ImageReveal>
           </div>
@@ -81,9 +67,9 @@ export default function ThemesSection() {
               <div>
                 <div className="chips">
                   {row.chips.map((chip) => (
-                    <Link href={themeChipHref()} className="chip" key={chip}>
+                    <span className="chip chip-static" key={chip}>
                       {chip}
-                    </Link>
+                    </span>
                   ))}
                 </div>
                 <p className="theme-note">{themeNotes[i]}</p>
@@ -91,11 +77,13 @@ export default function ThemesSection() {
             </div>
           ))}
         </RevealGroup>
+
+        <Reveal kind="up-sm" className="themes-more">
+          <Link href="/themes/" className="chip chip-more">
+            More
+          </Link>
+        </Reveal>
       </div>
     </section>
   );
-}
-
-function themeChipHref() {
-  return "/themes/";
 }

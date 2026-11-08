@@ -5,6 +5,7 @@ import Reveal from "@/components/animations/Reveal";
 import RevealGroup from "@/components/animations/RevealGroup";
 import TextReveal from "@/components/animations/TextReveal";
 import { linkify } from "@/lib/linkify";
+import { TierScopeIcon } from "@/components/ui/illustrations";
 
 /**
  * The scope/cost ladder — the site's signature section. Copy verbatim (§3).
@@ -36,9 +37,10 @@ export default function DiffSection() {
         </div>
 
         <RevealGroup className="diff" items=".tier" itemReveal="up" stagger={0.09}>
-          {diffTiers.map((tier) => (
+          {diffTiers.map((tier, index) => (
             <div className="tier" key={tier.id}>
               <div className="tier-lead">
+                <TierScopeIcon level={(Math.min(index, 3) + 1) as 1 | 2 | 3 | 4} />
                 <div className="tier-id">{tier.id}</div>
                 <div className="tier-name">{tier.name}</div>
                 <div className="tier-desc">{tier.description}</div>

@@ -8,48 +8,33 @@ import ImageReveal from "@/components/animations/ImageReveal";
 import Reveal from "@/components/animations/Reveal";
 import RevealGroup from "@/components/animations/RevealGroup";
 import TextReveal from "@/components/animations/TextReveal";
-import { TimelineGantt } from "@/components/ui/mockups-process";
+import { Visual } from "@/components/ui/visuals";
 
 /**
- * Timeline + process, side by side. Copy verbatim (§3).
+ * Process first, timeline second. Copy verbatim (§3).
  *
- * The schedule diagram underneath turns the two ranges either column quotes into
- * something you can read at a glance, including the two approval gates — which
- * is the section's actual claim: the dates slip on feedback, not on code.
+ * Layout per the November 2026 revision: "How the customization process works"
+ * keeps its place on the right with an illustration beside it; the "How long a
+ * customization takes" block moves down to sit directly above the four-step
+ * diagram.
  */
 export default function ProcessSection() {
   return (
-    <section className="tint has-backdrop" aria-labelledby="timeline-heading">
+    <section className="tint has-backdrop" aria-labelledby="process-heading">
       <div className="wrap">
         <Reveal kind="fade" duration={0.6}>
           <span className="eyebrow">{timelineSection.eyebrow}</span>
         </Reveal>
 
         <div className="proc">
-          <div>
-            <TextReveal as="h2" className="h2-col" id="timeline-heading">
-              {timelineSection.h2}
-            </TextReveal>
-            <Reveal kind="up-sm" delay={0.06}>
-              <p className="col-lede">{timelineSection.lede}</p>
-            </Reveal>
-            <RevealGroup className="times-wrap" items="li" itemReveal="up-sm" stagger={0.06}>
-              <ul className="times">
-                {timeRows.map((row) => (
-                  <li key={row.label}>
-                    <span>{row.label}</span>
-                    <b>{row.time}</b>
-                  </li>
-                ))}
-              </ul>
-            </RevealGroup>
-            <Reveal kind="up-sm" delay={0.1}>
-              <p className="times-note">{timelineSection.note}</p>
-            </Reveal>
+          <div className="proc-media">
+            <ImageReveal delay={0.1} parallax={0.05}>
+              <Visual name="image-customize" />
+            </ImageReveal>
           </div>
 
           <div>
-            <TextReveal as="h2" className="h2-col">
+            <TextReveal as="h2" className="h2-col" id="process-heading">
               {processSection.h2}
             </TextReveal>
             <Reveal kind="up-sm" delay={0.06}>
@@ -68,12 +53,35 @@ export default function ProcessSection() {
           </div>
         </div>
 
+        <div className="proc proc-timeline">
+          <div>
+            <TextReveal as="h2" className="h2-col" id="timeline-heading">
+              {timelineSection.h2}
+            </TextReveal>
+            <Reveal kind="up-sm" delay={0.06}>
+              <p className="col-lede">{timelineSection.lede}</p>
+            </Reveal>
+            <Reveal kind="up-sm" delay={0.1}>
+              <p className="times-note">{timelineSection.note}</p>
+            </Reveal>
+          </div>
+          <RevealGroup className="times-wrap" items="li" itemReveal="up-sm" stagger={0.06}>
+            <ul className="times">
+              {timeRows.map((row) => (
+                <li key={row.label}>
+                  <span>{row.label}</span>
+                  <b>{row.time}</b>
+                </li>
+              ))}
+            </ul>
+          </RevealGroup>
+        </div>
+
         <ImageReveal className="proc-figure" delay={0.1}>
           <div className="figure">
-            <TimelineGantt />
+            <Visual name="ill-process" />
           </div>
         </ImageReveal>
-        <p className="figure-cap">A four-week project, with both approval gates marked</p>
       </div>
     </section>
   );

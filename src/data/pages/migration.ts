@@ -20,10 +20,10 @@ export const page: PageContent = {
     eyebrow: "Migration",
     h1: "Online Store 2.0 migration, with your customizations rebuilt rather than lost",
     lede: "A theme migration is not a file copy. Sections, settings and custom code do not transfer between themes, so the real work is rebuilding what your store does today inside an architecture that will still accept changes next year. That is the job we scope and price.",
-    meta: ["From $4,200", "2–3 weeks typical", "Live store untouched until launch"],
+    meta: ["2–3 weeks typical", "Live store untouched until launch"],
     cta: { label: "Get a migration quote", href: "/hire/" },
     secondary: { label: "Compare themes first", href: "/themes/" },
-    visual: "migration",
+    visual: "ill-migration",
     backdrop: "beams",
   },
   blocks: [
@@ -41,8 +41,8 @@ export const page: PageContent = {
         "Sections needed on more than the homepage: migrate",
         "Metafields or app blocks required: migrate",
       ],
-      visual: "ceiling",
-      caption: "The editor ceiling you are migrating toward",
+      visual: "ill-theme-fit",
+      caption: "Newer themes are easier to change",
       media: "right",
     },
     {
@@ -97,7 +97,7 @@ export const page: PageContent = {
           meta: "Week 3",
         },
       ],
-      visual: "timeline",
+      visual: "ill-process",
     },
     {
       type: "showcase",
@@ -106,8 +106,8 @@ export const page: PageContent = {
       body: [
         "The visible result of a good migration is not that the storefront looks different. It is that the next change to it does not need us: content that was buried in Liquid becomes a field in the theme editor, and a section that only worked on the homepage now works on any page.",
       ],
-      visual: "sections",
-      caption: "One section definition, reorderable instances your team controls",
+      visual: "ill-edit-yourself",
+      caption: "After the move, your team edits sections without code",
       tone: "dark",
       backdrop: "mesh",
     },

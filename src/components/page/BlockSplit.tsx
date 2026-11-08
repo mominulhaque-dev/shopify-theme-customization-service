@@ -146,7 +146,9 @@ export function GallerySection({ block }: { block: GalleryBlock }) {
 function GalleryItem({ item }: { item: GalleryBlock["items"][number] }) {
   return (
     <div className="gallery-item">
-      <Visual name={item.visual} />
+      <div className="figure">
+        <Visual name={item.visual} />
+      </div>
       <h3>{item.caption}</h3>
       {item.body && <p>{item.body}</p>}
     </div>

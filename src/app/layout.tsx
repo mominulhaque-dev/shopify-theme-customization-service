@@ -91,7 +91,7 @@ const organizationJsonLd = {
   email: siteConfig.email,
   telephone: siteConfig.phoneE164,
   description: siteConfig.description,
-  priceRange: "$1,000–$12,000",
+  priceRange: "$50–$1,500",
   areaServed: "Worldwide",
   knowsAbout: [
     "Shopify theme customization",

@@ -1,4 +1,4 @@
-import type { FooterColumn, NavLink } from "@/types";
+import type { NavLink } from "@/types";
 
 export const siteConfig = {
   name: "Shopify Theme Customization Services",
@@ -20,31 +20,20 @@ export const siteConfig = {
  */
 export const mainNav: NavLink[] = [
   { label: "Services", href: "/services/" },
-  { label: "Themes", href: "/themes/" },
-  { label: "Work", href: "/work/" },
   { label: "Pricing", href: "/pricing/" },
 ];
 
-/** Footer links only to routes that are published in the page registry. */
-export const footerColumns: FooterColumn[] = [
-  {
-    heading: "Services",
-    links: [
-      { label: "Shopify development", href: "/services/shopify-development/" },
-      { label: "Theme migration", href: "/migration/" },
-      { label: "Store setup", href: "/store-setup/" },
-    ],
-  },
-  {
-    heading: "Company",
-    links: [
-      { label: "All services", href: "/services/" },
-      { label: "Pricing", href: "/pricing/" },
-      { label: "Case studies", href: "/work/" },
-      { label: "Compare themes", href: "/themes/" },
-      { label: "Custom theme development", href: "/custom-theme-development/" },
-      { label: "Custom theme vs template", href: "/custom-theme-vs-template/" },
-      { label: "Hire us", href: "/hire/" },
-    ],
-  },
+/**
+ * Footer, Nov 2026: one short menu instead of the full link map. Every page
+ * still exists and is still linked from the pages that need it; the footer
+ * just no longer lists them all.
+ */
+export const footerBlurb =
+  "We customize the Shopify theme you already have: new sections, better product pages and a cleaner look, at a fixed price agreed before work starts.";
+
+export const footerMenu: NavLink[] = [
+  { label: "Home", href: "/" },
+  ...mainNav,
+  { label: "Blog", href: "/blog/" },
+  { label: "Get a quote", href: "/hire/" },
 ];

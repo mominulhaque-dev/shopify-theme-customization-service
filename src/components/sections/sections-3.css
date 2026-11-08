@@ -60,6 +60,12 @@
 .tier:hover .tier-price {
   color: var(--accent);
 }
+.tier-icon {
+  display: block;
+  width: 96px;
+  height: 48px;
+  margin-bottom: 0.75rem;
+}
 .tier-id {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
@@ -85,7 +91,10 @@
   gap: 0.4rem;
   padding-top: 0.15rem;
 }
-.changes div {
+/* Rows only: a bare `.changes div` also caught `.mob-label`, outranked its
+   display:none and squeezed it into the 1.1rem column on desktop. */
+.changes .add,
+.changes .mod {
   display: grid;
   grid-template-columns: 1.1rem 1fr;
   gap: 0.45rem;
@@ -182,8 +191,21 @@
 .proc-figure {
   margin-top: var(--sp-block);
 }
+.proc-media {
+  position: sticky;
+  top: 6rem;
+}
+.proc-timeline {
+  margin-top: var(--sp-section-tight);
+  padding-top: var(--sp-section-tight);
+  border-top: 1px solid var(--line);
+  align-items: center;
+}
 
 @media (max-width: 960px) {
+  .proc-media {
+    position: static;
+  }
   .proc,
   .diff-foot {
     grid-template-columns: 1fr;

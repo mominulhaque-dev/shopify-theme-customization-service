@@ -5,7 +5,7 @@ export const page: PageContent = {
   slug: "/pricing/",
   title: "Shopify Theme Customization Pricing: Published Rates",
   description:
-    "What Shopify theme customization costs: four published tiers from $1,000 to $12,000, what each includes, the three variables that move an estimate, and what is quoted separately.",
+    "What Shopify theme customization costs: four published tiers from $50 to $1,500, what each includes, the three variables that move an estimate, and what is quoted separately.",
   seo: {
     intent: "commercial",
     primary: "Shopify theme customization cost",
@@ -20,10 +20,10 @@ export const page: PageContent = {
     eyebrow: "Pricing",
     h1: "Shopify theme customization pricing, published",
     lede: "Most agencies answer this with a contact form. Here is the range before you talk to anyone: four tiers, what each one changes in your theme, and the three variables that move a quote up or down. Every project is fixed-price before work starts.",
-    meta: ["From $1,000", "Fixed price before work starts", "Quote in 2 business days"],
+    meta: ["From $50", "Fixed price before work starts", "Quote in 2 business days"],
     cta: { label: "Get a scoped quote", href: "/hire/" },
     secondary: { label: "Explore services", href: "/services/" },
-    visual: "code-template",
+    visual: "ill-fixed-quote",
     backdrop: "grid",
     tone: "dark",
   },
@@ -122,7 +122,7 @@ export const page: PageContent = {
         "Out-of-scope work quoted before it is built",
         "No lock-in: the theme files are yours at handover",
       ],
-      visual: "handover",
+      visual: "ill-handover",
       caption: "What you receive at close",
       media: "right",
     },
@@ -131,7 +131,7 @@ export const page: PageContent = {
       items: [
         {
           q: "Why publish prices when most agencies do not?",
-          a: "Because the first question every merchant has is whether this is a $1,000 job or a $12,000 one, and making them book a call to find out wastes both parties' time. If the range does not fit your budget you should know that in thirty seconds, not after a discovery call.",
+          a: "Because the first question every merchant has is whether this is a $50 job or a $1,500 one, and making them book a call to find out wastes both parties' time. If the range does not fit your budget you should know that in thirty seconds, not after a discovery call.",
         },
         {
           q: "Is the price really fixed?",
@@ -143,7 +143,7 @@ export const page: PageContent = {
         },
         {
           q: "What is the cheapest useful thing you do?",
-          a: "A single-section edit at $1,000: one section added or reworked with schema so it stays editable afterwards. It suits stores that know exactly what is missing. Below that, you are better served making the change yourself than hiring anyone.",
+          a: "A single-section edit at $50: one section added or reworked with schema so it stays editable afterwards. It suits stores that know exactly what is missing. Below that, you are better served making the change yourself than hiring anyone.",
         },
         {
           q: "Do you offer retainers?",

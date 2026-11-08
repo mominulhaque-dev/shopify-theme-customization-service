@@ -117,7 +117,7 @@ export default function HirePage() {
           heading: "From your message to a published theme",
           lede: "Nothing starts until you approve the scope, and nothing publishes until you approve the build.",
           items: PROCESS_STEPS,
-          visual: "timeline",
+          visual: "ill-process",
           tone: "tint",
         }}
       />

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { gsap, motionEnabled, registerGsap } from "@/lib/gsap";
-import { footerColumns, mainNav, siteConfig } from "@/data/site";
+import { footerMenu, mainNav, siteConfig } from "@/data/site";
 
 /**
  * Mobile navigation panel.
@@ -135,20 +135,20 @@ export default function MobileMenu() {
           Get a quote
         </Link>
 
-        {footerColumns.slice(0, 4).map((column) => (
-          <div className="mobile-sub" key={column.heading}>
-            <h4>{column.heading}</h4>
-            <ul>
-              {column.links.map((link) => (
+        <div className="mobile-sub">
+          <h4>More</h4>
+          <ul>
+            {footerMenu
+              .filter((link) => !mainNav.some((m) => m.href === link.href) && link.href !== "/hire/")
+              .map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} onClick={close}>
                     {link.label}
                   </Link>
                 </li>
               ))}
-            </ul>
-          </div>
-        ))}
+          </ul>
+        </div>
 
         <div className="mobile-contact">
           <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>

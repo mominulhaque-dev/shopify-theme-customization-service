@@ -191,3 +191,11 @@
 .code .p {
   color: var(--white);
 }
+
+/* Raster illustration served through the visuals registry. */
+.visual-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r);
+}

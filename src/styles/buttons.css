@@ -129,6 +129,22 @@ button[disabled] {
   transform: translateY(-1px);
   box-shadow: var(--sh-sm);
 }
+/* Theme names shown as labels, not links: no hover lift. */
+.chip-static:hover {
+  border-color: var(--line);
+  color: var(--ink-2);
+  transform: none;
+  box-shadow: none;
+}
+/* The one linked chip under the theme rows. */
+.chip-more {
+  display: inline-block;
+  color: var(--brand);
+  border-color: var(--brand);
+}
+.themes-more {
+  margin-top: 1.25rem;
+}
 .chips {
   display: flex;
   flex-wrap: wrap;
