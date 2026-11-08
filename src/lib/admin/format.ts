@@ -48,7 +48,9 @@ export function safeSearch(q: string): string {
 
 export function toCsv(rows: Array<Record<string, unknown>>, columns: string[]): string {
   const cell = (v: unknown) => {
-    const s = v === null || v === undefined ? "" : Array.isArray(v) ? v.join("; ") : String(v);
+    let s = v === null || v === undefined ? "" : Array.isArray(v) ? v.join("; ") : String(v);
+    // Visitor-typed text must not run as a spreadsheet formula.
+    if (/^[=+\-@\t\r]/.test(s)) s = `'${s}`;
     return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
   };
   return [columns.join(","), ...rows.map((r) => columns.map((c) => cell(r[c])).join(","))].join("\r\n");

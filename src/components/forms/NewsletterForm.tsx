@@ -17,7 +17,11 @@ export default function NewsletterForm() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: String(data.get("email") || ""), consent: data.get("consent") === "on" }),
+        body: JSON.stringify({
+          email: String(data.get("email") || ""),
+          consent: data.get("consent") === "on",
+          sourcePage: window.location.pathname,
+        }),
       });
       const result = await res.json();
       if (!res.ok) throw new Error(result.error || "Something went wrong.");
