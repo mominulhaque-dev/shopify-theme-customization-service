@@ -137,24 +137,31 @@
   font-size: 1.0625rem;
   line-height: 1.75;
 }
-.post-content > h2 {
+.post-content > h2,
+.post-html > h2 {
   font-size: var(--t-h2);
   line-height: 1.25;
   margin: 2.5rem 0 0.9rem;
   scroll-margin-top: 6rem;
 }
-.post-content > h3 {
+.post-content > h3,
+.post-html > h3 {
   font-size: 1.2rem;
   margin: 1.75rem 0 0.5rem;
 }
 .post-content > p,
 .post-content > ul,
-.post-content > ol {
+.post-content > ol,
+.post-html > p,
+.post-html > ul,
+.post-html > ol {
   margin-bottom: 1.1rem;
   color: var(--ink-2);
 }
 .post-content > ul,
-.post-content > ol {
+.post-content > ol,
+.post-html > ul,
+.post-html > ol {
   padding-left: 1.3rem;
   display: grid;
   gap: 0.4rem;
@@ -329,4 +336,53 @@
   .news-band {
     grid-template-columns: 1fr;
   }
+}
+
+/* Bodies written in the admin editor (HTML). Callouts are blockquotes. */
+.post-html li > p {
+  margin: 0;
+}
+.post-html > blockquote {
+  background: var(--deep);
+  color: var(--on-deep);
+  border-radius: var(--r);
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0;
+  font-size: 1rem;
+}
+.post-html > blockquote strong {
+  color: var(--accent);
+}
+.post-html > blockquote p + p {
+  margin-top: 0.3rem;
+}
+.post-html > blockquote a {
+  color: var(--on-deep);
+}
+.post-html img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--r);
+  margin: 1.5rem 0;
+}
+.post-html > hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 2rem 0;
+}
+.post-html .post-table p {
+  margin: 0;
+}
+.post-html .post-table tr:first-child th {
+  background: var(--wash);
+  font-size: 0.8125rem;
+}
+.post-cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 16 / 10;
+  border-radius: inherit;
 }

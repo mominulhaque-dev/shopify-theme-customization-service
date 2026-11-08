@@ -6,7 +6,7 @@ import type { SiteSettings } from "@/lib/settings";
 
 export default function Header({ contact }: { contact: Pick<SiteSettings, "email" | "phoneDisplay" | "phoneE164" | "whatsappUrl"> }) {
   return (
-    <header>
+    <header className="site-header">
       <HeaderScrollState />
       <div className="wrap nav">
         <Link href="/" className="logo">
