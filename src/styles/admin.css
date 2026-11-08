@@ -817,3 +817,12 @@ td .adm-badge:first-child {
   border-color: var(--adm-brand);
   box-shadow: 0 0 0 3px var(--adm-brand-soft);
 }
+.adm-repeat-row {
+  grid-template-columns: 2fr 1fr 1fr auto;
+  align-items: end;
+}
+@media (max-width: 640px) {
+  .adm-repeat-row {
+    grid-template-columns: 1fr;
+  }
+}

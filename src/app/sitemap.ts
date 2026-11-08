@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { allRoutes } from "@/data/pages";
 import { getPosts } from "@/lib/posts";
+import { getCaseStudies } from "@/lib/cases";
 import { siteConfig } from "@/data/site";
 
 /**
@@ -12,7 +13,7 @@ import { siteConfig } from "@/data/site";
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getPosts();
+  const [posts, cases] = await Promise.all([getPosts(), getCaseStudies()]);
   const lastModified = new Date();
 
   const pages = allRoutes().map((route) => ({
@@ -26,5 +27,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(`${post.updated}T00:00:00Z`),
     })),
   ];
-  return [...pages, ...blog];
+  const work = cases.map((c) => ({
+    url: `${siteConfig.url}/work/${c.slug}/`,
+    lastModified: new Date(`${c.updated}T00:00:00Z`),
+  }));
+  return [...pages, ...work, ...blog];
 }
