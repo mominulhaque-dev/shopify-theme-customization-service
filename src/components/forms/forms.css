@@ -89,6 +89,7 @@
   color: var(--muted);
 }
 .form-row input,
+.form-row select,
 .form-row textarea {
   font-family: var(--font-body);
   font-size: 1rem;
@@ -105,10 +106,12 @@
   min-height: 8rem;
 }
 .form-row input:hover,
+.form-row select:hover,
 .form-row textarea:hover {
   border-color: var(--line-strong);
 }
 .form-row input:focus,
+.form-row select:focus,
 .form-row textarea:focus {
   outline: none;
   border-color: var(--brand);
@@ -171,4 +174,31 @@
   .form-foot .btn {
     width: 100%;
   }
+}
+
+/* Service + budget side by side; stacked on phones. */
+.form-row-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.form-row-split > div {
+  display: grid;
+  gap: inherit;
+}
+.form-row-split label {
+  display: block;
+}
+@media (max-width: 560px) {
+  .form-row-split {
+    grid-template-columns: 1fr;
+  }
+}
+/* Honeypot: off-screen, not display:none (some bots skip hidden fields). */
+.form-hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }

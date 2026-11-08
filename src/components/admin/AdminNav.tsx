@@ -8,6 +8,7 @@ import { useState } from "react";
 /** Sections are added here as each admin feature ships. */
 export const ADMIN_NAV = [
   { href: "/admin/", label: "Dashboard", icon: "◧" },
+  { href: "/admin/leads/", label: "Leads", icon: "✉" },
   { href: "/admin/settings/", label: "Settings", icon: "⚙" },
 ];
 

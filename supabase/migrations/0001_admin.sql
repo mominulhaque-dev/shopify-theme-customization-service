@@ -16,11 +16,11 @@
 --     → "Allow new users to sign up" off).
 -- =============================================================================
 
-create extension if not exists pgcrypto;
+create extension if not exists pgcrypto with schema extensions;
 
 -- ---------------------------------------------------------------- helpers ---
 create or replace function public.set_updated_at()
-returns trigger language plpgsql as $$
+returns trigger language plpgsql set search_path = '' as $$
 begin
   new.updated_at = now();
   return new;
@@ -179,6 +179,7 @@ create table if not exists public.posts (
   category     text not null default 'Guides',
   excerpt      text not null default '',
   cover_url    text,
+  visual       text,                                   -- built-in illustration key when no cover image
   takeaways    text[] not null default '{}',
   body_html    text not null default '',
   faq          jsonb not null default '[]'::jsonb,
@@ -215,6 +216,7 @@ create table if not exists public.case_studies (
   before_url        text,
   after_url         text,
   cover_url         text,
+  visual            text,
   testimonial_quote text not null default '',
   testimonial_name  text not null default '',
   meta_title        text not null default '',
@@ -243,7 +245,6 @@ create table if not exists public.redirects (
   destination text not null,
   permanent   boolean not null default true,
   active      boolean not null default true,
-  hits        int not null default 0,
   created_at  timestamptz not null default now()
 );
 alter table public.redirects enable row level security;
@@ -257,7 +258,7 @@ create policy "redirects admin write" on public.redirects
 -- --------------------------------------------------------- client portal ---
 create table if not exists public.projects (
   id               uuid primary key default gen_random_uuid(),
-  token            text not null unique default encode(gen_random_bytes(18), 'hex'),
+  token            text not null unique default encode(extensions.gen_random_bytes(18), 'hex'),
   title            text not null,
   client_name      text not null default '',
   client_email     text not null default '',
@@ -277,6 +278,8 @@ create table if not exists public.project_milestones (
   due_date   date,
   done_at    timestamptz
 );
+create index if not exists project_milestones_project_idx on public.project_milestones (project_id, sort);
+create index if not exists projects_lead_idx on public.projects (lead_id);
 alter table public.projects enable row level security;
 alter table public.project_milestones enable row level security;
 drop policy if exists "projects admin all" on public.projects;
