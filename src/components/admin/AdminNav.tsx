@@ -9,6 +9,7 @@ import { useState } from "react";
 export const ADMIN_NAV = [
   { href: "/admin/", label: "Dashboard", icon: "◧" },
   { href: "/admin/leads/", label: "Leads", icon: "✉" },
+  { href: "/admin/media/", label: "Media", icon: "▣" },
   { href: "/admin/settings/", label: "Settings", icon: "⚙" },
 ];
 
