@@ -122,14 +122,6 @@ export const page: PageContent = {
         },
       ],
     },
-    {
-      type: "related",
-      items: [
-        { label: "Online Store 2.0 migration", href: "/migration/", note: "When a legacy theme is the underlying cause" },
-        { label: "Store redesign", href: "/services/store-redesign/", note: "Designed against a budget" },
-        { label: "Pricing", href: "/pricing/", note: "Where speed work sits" },
-      ],
-    },
     ctaBlock(
       "Send the store and we will name the cause",
       "You get the five causes ranked for your store, with what each one is costing you and what fixing it involves, within two business days."

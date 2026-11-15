@@ -4,7 +4,7 @@ import Reveal from "@/components/animations/Reveal";
 import RevealGroup from "@/components/animations/RevealGroup";
 import TextReveal from "@/components/animations/TextReveal";
 import ContactForm from "@/components/forms/ContactForm";
-import { FaqSection, RelatedSection } from "@/components/page/BlockFaq";
+import { FaqSection } from "@/components/page/BlockFaq";
 import { StepsSection } from "@/components/page/BlockCards";
 import { PROCESS_STEPS } from "@/data/pages/_shared";
 import { OG_IMAGE } from "@/data/site";
@@ -153,18 +153,6 @@ export default async function HirePage() {
         }}
       />
 
-      <RelatedSection
-        block={{
-          type: "related",
-          heading: "Before you send it",
-          items: [
-            { label: "Pricing", href: "/pricing/", note: "The published ladder and what moves a quote" },
-            { label: "Services", href: "/services/", note: "What we can help you change" },
-            { label: "Case studies", href: "/work/", note: "Ten projects, including the rescopes" },
-            { label: "Themes", href: "/themes/", note: "Theme generations and trade-offs" },
-          ],
-        }}
-      />
     </>
   );
 }

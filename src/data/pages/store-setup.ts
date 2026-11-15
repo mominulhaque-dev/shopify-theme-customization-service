@@ -139,15 +139,6 @@ export const page: PageContent = {
         },
       ],
     },
-    {
-      type: "related",
-      items: [
-        { label: "Themes we support", href: "/themes/", note: "Choosing with the ceiling in mind" },
-        { label: "Customization services", href: "/services/", note: "After launch, when you change things" },
-        { label: "Pricing", href: "/pricing/", note: "How fixed pricing works" },
-        { label: "Themes we support", href: "/themes/", note: "Choosing a theme for your store" },
-      ],
-    },
     ctaBlock(
       "Opening a store?",
       "Tell us what you sell, whether your content is ready, and the date you want to open. You get a fixed-price setup scope and a launch date within two business days."
