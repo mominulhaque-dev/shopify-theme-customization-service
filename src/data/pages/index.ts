@@ -1,15 +1,7 @@
 import type { PageContent } from "@/types/page";
 
 import { page as services } from "@/data/pages/services";
-import { page as themes } from "@/data/pages/themes";
 import { page as pricing } from "@/data/pages/pricing";
-import { page as migration } from "@/data/pages/migration";
-import { page as storeSetup } from "@/data/pages/store-setup";
-import { page as work } from "@/data/pages/work";
-
-import { page as svcDevelopment } from "@/data/pages/svc-development";
-import { page as svcRedesign } from "@/data/pages/svc-redesign";
-import { page as svcSpeed } from "@/data/pages/svc-speed";
 
 /**
  * The interior pages intentionally published by this site.
@@ -22,14 +14,7 @@ import { page as svcSpeed } from "@/data/pages/svc-speed";
  */
 export const PAGE_LIST: PageContent[] = [
   services,
-  themes,
-  work,
   pricing,
-  migration,
-  storeSetup,
-  svcDevelopment,
-  svcRedesign,
-  svcSpeed,
 ];
 
 /** Slug → content, keyed by the route path with leading and trailing slashes. */

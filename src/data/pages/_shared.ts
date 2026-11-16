@@ -63,7 +63,7 @@ export function ctaBlock(
     heading,
     body,
     cta: { label: "Get a scoped quote", href: "/hire/" },
-    ...(options?.secondary === false ? {} : { secondary: { label: "See pricing", href: "/pricing/" } }),
+    ...(options?.secondary === false ? {} : { secondary: { label: "See services", href: "/services/" } }),
     tone: dark ? "dark" : "tint",
   };
 }

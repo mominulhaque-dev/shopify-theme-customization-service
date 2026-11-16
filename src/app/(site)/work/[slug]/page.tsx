@@ -64,7 +64,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Home", item: `${siteConfig.url}/` },
-        { "@type": "ListItem", position: 2, name: "Work", item: `${siteConfig.url}/work/` },
+        { "@type": "ListItem", position: 2, name: "Services", item: `${siteConfig.url}/services/` },
         { "@type": "ListItem", position: 3, name: c.title, item: url },
       ],
     },
@@ -73,7 +73,7 @@ export default async function CaseStudyPage({ params }: { params: { slug: string
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Breadcrumbs trail={[{ label: "Work", href: "/work/" }]} current={c.title} />
+      <Breadcrumbs trail={[{ label: "Services", href: "/services/" }]} current={c.title} />
 
       <article className="post case">
         <div className="post-head wrap">

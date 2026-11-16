@@ -44,20 +44,16 @@ export default function NotFound() {
           <Reveal kind="fade" delay={0.4}>
             <div className="related" style={{ marginTop: "2rem" }}>
               <Link href="/services/" className="rel">
-                <b>Theme customization</b>
-                <span>Every layer we work in, priced</span>
+                <b>Services</b>
+                <span>What we do and how projects run</span>
               </Link>
               <Link href="/pricing/" className="rel">
                 <b>Pricing</b>
                 <span>Four published tiers</span>
               </Link>
-              <Link href="/themes/" className="rel">
-                <b>Themes</b>
-                <span>Dawn, Prestige, Spotlight, legacy</span>
-              </Link>
-              <Link href="/work/" className="rel">
-                <b>Case studies</b>
-                <span>Examples of theme customization work</span>
+              <Link href="/blog/" className="rel">
+                <b>Blog</b>
+                <span>Guides and practical advice</span>
               </Link>
             </div>
           </Reveal>
