@@ -146,14 +146,6 @@ export const page: PageContent = {
         },
       ],
     },
-    {
-      type: "related",
-      items: [
-        { label: "Migration to 2.0", href: "/migration/", note: "Rebuild, do not copy" },
-        { label: "Customization services", href: "/services/", note: "Work tailored to your theme" },
-        { label: "Pricing", href: "/pricing/", note: "What each tier includes" },
-      ],
-    },
     ctaBlock(
       "Not sure what your theme can take?",
       "Send the store URL. We will tell you which generation your theme belongs to, what your request costs in it, and whether a migration would be cheaper than the work you are asking for."

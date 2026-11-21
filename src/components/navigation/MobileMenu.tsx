@@ -4,7 +4,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { footerMenu, mainNav, siteConfig } from "@/data/site";
+import { footerMenu, mainNav } from "@/data/site";
+
+interface Contact {
+  email: string;
+  phoneDisplay: string;
+  phoneE164: string;
+  whatsappUrl: string;
+}
 
 /**
  * Mobile navigation drawer.
@@ -21,7 +28,7 @@ import { footerMenu, mainNav, siteConfig } from "@/data/site";
  * While open: focus is trapped inside, the page behind is `inert`, and both
  * native scroll and Lenis are paused (scroll position is preserved).
  */
-export default function MobileMenu() {
+export default function MobileMenu({ contact }: { contact: Contact }) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
@@ -130,13 +137,13 @@ export default function MobileMenu() {
         </Link>
 
         <div className="mnav-contact">
-          <a href={`mailto:${siteConfig.email}`} tabIndex={open ? 0 : -1}>
-            {siteConfig.email}
+          <a href={`mailto:${contact.email}`} tabIndex={open ? 0 : -1}>
+            {contact.email}
           </a>
-          <a href={`tel:${siteConfig.phoneE164}`} tabIndex={open ? 0 : -1}>
-            {siteConfig.phoneDisplay}
+          <a href={`tel:${contact.phoneE164}`} tabIndex={open ? 0 : -1}>
+            {contact.phoneDisplay}
           </a>
-          <a href={siteConfig.whatsapp} target="_blank" rel="noopener noreferrer" tabIndex={open ? 0 : -1}>
+          <a href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer" tabIndex={open ? 0 : -1}>
             WhatsApp
           </a>
         </div>

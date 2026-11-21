@@ -5,7 +5,7 @@
    scroll frame, and the cost scales with the blur radius. 8px still separates the
    bar from the content sliding under it; `saturate()` was a second filter pass
    for an effect nobody could name. */
-header {
+.site-header {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -15,7 +15,7 @@ header {
   transition: border-color var(--dur-med) var(--ease-out), box-shadow var(--dur-med) var(--ease-out),
     background var(--dur-med);
 }
-header.is-scrolled {
+.site-header.is-scrolled {
   border-bottom-color: var(--line);
   box-shadow: 0 10px 30px -24px rgba(21, 20, 26, 0.45);
 }
@@ -263,7 +263,7 @@ header.is-scrolled {
    opaque, not just unblurred: a translucent header with nothing diffusing what
    scrolls under it is unreadable. */
 @media (max-width: 700px) {
-  header {
+  .site-header {
     background: var(--paper);
     backdrop-filter: none;
   }

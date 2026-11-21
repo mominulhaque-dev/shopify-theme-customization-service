@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
+import { BUDGET_OPTIONS, SERVICE_OPTIONS } from "@/data/lead-options";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -13,6 +14,8 @@ type Status = "idle" | "submitting" | "success" | "error";
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  // When the form appeared; submissions faster than a human could type are dropped server-side.
+  const shownAt = useRef(Date.now());
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -26,6 +29,12 @@ export default function ContactForm() {
       email: String(data.get("email") || ""),
       storeUrl: String(data.get("storeUrl") || ""),
       message: String(data.get("message") || ""),
+      service: String(data.get("service") || ""),
+      budget: String(data.get("budget") || ""),
+      website: String(data.get("website") || ""), // honeypot: real visitors never see this field
+      elapsedMs: Date.now() - shownAt.current,
+      sourcePage: window.location.pathname,
+      referrer: document.referrer.slice(0, 500),
     };
 
     try {
@@ -85,12 +94,42 @@ export default function ContactForm() {
           A password-protected store is fine — send the password too if you have one.
         </span>
       </div>
+      <div className="form-row form-row-split">
+        <div>
+          <label htmlFor="service">What do you need?</label>
+          <select id="service" name="service" defaultValue="">
+            <option value="" disabled>
+              Choose a service
+            </option>
+            {SERVICE_OPTIONS.map((option) => (
+              <option key={option}>{option}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="budget">Budget</label>
+          <select id="budget" name="budget" defaultValue="">
+            <option value="" disabled>
+              Choose a range
+            </option>
+            {BUDGET_OPTIONS.map((option) => (
+              <option key={option}>{option}</option>
+            ))}
+          </select>
+        </div>
+      </div>
       <div className="form-row">
         <label htmlFor="message">What do you want changed?</label>
         <textarea id="message" name="message" rows={6} required aria-describedby="message-hint" />
         <span className="hint" id="message-hint">
           A list is ideal. Include your theme name and any date you are working toward.
         </span>
+      </div>
+
+      {/* Honeypot. Hidden from people and screen readers; bots fill it in. */}
+      <div className="form-hp" aria-hidden="true">
+        <label htmlFor="website">Leave this empty</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
       {status === "error" && (

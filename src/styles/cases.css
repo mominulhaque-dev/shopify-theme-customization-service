@@ -1,0 +1,161 @@
+/* ==========================================================================
+   Case studies published from the admin (/work/ list + /work/<slug>/).
+   The article reuses the blog layout classes; this adds what is specific.
+   ========================================================================== */
+.case-list-sec {
+  padding: var(--sp-section) 0;
+}
+.case-list-sec .head {
+  margin-bottom: var(--sp-head);
+}
+.case-body {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+.case-body > section > h2,
+.case .post-content > h2 {
+  font-size: var(--t-h2);
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+.case .post-content > h2 {
+  margin-top: 2.5rem;
+}
+.case .post-content > h2:first-child {
+  margin-top: 0;
+}
+
+/* before / after slider */
+.ba {
+  margin: 0;
+}
+.ba-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--wash);
+  box-shadow: var(--sh);
+  user-select: none;
+}
+.ba-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.ba-before {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  clip-path: inset(0 calc(100% - var(--ba, 50%)) 0 0);
+}
+.ba-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--ba, 50%);
+  width: 2px;
+  margin-left: -1px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(21, 20, 26, 0.25);
+  pointer-events: none;
+}
+.ba-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--deep);
+  font-size: 1rem;
+  box-shadow: 0 4px 14px rgba(21, 20, 26, 0.3);
+}
+.ba-tag {
+  position: absolute;
+  top: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(21, 20, 26, 0.78);
+  color: #fff;
+  font-size: 0.75rem;
+  pointer-events: none;
+}
+.ba-tag-before {
+  left: 0.75rem;
+}
+.ba-tag-after {
+  right: 0.75rem;
+}
+.ba-range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+}
+.ba-frame:has(.ba-range:focus-visible) {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+
+/* results */
+.case-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: 1rem;
+}
+.case-result {
+  display: grid;
+  gap: 0.4rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--r);
+  background: var(--wash);
+}
+.case-result-label {
+  font-size: var(--t-sm);
+  color: var(--muted);
+}
+.case-result-vals {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  font-size: 1.35rem;
+}
+.case-result-vals s {
+  color: var(--muted);
+  font-size: 1rem;
+}
+.case-result-vals strong {
+  color: var(--ink);
+}
+.case-quote {
+  margin: 2.5rem 0 0;
+  padding: 1.5rem 1.75rem;
+  border-left: 4px solid var(--brand);
+  background: var(--wash);
+  border-radius: 0 var(--r) var(--r) 0;
+}
+.case-quote p {
+  font-size: 1.15rem;
+  color: var(--ink);
+}
+.case-quote cite {
+  display: block;
+  margin-top: 0.6rem;
+  font-style: normal;
+  font-size: var(--t-sm);
+  color: var(--muted);
+}

@@ -14,6 +14,8 @@ const nextConfig = {
 
   images: {
     formats: ["image/avif", "image/webp"],
+    /* Uploads from the admin media library live in Supabase Storage. */
+    remotePatterns: [{ protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" }],
   },
 
 };

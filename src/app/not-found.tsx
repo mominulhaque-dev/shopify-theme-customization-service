@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SiteChrome from "@/components/layout/SiteChrome";
 import Backdrop from "@/components/animations/Backdrop";
 import Reveal from "@/components/animations/Reveal";
 import TextReveal from "@/components/animations/TextReveal";
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
  */
 export default function NotFound() {
   return (
+    <SiteChrome>
     <div className="phero has-backdrop">
       <Backdrop variant="contour" noise />
       <div className="wrap">
@@ -62,5 +64,6 @@ export default function NotFound() {
         </div>
       </div>
     </div>
+    </SiteChrome>
   );
 }

@@ -136,14 +136,6 @@ export const page: PageContent = {
         },
       ],
     },
-    {
-      type: "related",
-      items: [
-        { label: "Themes we support", href: "/themes/", note: "Where you are migrating to" },
-        { label: "Shopify development", href: "/services/shopify-development/", note: "Custom sections and theme logic" },
-        { label: "Pricing", href: "/pricing/", note: "Where migration sits" },
-      ],
-    },
     ctaBlock(
       "Find out whether to migrate or patch",
       "Send your store URL and the changes you are considering. We will tell you which is cheaper for you over the next year, with both numbers, within two business days."

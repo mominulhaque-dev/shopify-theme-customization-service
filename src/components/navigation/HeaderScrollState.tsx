@@ -10,7 +10,7 @@ import { useEffect } from "react";
  */
 export default function HeaderScrollState() {
   useEffect(() => {
-    const header = document.querySelector("header");
+    const header = document.querySelector(".site-header");
     if (!header) return;
 
     const onScroll = () => {

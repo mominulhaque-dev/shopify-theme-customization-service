@@ -140,7 +140,7 @@
 @media print {
   .bd,
   .scroll-progress,
-  header,
+  .site-header,
   footer,
   .marquee {
     display: none !important;

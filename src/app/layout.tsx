@@ -1,9 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import MotionProvider from "@/components/animations/MotionProvider";
-import ScrollProgress from "@/components/animations/ScrollProgress";
-import SmoothScrollProvider from "@/components/animations/SmoothScrollProvider";
 import { siteConfig } from "@/data/site";
 
 import "./globals.css";
@@ -66,30 +61,6 @@ export const viewport: Viewport = {
 
 /* Share card: public/og-image.png (1200x630), a static export; no next/og route. */
 
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: siteConfig.name,
-  url: siteConfig.url,
-  email: siteConfig.email,
-  telephone: siteConfig.phoneE164,
-  description: siteConfig.description,
-  priceRange: "$50–$1,500",
-  areaServed: "Worldwide",
-  knowsAbout: [
-    "Shopify theme customization",
-    "Shopify Liquid development",
-    "Online Store 2.0 migration",
-    "Shopify store speed optimization",
-    "Shopify conversion rate optimization",
-  ],
-  makesOffer: [
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Shopify theme customization" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Online Store 2.0 migration" } },
-    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Shopify store redesign" } },
-  ],
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -111,24 +82,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
-      <body>
-        <script
-          type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-        />
-        <a href="#main" className="skip-link">
-          Skip to content
-        </a>
-        <ScrollProgress />
-        <SmoothScrollProvider>
-          <MotionProvider>
-            <Header />
-            <main id="main">{children}</main>
-            <Footer />
-          </MotionProvider>
-        </SmoothScrollProvider>
-      </body>
+      {/* The website chrome (header, footer, motion, structured data) lives in
+          app/(site)/layout.tsx; the admin has its own layout under app/admin. */}
+      <body>{children}</body>
     </html>
   );
 }

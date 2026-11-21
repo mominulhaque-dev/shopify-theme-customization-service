@@ -122,14 +122,6 @@ export const page: PageContent = {
         },
       ],
     },
-    {
-      type: "related",
-      items: [
-        { label: "Store redesign", href: "/services/store-redesign/", note: "When the brand, not the behaviour, is the problem" },
-        { label: "Themes we support", href: "/themes/", note: "Starting points for custom development" },
-        { label: "Pricing", href: "/pricing/", note: "The ladder in full" },
-      ],
-    },
     ctaBlock(
       "Describe the behaviour you need",
       "Send the store URL and what the theme cannot currently do. We will tell you whether it is a theme build, an app, or something Shopify simply does not allow — within two business days."

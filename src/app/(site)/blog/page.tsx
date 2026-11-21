@@ -3,9 +3,9 @@ import Link from "next/link";
 import Breadcrumbs from "@/components/page/Breadcrumbs";
 import Reveal from "@/components/animations/Reveal";
 import RevealGroup from "@/components/animations/RevealGroup";
-import { Visual } from "@/components/ui/visuals";
+import PostMedia from "@/components/blog/PostMedia";
 import NewsletterBand from "@/components/blog/NewsletterBand";
-import { BLOG_POSTS } from "@/data/blog";
+import { getPosts } from "@/lib/posts";
 import { OG_IMAGE, siteConfig } from "@/data/site";
 
 export const metadata: Metadata = {
@@ -25,14 +25,17 @@ function formatDate(iso: string) {
   });
 }
 
-export default function BlogIndex() {
-  const [featured, ...rest] = BLOG_POSTS;
+export const revalidate = 3600;
+
+export default async function BlogIndex() {
+  const posts = await getPosts();
+  const [featured, ...rest] = posts;
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: `${siteConfig.name} Blog`,
     url: `${siteConfig.url}/blog/`,
-    blogPost: BLOG_POSTS.map((p) => ({
+    blogPost: posts.map((p) => ({
       "@type": "BlogPosting",
       headline: p.title,
       url: `${siteConfig.url}/blog/${p.slug}/`,
@@ -62,7 +65,7 @@ export default function BlogIndex() {
             <Reveal kind="up">
               <Link href={`/blog/${featured.slug}/`} className="post-card post-featured">
                 <div className="post-media figure">
-                  <Visual name={featured.visual} />
+                  <PostMedia post={featured} eager />
                 </div>
                 <div className="post-body">
                   <span className="post-cat">{featured.category}</span>
@@ -80,7 +83,7 @@ export default function BlogIndex() {
             {rest.map((post) => (
               <Link href={`/blog/${post.slug}/`} className="post-card" key={post.slug}>
                 <div className="post-media figure">
-                  <Visual name={post.visual} />
+                  <PostMedia post={post} />
                 </div>
                 <div className="post-body">
                   <span className="post-cat">{post.category}</span>

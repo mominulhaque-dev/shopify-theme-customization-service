@@ -151,16 +151,6 @@ export const page: PageContent = {
         },
       ],
     },
-    {
-      type: "related",
-      items: [
-        { label: "Services", href: "/services/", note: "What we do and how projects run" },
-        { label: "Migration", href: "/migration/", note: "Quoted separately, and why" },
-        { label: "Store setup", href: "/store-setup/", note: "New store, not an existing theme" },
-        { label: "Case studies", href: "/work/", note: "Scope and outcome per project" },
-        { label: "Hire us", href: "/hire/", note: "Send a URL, get a number" },
-      ],
-    },
     ctaBlock(
       "Get the number for your actual request",
       "Send your store URL and what you want changed. You get a fixed price, a delivery date and the scope in writing within two business days. No discovery call required."

@@ -135,15 +135,6 @@ export const page: PageContent = {
         },
       ],
     },
-    {
-      type: "related",
-      items: [
-        { label: "Pricing", href: "/pricing/", note: "Which tier each project sat in" },
-        { label: "Migration", href: "/migration/", note: "Where two of these ended up" },
-        { label: "Services", href: "/services/", note: "The work we take on" },
-        { label: "Hire us", href: "/hire/", note: "Scoped quote in two business days" },
-      ],
-    },
     ctaBlock(
       "Your project would be the twenty-sixth",
       "Send your store URL and what you want changed. You get a fixed price, a delivery date and a written scope within two business days."

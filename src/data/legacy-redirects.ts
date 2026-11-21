@@ -1,0 +1,42 @@
+/**
+ * Pages removed in the Nov 2026 revision, with the closest live page. Seeded
+ * into the Redirects table from /admin/redirects with one click, so old links
+ * and search results land somewhere useful instead of a 404.
+ */
+export const LEGACY_REDIRECTS: Array<[source: string, destination: string]> = [
+  ["/customization/", "/services/"],
+  ["/customization/css/", "/services/shopify-development/"],
+  ["/customization/liquid/", "/services/shopify-development/"],
+  ["/customization/schema/", "/services/shopify-development/"],
+  ["/customization/sections/", "/services/shopify-development/"],
+  ["/customization/product-page/", "/blog/shopify-product-page-customization/"],
+  ["/customization/dawn/", "/blog/shopify-dawn-theme-customization/"],
+  ["/customization/prestige/", "/themes/"],
+  ["/customization/spotlight/", "/themes/"],
+  ["/customization/fonts/", "/services/store-redesign/"],
+  ["/customization/mobile/", "/services/store-redesign/"],
+  ["/customization/no-code/", "/services/"],
+  ["/customization/legacy-themes/", "/migration/"],
+  ["/guides/", "/blog/"],
+  ["/guides/customize-theme/", "/blog/customize-shopify-theme-or-buy-new/"],
+  ["/guides/change-theme/", "/blog/customize-shopify-theme-or-buy-new/"],
+  ["/guides/edit-theme/", "/blog/"],
+  ["/guides/theme-editor/", "/blog/"],
+  ["/guides/theme-updates/", "/blog/shopify-online-store-2-0-upgrade/"],
+  ["/guides/identify-theme/", "/themes/"],
+  ["/guides/hire-theme-developer/", "/hire/"],
+  ["/process/", "/services/"],
+  ["/services/conversion-optimization/", "/services/store-redesign/"],
+  ["/custom-theme-development/", "/services/shopify-development/"],
+  ["/custom-theme-vs-template/", "/blog/customize-shopify-theme-or-buy-new/"],
+  ["/work/accessories-brooklyn-to-dawn-migration/", "/work/"],
+  ["/work/apparel-dawn-product-page/", "/work/"],
+  ["/work/b2b-wholesale-price-list-templates/", "/work/"],
+  ["/work/cosmetics-mobile-conversion-pass/", "/work/"],
+  ["/work/footwear-legacy-turbo-rescope/", "/work/"],
+  ["/work/furniture-collection-filtering/", "/work/"],
+  ["/work/home-goods-prestige-brand-system/", "/work/"],
+  ["/work/jewellery-spotlight-editorial-templates/", "/work/"],
+  ["/work/outdoor-gear-speed-rebuild/", "/work/"],
+  ["/work/supplements-subscription-product-page/", "/work/"],
+];

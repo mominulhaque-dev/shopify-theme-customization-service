@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { allRoutes } from "@/data/pages";
-import { BLOG_POSTS } from "@/data/blog";
+import { getPosts } from "@/lib/posts";
+import { getCaseStudies } from "@/lib/cases";
 import { siteConfig } from "@/data/site";
 
 /**
@@ -9,7 +10,10 @@ import { siteConfig } from "@/data/site";
  * deliberately omitted (Google ignores both) — each entry is a URL and its
  * last-modified date only.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 3600;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const [posts, cases] = await Promise.all([getPosts(), getCaseStudies()]);
   const lastModified = new Date();
 
   const pages = allRoutes().map((route) => ({
@@ -18,10 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
   const blog = [
     { url: `${siteConfig.url}/blog/`, lastModified },
-    ...BLOG_POSTS.map((post) => ({
+    ...posts.map((post) => ({
       url: `${siteConfig.url}/blog/${post.slug}/`,
-      lastModified: new Date(`${post.date}T00:00:00Z`),
+      lastModified: new Date(`${post.updated}T00:00:00Z`),
     })),
   ];
-  return [...pages, ...blog];
+  const work = cases.map((c) => ({
+    url: `${siteConfig.url}/work/${c.slug}/`,
+    lastModified: new Date(`${c.updated}T00:00:00Z`),
+  }));
+  return [...pages, ...work, ...blog];
 }

@@ -123,15 +123,6 @@ export const page: PageContent = {
         },
       ],
     },
-    {
-      type: "related",
-      items: [
-        { label: "Speed optimization", href: "/services/speed-optimization/", note: "The budget a redesign runs against" },
-        { label: "Shopify development", href: "/services/shopify-development/", note: "When a design needs new behaviour" },
-        { label: "Themes we support", href: "/themes/", note: "Which themes carry a redesign best" },
-        { label: "Pricing", href: "/pricing/", note: "The ladder in full" },
-      ],
-    },
     ctaBlock(
       "Send the store you want redesigned",
       "We will tell you whether your theme can carry the design you have in mind, and what the full pass costs, within two business days."

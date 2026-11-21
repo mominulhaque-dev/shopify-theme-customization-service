@@ -6,6 +6,7 @@ import RevealGroup from "@/components/animations/RevealGroup";
 import TextReveal from "@/components/animations/TextReveal";
 import { linkify } from "@/lib/linkify";
 import { TierScopeIcon } from "@/components/ui/illustrations";
+import { getSettings } from "@/lib/settings";
 
 /**
  * The scope/cost ladder — the site's signature section. Copy verbatim (§3).
@@ -16,7 +17,8 @@ import { TierScopeIcon } from "@/components/ui/illustrations";
  * row lights its own hairline and lifts its price on hover, so the ladder feels
  * like a set of choices rather than a static table.
  */
-export default function DiffSection() {
+export default async function DiffSection() {
+  const { tiers } = await getSettings();
   return (
     <section className="diff-sec has-backdrop" aria-labelledby="pricing-heading" data-curtain="3">
       <Backdrop variant="grid" tone="dark" noise />
@@ -58,8 +60,8 @@ export default function DiffSection() {
               </div>
               <div className="tier-cost">
                 <div className="mob-label">Price and turnaround</div>
-                <div className="tier-price">{tier.price}</div>
-                <div className="tier-time">{tier.time}</div>
+                <div className="tier-price">{tiers[index]?.price ?? tier.price}</div>
+                <div className="tier-time">{tiers[index]?.time ?? tier.time}</div>
               </div>
             </div>
           ))}
