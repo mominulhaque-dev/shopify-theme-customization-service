@@ -68,7 +68,7 @@ limit 1;
 -- ---------------------------------------------------------- site settings ---
 create table if not exists public.site_settings (
   id            int primary key default 1 check (id = 1),
-  email         text not null default 'hihopifythemecustomization@gmail.com',
+  email         text not null default 'hishopifythemecustomization@gmail.com',
   phone_display text not null default '01580424024',
   phone_e164    text not null default '+8801580424024',
   whatsapp_url  text not null default 'https://wa.me/8801580424024',

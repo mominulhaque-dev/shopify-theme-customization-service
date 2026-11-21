@@ -24,7 +24,7 @@ scratch").
   `noUncheckedIndexedAccess`, plain CSS, GSAP 3.15 + ScrollTrigger + SplitText +
   DrawSVG + CustomEase, Lenis for smooth scroll, Resend for the contact form.
 - **Contact details (real, in `src/data/site.ts`):**
-  - Email: `hihopifythemecustomization@gmail.com`
+  - Email: `hishopifythemecustomization@gmail.com`
   - Phone: `01580424024` / `+8801580424024`
   - WhatsApp: `https://wa.me/8801580424024`
 

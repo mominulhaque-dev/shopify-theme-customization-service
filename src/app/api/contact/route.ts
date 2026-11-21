@@ -104,7 +104,7 @@ export async function POST(request: Request) {
 
   let emailed = false;
   if (resend) {
-    const contactEmail = process.env.CONTACT_EMAIL || "hihopifythemecustomization@gmail.com";
+    const contactEmail = process.env.CONTACT_EMAIL || "hishopifythemecustomization@gmail.com";
     const key = idempotencyKey("contact", lead.email, lead.storeUrl, lead.message);
     try {
       const { error } = await resend.emails.send(

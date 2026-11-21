@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: "3sVTW5QSGgp2Ekr-TN2voz0Bm7BKc5B4n95GifDxk3M",
+  },
   title: {
     default: `${siteConfig.name}: Scope, Cost and Timeline`,
     // Page titles already lead with "Shopify …"; a brand suffix pushed most of

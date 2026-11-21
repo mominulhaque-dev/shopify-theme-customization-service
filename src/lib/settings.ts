@@ -30,7 +30,7 @@ export interface SiteSettings {
 }
 
 export const DEFAULT_SETTINGS: SiteSettings = {
-  email: "hihopifythemecustomization@gmail.com",
+  email: "hishopifythemecustomization@gmail.com",
   phoneDisplay: "01580424024",
   phoneE164: "+8801580424024",
   whatsappUrl: "https://wa.me/8801580424024",
