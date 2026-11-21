@@ -30,7 +30,7 @@ scratch").
 
 ## 2. Architecture — the three decisions that shape everything
 
-**a. One catch-all route renders 9 interior pages.** `src/app/[...slug]/page.tsx` looks
+**a. One catch-all route renders the registry pages (currently 2: Services, Pricing).** `src/app/[...slug]/page.tsx` looks
 up `src/data/pages/index.ts` and hands the result to `PageRenderer`. Pages are
 data (`PageContent` in `src/types/page.ts`), composed from a discriminated union
 of block types. `generateStaticParams` means they are all still statically
@@ -110,14 +110,21 @@ to their destinations, so no wording was altered to make a link fit. Add to
 
 Other pages have no such restriction.
 
-## 5. Routes — 11 published content URLs
+## 5. Routes — 4 published content URLs
 
-Homepage, `/hire/`, and 9 registry pages: `/services/`,
-`/services/shopify-development/`, `/services/store-redesign/`,
-`/services/speed-optimization/`, `/themes/`, `/work/`, `/pricing/`,
-`/migration/` and `/store-setup/` — the "Yes" rows of the "URLs" tab in
-sitemap-urls.xlsx (Nov 2026 revision). Other page routes are not registered and
-return 404; only these URLs appear in the sitemap, with `lastmod` only (no
+Homepage, `/hire/`, and 2 registry pages: `/services/` and `/pricing/`.
+
+**Nov 2026 cut:** the client asked to keep only Services and Pricing, so the
+six other interior pages — `/themes/`, `/work/`, `/migration/`, `/store-setup/`,
+`/services/shopify-development/`, `/services/store-redesign/` and
+`/services/speed-optimization/` — were deleted from the registry and their data
+files removed. Every internal link that pointed at them was repointed to
+`/services/` (or, for the Services page's own service cards, turned into
+non-linking info cards). The removed URLs 301 to `/services/` via the redirects
+table (see §5b); those rows are also seeded in `legacy-redirects.ts`. The
+case-study *detail* route `/work/<slug>/` still exists for the admin case-studies
+feature, but the `/work/` index is gone. Other page routes are not registered and
+return 404; only the live URLs appear in the sitemap, with `lastmod` only (no
 `changefreq`/`priority`, by request).
 
 **Blog (Nov 2026).** `/blog/` and `/blog/<slug>/` are hand-built routes in
@@ -143,8 +150,8 @@ Service pages carry no "From $" figures any more.
 
 `npm run audit:links` walks the prerendered HTML, collects every internal href
 and checks it against the pages that actually built. It also fails on `#`,
-`javascript:void(0)` and empty hrefs. Currently: 11 distinct internal targets,
-zero broken, zero placeholders, zero orphan pages.
+`javascript:void(0)` and empty hrefs. Currently: 10 distinct internal targets,
+zero broken, zero placeholders.
 
 `trailingSlash: true` is on because every href in the site is written with one.
 Routes not in the published list resolve to 404 unless a redirect is added in `/admin/redirects/` (one click seeds the removed Nov 2026 URLs).
@@ -183,12 +190,14 @@ been exercised against the real project yet.
   - Blog: TipTap editor → `body_html`, sanitised on save (`lib/blog-html.ts`).
     `getPosts()` (`lib/posts.ts`, tag `posts`) falls back to `data/blog.ts`
     until any post is published in the DB; "Import" copies the five into it.
-  - Case studies: `/work/<slug>/` + before/after slider; listed on `/work/`
-    after the intro block (`PageRenderer`), tag `cases`.
+  - Case studies: `/work/<slug>/` + before/after slider, tag `cases`. The
+    `/work/` index page was removed in the Nov cut, so published case studies
+    are reachable only by their own detail URL (and from the admin).
   - Media: Supabase Storage bucket `media` (raster images ≤ 5 MB, no SVG);
     `MediaPicker` / `MediaLibraryDialog` reuse it in forms.
   - Redirects: normalised paths (`lib/redirects.ts`), loop check, one-click
-    seed of the 35 pages removed in Nov (`data/legacy-redirects.ts`).
+    seed of the legacy + Nov-cut URLs (42 rows, `data/legacy-redirects.ts`), all
+    301ing to live pages. The live DB table was reconciled to this list.
   - Settings: `getSettings()` cached under `settings`; tier price/time feed
     `DiffSection` and `priceList` blocks; contact details feed header,
     footer, mobile menu, `/hire/` and the portal.

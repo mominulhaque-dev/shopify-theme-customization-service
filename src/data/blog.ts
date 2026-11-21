@@ -123,10 +123,10 @@ export const BLOG_POSTS: BlogPost[] = [
         ["Build a custom theme", "A theme designed and coded from zero just for you", "Usually $10,000+"],
       ] },
       { type: "h2", text: "Question 1: Is the problem how it looks, or what it can do?" },
-      { type: "p", text: "If your store looks plain or off-brand, that is a design problem, and design can be changed inside your current theme: colours, fonts, spacing, images and layout. That is exactly what a [store redesign](/services/store-redesign/) on your existing theme does." },
-      { type: "p", text: "If your theme simply cannot do something you need, like showing bundles or filtering products the way your customers shop, that is a feature problem. It can usually still be added with a [custom section](/services/shopify-development/), without switching themes." },
+      { type: "p", text: "If your store looks plain or off-brand, that is a design problem, and design can be changed inside your current theme: colours, fonts, spacing, images and layout. That is exactly what a store redesign on your existing theme does." },
+      { type: "p", text: "If your theme simply cannot do something you need, like showing bundles or filtering products the way your customers shop, that is a feature problem. It can usually still be added with a custom section, without switching themes." },
       { type: "h2", text: "Question 2: How old is your theme?" },
-      { type: "p", text: "Shopify themes released before 2021 are often called vintage themes. They do not support moving sections around on every page. If yours is one of them and you keep asking for changes, each change gets more expensive. At that point, moving to a newer theme is often the cheaper long-term choice. Our [theme comparison](/themes/) shows where common themes sit." },
+      { type: "p", text: "Shopify themes released before 2021 are often called vintage themes. They do not support moving sections around on every page. If yours is one of them and you keep asking for changes, each change gets more expensive. At that point, moving to a newer theme is often the cheaper long-term choice." },
       { type: "h2", text: "Question 3: How many changes are on your list?" },
       { type: "list", items: [
         "One to three changes: customize your current theme.",
@@ -193,7 +193,7 @@ export const BLOG_POSTS: BlogPost[] = [
         ["Custom code", "Moved across properly, not copied blindly"],
       ] },
       { type: "h2", text: "Will upgrading hurt my SEO?" },
-      { type: "p", text: "Changing the theme does not change your web addresses, page titles or product descriptions, so done properly it should not hurt your search rankings. The things to check are headings, image descriptions and page speed, which a careful [Online Store 2.0 migration](/migration/) checks before going live." },
+      { type: "p", text: "Changing the theme does not change your web addresses, page titles or product descriptions, so done properly it should not hurt your search rankings. The things to check are headings, image descriptions and page speed, which a careful Online Store 2.0 migration checks before going live." },
       { type: "p", text: "Not sure whether to patch or upgrade? [Send us your store link](/hire/) and your list of changes. We will price both options so you can compare." },
     ],
     faq: [

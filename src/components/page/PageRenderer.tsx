@@ -52,8 +52,8 @@ export function pageMetadata(page: PageContent): Metadata {
  */
 export default async function PageRenderer({ page }: { page: PageContent }) {
   const { tiers } = await getSettings();
-  // Case studies published from the admin appear on /work/ after the intro block.
-  const cases = page.slug === "/work/" ? await getCaseStudies() : [];
+  // /work/ page was removed; case studies are admin-only now.
+  const cases: Awaited<ReturnType<typeof getCaseStudies>> = [];
   const faq = page.blocks.find((block) => block.type === "faq");
   const jsonLd = buildJsonLd(page, faq);
 

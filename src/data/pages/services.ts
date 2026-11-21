@@ -42,22 +42,18 @@ export const page: PageContent = {
         {
           title: "Shopify development",
           body: "Custom sections, apps blocks, metafield-driven content and the JavaScript behaviour a theme setting cannot reach.",
-          href: "/services/shopify-development/",
         },
         {
           title: "Store redesign",
           body: "A new brand system applied across every template, with the section library your marketing team needs to keep shipping.",
-          href: "/services/store-redesign/",
         },
         {
           title: "Speed optimization",
           body: "Theme-level Core Web Vitals work: render-blocking assets, image pipeline, third-party scripts, unused sections.",
-          href: "/services/speed-optimization/",
         },
         {
           title: "Online Store 2.0 migration",
           body: "Move off a legacy theme with every existing customization rebuilt as schema-driven sections rather than lost.",
-          href: "/migration/",
         },
       ],
     },

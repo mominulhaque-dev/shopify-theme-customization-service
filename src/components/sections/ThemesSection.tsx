@@ -79,8 +79,8 @@ export default function ThemesSection() {
         </RevealGroup>
 
         <Reveal kind="up-sm" className="themes-more">
-          <Link href="/themes/" className="chip chip-more">
-            More
+          <Link href="/hire/" className="chip chip-more">
+            Get a quote
           </Link>
         </Reveal>
       </div>
